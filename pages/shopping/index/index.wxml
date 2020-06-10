@@ -1,0 +1,92 @@
+<view class="container">
+<!-- 轮播图 -->
+<view class="banner-swiper-container">
+        <swiper indicator-dots="{{true}}" indicator-color="#ccc" indicator-active-color="#ee731a" circular="{{true}}" class="swipers" autoplay="{{true}}">
+                <block wx:for="{{carouselList}}" wx:key="index">
+                    <swiper-item>
+                        <image src="{{item.imgUrl}}" class="slide-image"></image>
+                    </swiper-item>
+                </block>
+        </swiper>
+    </view>
+</view>
+<!-- 商品信息 -->
+<view class = "brandInfo">
+      <view>
+              <view class="name">
+                {{activity.activityName}}
+              </view>
+              <image class = "imageRight" src = "../../../images/share.png"  mode = "widthFix"  />
+              <view>
+                  <text class = "price">{{activity.currentPrice}}元</text>
+                  <text class = "price" style = "color : #ccc ; text-decoration: line-through; ">{{activity.originalPrice}}元</text>
+              </view>
+              <view  class = "tag">
+                  <view class  = "btn">
+                        <view>
+                          {{allowance}}折
+                        </view>
+                  </view>
+              </view>
+      </view>
+<!-- 商品评价 -->
+      <view class= "mark box-shadow mt20">
+        商品评价 (82) 
+        <navigator class="more" url="" open-type="navigate">
+          <view class = "query">
+            查看更多 >>
+          </view>
+        </navigator>
+          <!-- 详细评价 -->
+           <view class = "markInfo">
+            <view class = "markImage">
+                <image class = "image" src = "{{stores.brand.logoUrl}}"/>
+            </view>
+            <view class = "username">测试***用户</view>
+            <view class = "content"> 服务态度非常棒，领取优惠券后直接到店使用，真实有效，很方便， 商家活动都能找到折扣。</view>
+          </view>
+      </view>
+
+      <view class = "stores-list-container" >
+          	<view class="image-container">
+								<image style="width:70rpx;height:70rpx;"  src="{{stores.brand.logoUrl}}"></image>
+                <view id = "shopName">{{stores.shopName}}</view>
+							</view>
+              <view class="right">
+							<van-button round size="small" color="linear-gradient(to right, #FF8D00, #FE5600)" bindtap="goBrand" data-operation="{{stores}}" >
+								进店逛逛
+							</van-button>
+						</view>
+      </view>
+      		<!-- 活动列表 -->
+      <view class = "activity-recommen">
+        活动推荐
+      </view>
+			<view class="list-container mt20">
+				<block wx:for="{{activityList}}" wx:key="index">
+					<view class="list-item box-shadow">
+						<image src="{{item.listImage}}"></image>
+					</view>
+				</block>
+			</view>
+        
+  
+
+</view>
+  
+
+
+<view class="footer-container">
+<!-- 选择购物 -->
+<van-goods-action>
+  <van-goods-action-icon icon="chat-o" text="客服" bind:click="clickBuy" />
+  <van-goods-action-icon icon="cart-o" text="购物车" bind:click="clickBuy" />
+   <van-goods-action-icon icon="shop-o" text="店铺" />
+  <van-goods-action-button
+    text="相似商品"
+    type="warning"
+    bind:click="clickBuy"
+  />
+  <van-goods-action-button text="立即购买" bind:click="clickBuy" />
+</van-goods-action>
+</view>

@@ -1,0 +1,103 @@
+.iconfont {
+  font-size: 50rpx;
+}
+
+.container {
+  width: 750rpx;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 24rpx;
+}
+
+.container {
+  padding: 0 24rpx;
+}
+
+.header-container {
+  height: 337rpx;
+  padding: 30rpx 55rpx 0 20rpx;
+  box-sizing: border-box;
+
+}
+
+.header-container .user-info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-container .user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-container .user-content {
+  margin-left: 14rpx;
+}
+
+.item-list-container {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.rights-container {
+  height: 236rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+.content-container {
+  padding: 20rpx;
+}
+
+.content-container .iconfont{
+  font-size: 42rpx;
+}
+
+.content-container .item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content-container .item .right .iconfont {
+  font-size: 20rpx;
+  color: #999;
+}
+
+.content-container .item .left {
+  display: flex;
+  align-items: center;
+
+}
+
+.content-container .item .left .title {
+  margin-left: 20rpx;
+  font-size: 24rpx;
+}
+
+.content-container .item .left .tip {
+  font-size: 20rpx;
+  color: #999;
+  margin-left: 10rpx;
+  margin-top: 7rpx;
+}
+
+.footer-container button{
+  width: 622rpx;
+  height: 56rpx;
+  border: 1px solid #ee731a;
+  box-sizing: border-box;
+  line-height: 56rpx;
+  text-align: center;
+  border-radius: 7rpx;
+  font-size: 24rpx;
+  margin-bottom: 20rpx;
+  background-color: initial;
+
+}

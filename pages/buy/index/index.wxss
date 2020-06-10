@@ -1,0 +1,216 @@
+.container {
+  padding: 24rpx;
+  width: 750rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.header-container {
+  padding: 0 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-container .custom-class {
+  width: 600rpx;
+  height: 60rpx;
+  border-radius: 8rpx;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+
+.header-container .custom-class .van-search__content {
+  background-color: initial;
+}
+
+.tab-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tab-container .city {
+  font-size: 20rpx;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.tab-list {
+  font-size: 28rpx;
+  font-weight: bold;
+  width: 500rpx;
+}
+
+.tab-active {
+  color: #ee731a !important;
+  font-size: 36rpx !important;
+  font-weight: bold !important;
+}
+
+.ad {
+  font-size: 0;
+}
+
+.banner-swiper-container .swipers {
+  width: 100%;
+  height: 300rpx;
+}
+
+.banner-swiper-container .swipers image {
+  width: 100%;
+  height: 100%;
+}
+
+.option-swiper-container {
+  margin-top: 20rpx;
+}
+
+.option-swiper-container .swipers {
+  height: 230rpx;
+}
+
+.option-swiper-container .option-item-container {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+}
+
+.option-swiper-container .option-item-container .option-item {
+  height: 80rpx;
+  width: 100rpx;
+  margin-left: 34rpx;
+  margin-top: 15rpx;
+  text-align: center;
+  color: #666;
+  font-size: 20rpx;
+}
+
+.option-swiper-container .option-item-container .option-item .iconfont {
+  color: #ee731a;
+  font-size: 45rpx;
+}
+
+.list-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.list-container .list-item {
+  width: 339rpx;
+  height: 260rpx;
+  margin-bottom: 20rpx;
+}
+
+.list-container .list-item image {
+  width: 339rpx;
+  height: 260rpx;
+  display: block;
+}
+
+/* 4s店 */
+.stores .hot-brand {
+  margin-top: 10rpx;
+  width: 100%;
+  height: 176rpx;
+  padding: 13rpx 19rpx;
+  box-sizing: border-box;
+}
+
+.stores .hot-brand .title {
+  font-size: 24rpx;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+.stores .hot-brand .all {
+  font-size: 20rpx;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.stores .hot-brand .brand-container {
+  padding: 0 25rpx;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10rpx;
+}
+
+.stores .hot-brand .brand-item {
+  text-align: center;
+}
+
+
+.stores .hot-brand .brand-item .image-container {
+  height: 70rpx;
+  width: 70rpx;
+}
+
+.stores .hot-brand .brand-item .name {
+  font-size: 20rpx;
+  color: #444;
+  margin-top: 10rpx;
+}
+
+.stores .stores-list-container {
+  padding: 14rpx 20rpx;
+}
+
+.stores .stores-item {
+  margin-top: 15rpx;
+}
+
+.stores .stores-item .title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stores .stores-item .title-container .left {
+  display: flex;
+  align-items: center;
+}
+
+.stores .stores-item .title-container .left .store-name {
+  font-size: 24rpx;
+  margin-left: 15rpx;
+  margin-right: 10rpx;
+}
+
+.stores .stores-item .title-container .left .address {
+  font-size: 20rpx;
+  color: #999;
+}
+
+/* 品牌 */
+.brand .stores-container {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.brand .stores-container .stores-item {
+  font-size: 24rpx;
+  padding: 5rpx 24rpx;
+  border-radius: 7rpx;
+  background-color: #F1F1F1;
+  margin-right: 15rpx;
+}
+
+.loading {
+  display: flex !important;
+  justify-content: center !important;
+  margin-top: 150rpx !important;
+}
+
+.no-data {
+  margin-top: 150rpx;
+  text-align: center;
+  color: #ccc;
+}

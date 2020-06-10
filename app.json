@@ -1,0 +1,64 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/buy/index/index",
+    "pages/my/index/index",
+    "pages/collect/index/index",
+    "pages/message/index/index",
+    "pages/recommend/index/index",
+    "pages/shopping/index/index"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "tabBar": {
+    "color": "#d5d5d5",
+    "selectedColor": "#c0a354",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/images/index.png",
+        "selectedIconPath": "/images/index_selected.png"
+      },
+      {
+        "pagePath": "pages/collect/index/index",
+        "text": "收藏",
+        "iconPath": "/images/collect.png",
+        "selectedIconPath": "/images/collect_selected.png"
+      },
+      {
+        "pagePath": "pages/recommend/index/index",
+        "text": "推荐",
+        "iconPath": "/images/recommend.png",
+        "selectedIconPath": "/images/recommend_selected.png"
+      },
+      {
+        "pagePath": "pages/message/index/index",
+        "text": "消息",
+        "iconPath": "/images/message.png",
+        "selectedIconPath": "/images/message_selected.png"
+      },
+      {
+        "pagePath": "pages/my/index/index",
+        "text": "我的",
+        "iconPath": "/images/my.png",
+        "selectedIconPath": "/images/my_selected.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "van-image": "@vant/weapp/image/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-loading": "@vant/weapp/loading/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

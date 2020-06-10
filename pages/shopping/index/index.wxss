@@ -1,0 +1,141 @@
+.container {
+    width: 750rpx;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .banner-swiper-container .swipers {
+    width: 100%;
+    height: 450rpx;
+  }
+  .banner-swiper-container .swipers image {
+    width: 100%;
+    height: 100%;
+  }
+.brandInfo{
+  padding :24rpx;
+  position: relative;
+}
+.brandInfo .name{
+  font-weight: 500;
+  font-size: 35rpx;
+  margin-left: 10rpx;
+}
+.price{
+  margin-top: 12rpx;
+  color: #ee731a;
+  font-weight: 500;
+  padding-right: 80rpx;
+  margin-left: 12rpx;
+  font-family:Source Han Sans CN;
+}
+.tag .btn{
+  width: 100rpx;
+  border-radius: 60rpx;
+  height: 40rpx;
+  background-color: #ee731a;
+  text-align: center;
+}
+.tag .btn view{
+  font-size: 24rpx;
+  color: white;
+  line-height: 40rpx;
+}
+.imageRight{
+  width:50rpx;
+  height:50rpx;
+  position: absolute;
+  top: 24rpx;
+  right: 10px;
+}
+.mark{
+  position: relative;
+  display: flex;
+  height: 240rpx;
+  justify-content: space-between;
+  font-size: 25rpx;
+  padding-left: 20rpx;
+  font-weight: 500;
+  font-family:Source Han Sans CN;
+}
+.more .query{
+  display: inline-block;
+  font-size: 25rpx;
+  color: #ccc;
+  font-weight: 400;
+  font-family:Source Han Sans CN;
+}
+.markImage .image{
+  height: 50rpx;
+  width:  50rpx;
+  padding-left: 20rpx;
+}
+.markInfo {
+  position: absolute;
+  left: 0;
+  top: 40rpx;
+  display: flex;
+  height: 50rpx;
+  padding-top: 10rpx;
+}
+.username{
+  display: flex;
+  margin-bottom: 25rpx;
+  padding-left: 20rpx;
+  line-height: 50rpx;
+  font-weight:500;
+  color: #666666;
+}
+.content{
+  display: block;
+  position: absolute;
+  padding-left: 25rpx;
+  padding-top: 50rpx;
+  font-family:Source Han Sans CN;
+  font-weight:500;
+  color: #666666;
+  width: 675rpx;
+}
+
+
+.stores-list-container {
+  position: relative;
+  width: 100%;
+  padding: 30rpx 20rpx;
+} 
+.image-container{
+  display: flex;
+}
+#shopName{
+  display: flex;
+  line-height: 70rpx;
+  padding-left: 40rpx;
+  font-weight: 500;
+}
+.right{
+  display: flex;
+  position: absolute;
+  top: 30rpx;
+  right: 40rpx;
+
+}
+.list-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.list-container .list-item {
+  width: 339rpx;
+  height: 260rpx;
+  margin-bottom: 20rpx;
+}
+
+.list-container .list-item image {
+  width: 339rpx;
+  height: 260rpx;
+  display: block;
+}
+.activity-recommen{
+  display: flex;
+  padding-left: 20rpx;
+}

@@ -1,0 +1,126 @@
+<view class="container">
+	<view class="header-container box-shadow mt10 boder-radius">
+		<button wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+
+		<block wx:else>
+			<view class="user-info-container">
+				<view class="user-info">
+					<van-image round width="120rpx" height="120rpx" src="{{userInfo.avatarUrl}}" />
+					<view class="user-content">
+						<view class="name fs28"><text>{{userInfo.nickName}}</text></view>
+						<view class="mobile fs24"><text>188****8888</text></view>
+					</view>
+				</view>
+				<view class="iconfont icon-edit fs32"></view>
+			</view>
+		</block>
+
+		<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
+
+		<view class="item-list-container mt40">
+			<view class="item">
+				<view class="iconfont icon-car yellow"></view>
+				<text class="fs24 mt10">我的车辆</text>
+			</view>
+			<view class="item">
+				<view class="iconfont icon-dingdan yellow"></view>
+				<text class="fs24 mt10">我的订单</text>
+			</view>
+		</view>
+
+	</view>
+	<view class="main-container">
+		<view class="rights-container box-shadow mt20 boder-radius fs24">
+			<view class="item">
+				<view class="iconfont icon-rights yellow"></view>
+				<view class="mt10">
+					<text>会员权益</text>
+				</view>
+			</view>
+			<view class="item">
+				<view class="iconfont icon-kaquan yellow"></view>
+				<view class="mt10">
+					<text>我的卡券</text>
+				</view>
+			</view>
+			<view class="item">
+				<view class="fs28 blod">
+					<text>3230</text>
+				</view>
+				<view class="mt10">
+					<text>我的积分</text>
+				</view>
+			</view>
+		</view>
+
+		<!-- 评价分享 -->
+		<view class="content-container box-shadow mt20 boder-radius">
+			<view class="item">
+				<view class="left">
+					<text class="iconfont icon-pingjia yellow"></text>
+					<text class="title">评价有礼</text>
+					<text class="tip">发评价赢好礼</text>
+				</view>
+				<view class="right">
+					<text class="iconfont icon-right"></text>
+				</view>
+			</view>
+			<view class="item mt40">
+				<view class="left">
+					<text class="iconfont icon-share yellow"></text>
+					<text class="title">分享赚钱</text>
+					<text class="tip">邀好友赚积分 积分当钱花</text>
+				</view>
+				<view class="right">
+					<text class="iconfont icon-right"></text>
+				</view>
+			</view>
+		</view>
+
+		<view class="content-container box-shadow mt20 boder-radius">
+			<view class="item">
+				<view class="left">
+					<text class="iconfont icon-yijianfankui yellow"></text>
+					<text class="title">意见反馈</text>
+					<text class="tip">有什么不满尽管来吐槽吧</text>
+				</view>
+				<view class="right">
+					<text class="iconfont icon-right"></text>
+				</view>
+			</view>
+			<view class="item mt40">
+				<view class="left">
+					<text class="iconfont icon-daodiantiyan yellow"></text>
+					<text class="title">成为体验馆</text>
+					<text class="tip">多重福利免费领取</text>
+				</view>
+				<view class="right">
+					<text class="iconfont icon-right"></text>
+				</view>
+			</view>
+			<view class="item mt40">
+				<view class="left">
+					<text class="iconfont icon-about yellow"></text>
+					<text class="title">关于我们</text>
+
+				</view>
+				<view class="right">
+					<text class="iconfont icon-right"></text>
+				</view>
+			</view>
+			<view class="item mt40">
+				<view class="left">
+					<text class="iconfont icon-hezuo yellow"></text>
+					<text class="title">我要合作</text>
+					<text class="tip">合作共赢 共同发展</text>
+				</view>
+				<view class="right">
+					<text class="iconfont icon-right"></text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="footer-container mt20">
+		<button hover-class="none">退出当前账号</button>
+	</view>
+</view>
