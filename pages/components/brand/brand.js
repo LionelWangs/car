@@ -10,7 +10,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    
+
   },
 
   /**
@@ -72,8 +72,8 @@ getBrandDetails(id){
         logoUrl : success.data.dto.logoUrl
       })
     }
-    
-    ) 
+
+    )
 }
 ,
     //获取活动列表

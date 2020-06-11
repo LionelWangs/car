@@ -149,6 +149,23 @@ const getActivityList = function (option, success) {
     return success(res)
   })
 }
+// 根据4S店活动查询列表 排除已出现的
+const getActivityListRemove = function (option, success) {
+  request2({
+    url: '/admin/microservice/activity/list',
+    method: 'POST',
+    data: {
+      maxResults:option.maxResults,
+      pageNo:option.pageNo,
+      shopId:option.shopId,
+      activityId:option.activityId,
+      status:option.status,
+
+    },
+  }).then(res => {
+    return success(res)
+  })
+}
 // 根据品牌活动查询列表
 const getActivityListByBrandId = function (option, success) {
   request2({
@@ -324,5 +341,6 @@ module.exports = {
   getGoodsListWithShopId,
   getActivityListByBrandId,
   getGoodsListWithBrandId,
-  getStoresDistance
+  getStoresDistance,
+  getActivityListRemove
 }

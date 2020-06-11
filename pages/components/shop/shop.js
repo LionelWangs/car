@@ -39,14 +39,7 @@ Component({
       this.getGoodsListWithShopId()
       this.getActivityList()
       this.GPSsubmit()
-    },
-    attached: function(){
-      const a = wx.getStorageSync("address");
-      const b = wx.getStorageSync("brandName");
-      this.setData({
-        address:a,
-        brandName:b,
-      })
+      this.getStores()
     }
   },
 
@@ -59,16 +52,18 @@ Component({
    */
   onReachBottom: function () {
     //上拉4s店
-    if (this.data.tabActive == 1) {
-      if (!this.data.storePageEnd && !this.data.storeLoading) {
-        this.setData({
-          storeLoading: true,
-          storePageNo: this.data.storePageNo + 1
-        });
-        this.getStoresListList();
-      }
-    }
+    // if (this.data.tabActive == 1) {
+    //   if (!this.data.storePageEnd && !this.data.storeLoading) {
+    //     this.setData({
+    //       storeLoading: true,
+    //       storePageNo: this.data.storePageNo + 1
+    //     });
+    //     this.getStoresListList();
+    //   }
+    // }
   },
+ 
+
     //获取经纬度度
     GPSsubmit:function(){
       wx.getLocation({
@@ -85,6 +80,23 @@ Component({
    
       })
     }
+  ,
+ //获取4S店
+ getStores:function(){
+    const c = wx.getStorageSync("shopId");  
+    api.getStores({
+      shopId:c
+    } ,
+    success=>{
+      console.log(success)
+      this.setData({
+        address:success.data.dto.adress,
+        brandName:success.data.dto.shopName
+      })
+    }
+    
+    )
+}
   ,
     //获取门店经纬度
     getStoresDistance(latitude,longitude){

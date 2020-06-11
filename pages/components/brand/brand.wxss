@@ -8,7 +8,7 @@
   left: 0px;
   margin-top: -30rpx;
   line-height: 60rpx;
-}
+}-
 image{
   padding-top: 9rpx;
   margin-right: 16rpx;

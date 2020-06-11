@@ -27,7 +27,7 @@ Page({
    */
   onLoad: function (e) {
     console.log(e)
-    this.getActivityList(e.shopId);
+    this.getActivityListRemove(e.shopId,e.id);
     this.getActivity(e.id);
     this.getStores(e.shopId)
     this.getGoodsListWithShopId(e.shopId)
@@ -61,13 +61,15 @@ Page({
     },
 
    //获取活动列表
-   getActivityList(id) {
-    api.getActivityList({
+   getActivityListRemove(shopId,id) {
+    api.getActivityListRemove({
       pageNo:this.data.storePageNo,
       maxResults:this.data.storePageSize,
       status:1,
-      shopId:id
+      shopId:shopId,
+      activityId:id
     }, success => {
+      console.log(success)
       this.setData({
         activityList: success.data.dto.list
       })
@@ -110,19 +112,38 @@ Page({
   }
   ,
   goBrand(e){
-    const  brandId = e.currentTarget.dataset.operation.brandId
+
+    const  shopId = e.currentTarget.dataset.operation.shopId
+    console.log(e)
     // const logoUrl = e.currentTarget.dataset.operation.logoUrl
     // wx.setStorage({
     //   key:"logoUrl",
     //   data:logoUrl
     // })
     wx.setStorage({
-      key:"brandId",
-      data:brandId
+      key:"shopId",
+      data:shopId
     })
     wx.reLaunch({
-      url:"../../index/index?tabActive=5"
+      url:"../../index/index?tabActive=4"
     })
+  },
+  shopping(e){
+    console.log(e)
+    //activityId
+    var id = e.currentTarget.dataset.operation.id
+    // shopId
+    var shopId =  e.currentTarget.dataset.operation.shopId
+    this.getActivity(id)
+    this.getActivityListRemove(shopId,id)
   }
+  // shopping(e){
+  //   console.log(e)
+  //   var id = e.currentTarget.dataset.operation.id
+  //   var shopId = e.currentTarget.dataset.operation.shopId
+  //   wx.navigateTo({
+  //     url:"shopping/index/index?id="+id+"&shopId="+shopId
+  //   })
+  // },
 
 })

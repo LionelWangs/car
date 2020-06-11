@@ -187,7 +187,6 @@
   font-size: 20rpx;
   color: #999;
 }
-
 /* 品牌 */
 .brand .stores-container {
   display: flex;

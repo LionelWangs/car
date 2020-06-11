@@ -65,6 +65,7 @@ Page({
       pageNo: 1,
       pageSize: 99
     }, success => {
+      console.log(success)
       this.setData({
         carouselList: success.data.dto.list
       })
@@ -195,20 +196,10 @@ Page({
     4S子页面
   */
   goShop(e){
-    const brandName = e.currentTarget.dataset.operation.brand.brandName
-    const  address = e.currentTarget.dataset.operation.shop.adress
     const  shopId = e.currentTarget.dataset.operation.shop.shopId
-    wx.setStorage({
-      key:"brandName",
-      data:brandName
-    })
     wx.setStorage({
       key:"shopId",
       data:shopId
-    })
-    wx.setStorage({
-      key:"address",
-      data:address
     })
     console.log("缓存成功")
     this.setData({

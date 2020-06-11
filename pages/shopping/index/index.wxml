@@ -65,7 +65,7 @@
 			<view class="list-container mt20">
 				<block wx:for="{{activityList}}" wx:key="index">
 					<view class="list-item box-shadow">
-						<image src="{{item.listImage}}"></image>
+						<image src="{{item.listImage}}" bindtap = "shopping" data-operation = "{{item}}"></image>
 					</view>
 				</block>
 			</view>

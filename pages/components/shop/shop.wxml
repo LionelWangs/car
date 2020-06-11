@@ -18,7 +18,7 @@
 				{{brandName}}
 			</view>
 			<view class="address">
-				<view>地址:{{address}}</view>
+				<view>{{address}}</view>
 				<view class="distance">
 				<view wx:if = "{{distance}}">
 					距您：{{distance}}km
