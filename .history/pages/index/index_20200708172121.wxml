@@ -155,7 +155,7 @@
 					<image style="width:100%;height:145rpx;border-radius:7rpx" src="{{adImgUrl}}"></image>
 				</view> -->
 				<!-- 活动列表 -->
-				<view class="list-container mt20">
+				<!-- <view class="list-container mt20">
 					<block wx:for="{{activityList}}" wx:key="index">
 						<view
 						 class="list-item box-shadow"
@@ -165,7 +165,7 @@
 							<image src="{{item.imgUrl}}"></image>
 						</view>
 					</block>
-				</view>
+				</view> -->
 			</view>
 			<!-- 4s店 -->
 			<view class="tab-index stores" hidden="{{tabActive==1?false:true}}">

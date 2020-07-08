@@ -250,7 +250,7 @@
 						</view>
 					</view>
 					<view class="stores-container">
-						<block wx:for="{{hotStoresList}}" wx:key="index">
+						<block wx:for="{{hotStoresList}}" wx:key="index" >
 							<view class="stores-item">
 								<text bindtap="goHotShop"
 									 data-operation="{{item}}">{{item.shopName}}</text>

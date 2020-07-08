@@ -141,6 +141,8 @@ Page({
         type: 2,
       },
       (success) => {
+        debugger
+        console.log(success)
         this.setData({
           activityList: success.data.dto.list,
         });
@@ -361,15 +363,16 @@ Page({
     }
   },
   goactivity(e) {
+    console.log(e)
     var shopId = e.currentTarget.dataset.operation.shopId;
-    var id = e.currentTarget.dataset.operation.id;
+    var activityId = e.currentTarget.dataset.operation.activity.id;
     var status = 1;
     wx.navigateTo({
       url:
         "../shopping/index/index?shopId=" +
         shopId +
         "&id=" +
-        id +
+        activityId +
         "&status=" +
         status,
     });
