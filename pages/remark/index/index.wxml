@@ -1,0 +1,31 @@
+<view class="container">
+	<view class="header">
+		<image style="width:90rpx;height:90rpx" src="{{order.coupon.listImageUrl}}" />
+		<view class="couponname">{{order.coupon.couponName}}</view>
+	</view>
+	<view class="rate">
+		<view class="text">
+			综合评分
+		</view>
+		<view>
+			<van-rate value="{{ value }}" bind:change="onChange" />
+		</view>
+		<view class="good">
+			非常好
+		</view>
+	</view>
+	<view class="remark">
+		<textarea
+		 placeholder="您的评价会帮助我们选择更好的商品哦~"
+		 bindinput="input"
+		 style="height: 175rpx;"
+		/>
+		</view>
+	<view class="upload">
+		<van-uploader file-list="{{ fileList }}" bind:after-read="afterRead" />
+	</view>
+</view>
+<view class="btn" bindtap="submit">
+	提交订单
+</view>
+

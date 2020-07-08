@@ -1,0 +1,80 @@
+<van-dialog id="van-dialog" />
+<view class="container">
+	<!-- 砍价信息详情 -->
+	<view class="header">
+		<image src="{{activity.listImage}}" style="width:146rpx;height:146rpx;line-height:202rpx;" />
+		<view class="couponInfo">
+			<view class="name">
+				{{activity.activityName}}
+			</view>
+			<view class="time">
+				<view class="button">23:56:11</view>
+				<view class="timeInfo">
+					后砍价过期
+				</view>
+			</view>
+			<view class="money-people">
+				<view class="money">
+					{{activity.currentPrice}}
+				</view>
+				<view class="people">
+					212人已0元拿
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- 中间部分 -->
+	<view class="middle" wx:if="{{initiate}}">
+
+		<view class="success">
+			已砍
+			<text>96.49</text>
+			元，还差
+			<text >3.51</text>
+			元
+		</view>
+		<!-- 进度条 -->
+		<view>
+			<van-progress
+			 percentage="75"
+			 pivot-color="#7232dd"
+			 stroke-width="28rpx"
+			 show-pivot="{{false}}"
+			 track-color="#fff;border-radius: 20rpx;"
+			 color="linear-gradient(90deg,rgba(255,115,12,1) 0%,rgba(255,76,0,1) 100%)"
+			 custom-class="progress"
+			/>
+		</view>
+		<image src="../../../images/freefriends.png" style="width:714rpx;height:74rpx;padding-left:20rpx;padding-right:20rpx" />
+	</view>
+	<view class="middle" wx:else>
+		<!-- 发起者 -->
+		<view class="success">
+			成功帮好友砍价
+		</view>
+		<image src="../../../images/free.png" style="width:714rpx;height:74rpx;padding-left:20rpx;padding-right:20rpx" />
+	</view>
+
+	<!-- 砍价记录 -->
+	<view class="record">
+		<van-divider contentPosition="center" customStyle="border-color: rgba(238,115,26,1);font-size:12px;font-family:Source Han Sans CN;font-weight:500;color:rgba(68,68,68,1);">
+			砍价记录
+		</van-divider>
+		<view class="barginUser">
+			<view class="name-image">
+				<image src="../../../images/356.png" style="width:70rpx;height:70rpx" />
+				<view class="name">
+					上海百联店店长
+				</view>
+			</view>
+			<!-- 砍价金额 -->
+			<view class="bargin-money">
+				<image src="../../../images/bargaining.png" style="width:48rpx;height:48rpx;padding-right:20rpx" />
+				<view class="money">
+					砍掉26.1元
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+

@@ -1,0 +1,237 @@
+.time{
+    font-size:26rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    align-items: center;
+    text-align: center;
+}
+.time text{
+    color: #EE731A;
+}
+.payinfo{
+    width:708rpx;
+    height:216rpx;
+    background:rgba(255,255,255,1);
+    border-radius:6rpx;
+    box-shadow: 0px 1px 14px 0px rgba(50, 50, 50, 0.68);
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+}
+.payinfo .header{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 20rpx;
+    margin-left: 20rpx;
+   padding-top: 20rpx;
+}
+.payinfo .header .shopname{
+    font-size:28rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(68,68,68,1);
+}
+.payinfo .header .status{
+    font-size:24rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(238,115,26,1);
+}
+.couponinfo{
+    display: flex;
+    margin-top: -10rpx;
+}
+.couponinfo .couponname-money{
+    display: flex;
+    justify-content: space-between;
+    font-size:24rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(102,102,102,1);
+}
+.couponinfo .couponname-money .couponname{
+    width:422rpx;
+    height:58rpx;
+}
+.couponinfo .couponname-money  .money-num{
+    position: absolute;
+    right: 40rpx;
+    display: flex;
+    flex-direction: column;
+    font: size 24rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(102,102,102,1);
+}
+.couponinfo .couponname-money  .money-num .num{
+    font-size:20rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(154,154,154,1);
+    position: absolute;
+    right: 0rpx;
+    top: 40rpx;
+}
+.payway{
+    width:708rpx;
+    height:216rpx;
+    background:rgba(255,255,255,1);
+    border-radius:6rpx;
+    box-shadow: 0px 1px 14px 0px rgba(50, 50, 50, 0.68);
+    margin-top: 20rpx;
+}
+.payway .header{
+    font-size:28rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(68,68,68,1);
+}
+/* 微信支付 */
+.wechat{
+    padding-top: 20rpx;  
+    padding-left: 20rpx;
+    display:  flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .wechat-line{
+      display: flex;
+  }
+  .wechat-line view{
+      line-height: 42rpx;
+      padding-left: 20rpx;
+      height:24rpx;
+      font-size:24rpx;
+      font-family:Source Han Sans CN;
+      font-weight:500;
+  }
+  .wechat view{
+    font-size:22rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    padding-right: 5rpx    ;
+  }
+  /* 好友支付 */
+  .friends{
+    height: 84rpx;
+    padding-bottom: 20rpx;  
+    padding-left: 20rpx;
+    display:  flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .friends-line{
+    display: flex;
+}
+  .friends-line view{
+    line-height: 42rpx;
+    padding-left: 20rpx;
+    height:24rpx;
+    font-size:24rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+}
+.friends view{
+  font-size:22rpx;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  padding-right: 5rpx    ;
+}
+.orderInfo{
+    width:708rpx;
+    height:174rpx;
+    background:rgba(255,255,255,1);
+    border-radius:6rpx;
+    box-shadow: 0px 1px 14px 0px rgba(50, 50, 50, 0.68);
+    margin-top: 20rpx;
+}
+.orderInfo .header{
+    font-size:28rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(68,68,68,1);
+}
+.orderInfo .idtime{
+    display: flex;
+    flex-direction: column;
+    font-size:24rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(151,151,151,1);
+    padding-left: 20rpx;
+    padding-top: 20rpx;
+}
+.orderInfo .idtime text{
+    font-size:24rpx;
+    font-family:Arial;
+    font-weight:400;
+    color:rgba(151,151,151,1);
+    float: right;
+    margin-right: 20rpx;
+
+}
+.btn{
+    margin-top: 20rpx;
+    width:708rpx;
+    height:66rpx;
+    background:rgba(255,255,255,1);
+    border:2rpx solid rgba(187,187,187,1);
+    border-radius:6rpx;
+    font-size:24rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    text-align: center;
+    line-height: 66rpx;
+}
+.priceclass{
+    color: #EE731A;
+}
+/* 弹出框 */
+.cancle .header{
+    display: flex;
+    flex-direction: column;
+}
+.cancle .header .title{
+    font-size:28rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(68,68,68,1);
+}
+.cancle .header .intro{
+    font-size:24rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(181,181,181,1);
+}
+.cancle .radio{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 25rpx;
+    padding-right: 20rpx;
+}
+.cancle .radio .cause{
+    font-size:28rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(68,68,68,1);
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    margin-top: 20rpx;
+    line-height: 20rpx;
+
+}
+.canclesubmit{
+    width:714rpx;
+    height:74rpx;
+    background:linear-gradient(90deg,rgba(255,137,1,1) 0%,rgba(255,86,1,1) 97%);
+    border-radius:36rpx;
+    color: white;
+    line-height: 74rpx;
+    text-align: center;
+    margin-right: 10rpx;
+    margin-left: 18rpx;
+    margin-top: 26%;
+}

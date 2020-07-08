@@ -1,0 +1,70 @@
+.red{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100rpx;
+    padding-top: 15rpx;
+}
+.red .red-left{
+    display: flex;
+    flex-direction: column;
+    padding-left: 30rpx;
+}
+.check{
+    margin-top: 20rpx;
+    margin-right: 20rpx;
+
+}
+.red .red-left .red-money{
+    width:200rpx;
+    height:22rpx;
+    font-size:24rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+   
+}
+.red .red-left .red-date{
+    width:300rpx;
+    height:18rpx;
+    font-size:18rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(153,153,153,1);
+    padding-top: 20rpx;
+}
+.right-money{
+    padding-right: 100rpx;
+    font-size:24rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(238,115,26,1);
+    position: relative;
+    padding-top: 20rpx;
+}
+.check{
+    position: absolute;
+    right: 0rpx;
+    top: 0rpx;
+    padding-right: 20rpx;
+
+}
+.footer{
+    padding-top:185rpx;
+    /* background:#ee731a; */
+    /* width: 70%; */
+    display: flex;
+    justify-content: center;
+
+    
+}
+.footer .btn{
+    color: white;
+    text-align: center;
+    width: 714rpx;
+    height: 74rpx;
+    border-radius: 40rpx;
+    background-color: #ff440b;
+    line-height: 74rpx;
+    margin-top: 45%;
+}

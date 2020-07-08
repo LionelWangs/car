@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-divider": "@vant/weapp/divider/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-progress": "@vant/weapp/progress/index"
+  },
+  "navigationBarTitleText": "砍价"
+}

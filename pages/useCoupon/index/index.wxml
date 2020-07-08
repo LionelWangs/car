@@ -1,0 +1,53 @@
+<view class="container">
+	<view class="main">
+		<view class="name">
+			{{coupon.couponName}}
+		</view>
+		<text >
+            请向店员出示二维码验券
+        </text>
+		<view class="img">
+			<image style="width:278rpx;height:278rpx" src="{{coupon.qrcodeUrl}}" />
+		</view>
+		{{coupon.couponNumber}}
+		<van-divider dashed />
+		<view class="footer">
+			<view class="data">
+				<view>
+					有效期
+				</view>
+				<view>
+					{{coupon.endTime}}
+				</view>
+			</view>
+			<view class="shop">
+				<view>
+					体验商户
+				</view>
+				<view>
+					上海百联沪东4S店
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="tip">
+		<view class="header">
+			<view>
+				遇到问题了？
+			</view>
+			<view style="color:rgba(151,151,151,1);font-size:26rpx;">
+				更多问题
+			</view>
+		</view>
+		<view class="tip-button">
+			<view style="width:422rpx">
+				我没时间去怎么办，可以取消吗？
+			</view>
+			<view style="width:290rpx">
+				不小心验证了怎么办？
+			</view>
+		</view>
+	</view>
+
+</view>
+

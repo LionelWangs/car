@@ -1,0 +1,536 @@
+<van-dialog id="van-dialog" />
+<view class="container">
+	<!-- 搜索栏 -->
+	<view class="search">
+		<van-search value="{{ value }}" placeholder="请输入搜索关键词" />
+	</view>
+	<!-- 导航栏 -->
+	<view class="tabbar">
+		<van-tabs
+		 active="{{ active }}"
+		 line-width="0"
+		 bind:change="onChange"
+		 tab-active-class="tab-active"
+		 tab-class="tab-class"
+		 sticky="{{true}}"
+		>
+			<van-tab title="全部" />
+			<van-tab title="待付款" />
+			<van-tab title="待使用" />
+			<van-tab title="已完成" />
+			<van-tab title="已过期" />
+			<van-tab title="已取消" />
+		</van-tabs>
+	</view>
+	<!-- 全部的信息 -->
+	<view hidden="{{active==0?false:true}}">
+		<view
+		 class="all"
+		 wx:for="{{orderList}}"
+		 wx:key="index"
+		>
+			<view class="header">
+				<view class="shopname">
+					奥迪朝阳路4S店
+				</view>
+				<view class="mark">
+					{{item.statusName}}
+				</view>
+			</view>
+			<van-divider hairline />
+			<!-- 订单具体信息 -->
+			<view class="order">
+				<image src="{{item.coupon.listImageUrl}}" style="width:92rpx;height:92rpx" />
+				<view class="orderInfo">
+					<view class="name">{{item.coupon.couponName}}</view>
+				</view>
+				<view class="moneyandnum">
+					<view class="money">
+						{{item.feeAmount}}
+					</view>
+					<view class="num">
+						X{{item.buyCount}}
+					</view>
+				</view>
+			</view>
+			<view class="btn" wx:if="{{item.statusFlag == 4 }}">
+				<view
+				 class="radius"
+				 class="radius"
+				 bindtap="delete"
+				 data-operation="{{item}}"
+				>
+					删除订单
+				</view>
+				<view
+				 class="buy"
+				 bindtap="goRemark"
+				 data-operation="{{item}}"
+				>
+					去评价
+				</view>
+			</view>
+			<view class="btn" wx:if="{{item.statusFlag == 5 }}">
+				<view
+				 class="radius"
+				 class="radius"
+				 bindtap="delete"
+				 data-operation="{{item}}"
+				>
+					删除订单
+				</view>
+				<view
+				 class="buy"
+				 bindtap="buyAgain"
+				 data-operation="{{item}}"
+				>
+					再次购买
+				</view>
+			</view>
+			<view class="btn" wx:if="{{item.statusFlag == 2 }}">
+				<view
+				 class="radius"
+				 bindtap="delete"
+				 data-operation="{{item}}"
+				>
+					删除订单
+				</view>
+			</view>
+			<view class="btn" wx:if="{{item.statusFlag == 1 }}">
+				<view
+				 class="radius"
+				 bindtap="cancle"
+				 data-operation="{{item}}"
+				>
+					取消订单
+				</view>
+				<van-cell title="展示弹出层" is-link />
+				<van-popup
+				 show="{{ show }}"
+				 position="bottom"
+				 bind:close="onClose"
+				 closeable
+				>
+					<scroll-view
+					 scroll-y="true"
+					 scroll-top="50"
+					 class="popup"
+					 scroll-right
+					>
+						<view class="cancle">
+							<view class="header">
+								<view class="title">
+									请选择原因
+								</view>
+								<view class="intro">
+									取消订单后无法恢复，优惠券红包原路返还
+								</view>
+							</view>
+							<view
+							 class="radio"
+							 wx:for="{{cause}}"
+							 wx:key="index"
+							>
+								<view class="cause">
+									{{item.cause}}
+								</view>
+								<view style="padding-right: 5px;padding-top: 10rpx;">
+									<van-radio-group
+									 value="{{ radio }}"
+									 bind:change="onRadio"
+									 style="padding-top: 3px;"
+									>
+										<van-radio name="{{item.id}}"></van-radio>
+									</van-radio-group>
+								</view>
+							</view>
+							<view class="canclesubmit" bindtap="submit">
+								提交
+							</view>
+						</view>
+					</scroll-view>
+				</van-popup>
+				<view
+				 class="buy"
+				 bindtap="goPay"
+				 data-operation="{{item}}"
+				>
+					去支付
+				</view>
+			</view>
+			<view class="btn" wx:if="{{item.statusFlag == 3 }}">
+				<view
+				 class="buy"
+				 bindtap="goUse"
+				 data-operation="{{item}}"
+				>
+					去使用
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+<!-- 代付款 -->
+<view hidden="{{active==1?false:true}}">
+	<view
+	 class="all"
+	 wx:for="{{obligation}}"
+	 wx:key="index"
+	 wx:if="{{obligation}}"
+	>
+		<view class="header">
+			<view class="shopname">
+				奥迪朝阳路4S店
+			</view>
+			<view class="mark">
+				{{item.statusName}}
+			</view>
+		</view>
+		<van-divider hairline />
+		<!-- 订单具体信息 -->
+		<view class="order">
+			<image src="{{item.coupon.listImageUrl}}" style="width:92rpx;height:92rpx" />
+			<view class="orderInfo">
+				<view class="name">{{item.coupon.couponName}}</view>
+			</view>
+			<view class="moneyandnum">
+				<view class="money">
+					{{item.feeAmount}}
+				</view>
+				<view class="num">
+					X{{item.buyCount}}
+				</view>
+			</view>
+		</view>
+		<view class="time-btn">
+			<view class="time">
+				<view style="padding-right: 20rpx;margin-top: 4rpx;">支付剩余 </view>
+				<view>
+					<van-count-down
+					 use-slot
+					 time="{{ time }}"
+					 bind:change="timeChange"
+					>
+						<text class="item">{{ timeData.hours }}</text>
+						<text class="item">{{ timeData.minutes }}</text>
+						<text class="item">{{ timeData.seconds }}</text>
+					</van-count-down>
+				</view>
+			</view>
+			<view class="btn">
+				<view
+				 class="radius"
+				 bindtap="cancle"
+				 data-operation="{{item}}"
+				>
+					取消订单
+				</view>
+				<van-cell title="展示弹出层" is-link />
+				<van-popup
+				 show="{{ show }}"
+				 position="bottom"
+				 closeable
+				 bind:close="onClose"
+				>
+					<scroll-view
+					 scroll-y="true"
+					 scroll-top="50"
+					 class="popup"
+					 scroll-right
+					>
+						<view class="cancle">
+							<view class="header">
+								<view class="title">
+									请选择原因
+								</view>
+								<view class="intro">
+									取消订单后无法恢复，优惠券红包原路返还
+								</view>
+							</view>
+							<view
+							 class="radio"
+							 wx:for="{{cause}}"
+							 wx:key="index"
+							>
+								<view class="cause">
+									{{item.cause}}
+								</view>
+								<view style="padding-right: 5px;padding-top: 10rpx;">
+									<van-radio-group
+									 value="{{ radio }}"
+									 bind:change="onRadio"
+									 style="padding-top: 5px;"
+									>
+										<van-radio name="{{item.id}}"></van-radio>
+									</van-radio-group>
+								</view>
+							</view>
+							<view class="canclesubmit" bindtap="submit">
+								提交
+							</view>
+						</view>
+					</scroll-view>
+				</van-popup>
+				<view
+				 class="buy"
+				 bindtap="goPay"
+				 data-operation="{{item}}"
+				>
+					去支付
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- 没有待付款信息时 -->
+	<view wx:if="{{obligationCount == 0}}" class="nullOrder">
+		<view class="image">
+			<image src="../../../images/nullOrder.png" style="width:214rpx;height:166rpx" />
+		</view>
+		<view class="orderTip">
+			您还没有相关订单
+		</view>
+		<view class="about">
+			没找到订单？试试
+			<text style="color:#3385FF" bindtap = "checkAll">查看全部</text>
+		</view>
+	</view>
+</view>
+<!-- 待使用 -->
+<view hidden="{{active==2?false:true}}">
+	<view
+	 class="all"
+	 wx:for="{{standby}}"
+	 wx:key="index"
+	>
+		<view class="header">
+			<view class="shopname">
+				奥迪朝阳路4S店
+			</view>
+			<view class="mark">
+				{{item.statusName}}
+			</view>
+		</view>
+		<van-divider hairline />
+		<!-- 订单具体信息 -->
+		<view class="order">
+			<image src="{{item.coupon.listImageUrl}}" style="width:92rpx;height:92rpx" />
+			<view class="orderInfo">
+				<view class="name">{{item.coupon.couponName}}</view>
+			</view>
+			<view class="moneyandnum">
+				<view class="money">
+					{{item.feeAmount}}
+				</view>
+				<view class="num">
+					X{{item.buyCount}}
+				</view>
+			</view>
+		</view>
+		<view class="btn" wx:if="{{item.statusFlag == 3 }}">
+			<view
+			 class="buy"
+			 bindtap="goUse"
+			 data-operation="{{item}}"
+			>
+				去使用
+			</view>
+		</view>
+	</view>
+	<!-- 没有待使用信息时 -->
+	<view wx:if="{{standbyCount == 0}}" class="nullOrder">
+		<view class="image">
+			<image src="../../../images/nullOrder.png" style="width:214rpx;height:166rpx" />
+		</view>
+		<view class="orderTip">
+			您还没有相关订单
+		</view>
+		<view class="about">
+			没找到订单？试试
+			<text style="color:#3385FF" bindtap = "checkAll">查看全部</text>
+		</view>
+	</view>
+</view>
+<!-- 已完成 -->
+<view hidden="{{active== 3?false:true }}">
+	<view
+	 class="all"
+	 wx:for="{{alreadyList}}"
+	 wx:key="index"
+	>
+		<view class="header">
+			<view class="shopname">
+				奥迪朝阳路4S店
+			</view>
+			<view class="mark">
+				{{item.statusName}}
+			</view>
+		</view>
+		<van-divider hairline />
+		<!-- 订单具体信息 -->
+		<view class="order">
+			<image src="{{item.coupon.listImageUrl}}" style="width:92rpx;height:92rpx" />
+			<view class="orderInfo">
+				<view class="name">{{item.coupon.couponName}}</view>
+			</view>
+			<view class="moneyandnum">
+				<view class="money">
+					{{item.feeAmount}}
+				</view>
+				<view class="num">
+					X{{item.buyCount}}
+				</view>
+			</view>
+		</view>
+		<view class="btn">
+			<view class="btn" wx:if="{{item.statusFlag == 4 }}">
+				<view
+				 class="buy"
+				 bindtap="goRemark"
+				 data-operation="{{item}}"
+				>
+					去评价
+				</view>
+			</view>
+			<view class="btn" wx:if="{{item.statusFlag == 5 }}">
+				<view
+				 class="buy"
+				 bindtap="buyAgain"
+				 data-operation="{{item}}"
+				>
+					再次购买
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- 没有已完成信息时 -->
+	<view wx:if="{{alreadyListCount == 0}}" class="nullOrder">
+		<view class="image">
+			<image src="../../../images/nullOrder.png" style="width:214rpx;height:166rpx" />
+		</view>
+		<view class="orderTip">
+			您还没有相关订单
+		</view>
+		<view class="about">
+			没找到订单？试试
+			<text style="color:#3385FF" bindtap = "checkAll">查看全部</text>
+		</view>
+	</view>
+</view>
+
+<!-- 已过期 -->
+<view hidden="{{active==4?false:true}}">
+	<view
+	 class="all"
+	 wx:for="{{expire}}"
+	 wx:key="index"
+	>
+		<view class="header">
+			<view class="shopname">
+				奥迪朝阳路4S店
+			</view>
+			<view class="mark">
+				{{item.statusName}}
+			</view>
+		</view>
+		<van-divider hairline />
+		<!-- 订单具体信息 -->
+		<view class="order">
+			<image src="{{item.coupon.listImageUrl}}" style="width:92rpx;height:92rpx" />
+			<view class="orderInfo">
+				<view class="name">{{item.coupon.couponName}}</view>
+			</view>
+			<view class="moneyandnum">
+				<view class="money">
+					{{item.feeAmount}}
+				</view>
+				<view class="num">
+					X{{item.buyCount}}
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- 没有已过期信息时 -->
+	<view wx:if="{{expireCount == 0}}" class="nullOrder">
+		<view class="image">
+			<image src="../../../images/nullOrder.png" style="width:214rpx;height:166rpx" />
+		</view>
+		<view class="orderTip">
+			您还没有相关订单
+		</view>
+		<view class="about">
+			没找到订单？试试
+			<text style="color:#3385FF" bindtap = "checkAll">查看全部</text>
+		</view>
+	</view>
+</view>
+
+<!-- 已取消 -->
+<view hidden="{{active==5?false:true}}">
+	<view
+	 class="all"
+	 wx:for="{{cancel}}"
+	 wx:key="index"
+	>
+		<view class="header">
+			<view class="shopname">
+				奥迪朝阳路4S店
+			</view>
+			<view class="mark">
+				{{item.statusName}}
+			</view>
+		</view>
+		<van-divider hairline />
+		<!-- 订单具体信息 -->
+		<view class="order">
+			<image src="{{item.coupon.listImageUrl}}" style="width:92rpx;height:92rpx" />
+			<view class="orderInfo">
+				<view class="name">{{item.coupon.couponName}}</view>
+			</view>
+			<view class="moneyandnum">
+				<view class="money">
+					{{item.feeAmount}}
+				</view>
+				<view class="num">
+					X{{item.buyCount}}
+				</view>
+			</view>
+		</view>
+		<view class="btn">
+			<view
+			 class="radius"
+			 bindtap="delete"
+			 data-operation="{{item}}"
+			>
+				删除订单
+			</view>
+		</view>
+	</view>
+	<!-- 没有已过期信息时 -->
+	<view wx:if="{{cancelCount == 0}}" class="nullOrder">
+		<view class="image">
+			<image src="../../../images/nullOrder.png" style="width:214rpx;height:166rpx" />
+		</view>
+		<view class="orderTip">
+			您还没有相关订单
+		</view>
+		<view class="about">
+			没找到订单？试试
+			<text style="color:#3385FF" bindtap = "checkAll">查看全部</text>
+		</view>
+	</view>
+</view>
+<!-- 为你推荐 -->
+<view>
+	<van-divider contentPosition="center" customStyle="recommend">
+		<image src="../../../images/orderrecommend.png" style="width:34rpx;height:34rpx" />
+		<view style="padding-left:10rpx">为你推荐</view>
+	</van-divider>
+	<view class="list-container mt20">
+		<block wx:for="{{activityList}}" wx:key="index">
+			<view class="list-item box-shadow">
+				<image src="{{item.imgUrl}}"></image>
+			</view>
+		</block>
+	</view>
+</view>
+

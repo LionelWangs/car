@@ -1,0 +1,95 @@
+<view class="container">
+	<!-- 标题 -->
+	<text style = "padding-left:30rpx" >优惠券</text>
+	<!-- 优惠券信息 -->
+	<view
+	 class="coupon"
+	 wx:for="{{coupon}}"
+	 wx:key="{{index}}"
+	>
+		<!-- 满减 -->
+		<view
+		 class="fullreduction"
+		 wx:if="{{nowPrice >= item.thresholdAmount }}"
+		 style="background : #ED7319"
+		>
+			<view class="money">
+				<view style="font-size : 56rpx;padding-top :20rpx">{{item.faceAmount}}
+					<text class = "text">元</text>
+				</view>
+				<view style="font-size : 24rpx">满{{item.thresholdAmount}}元使用</view>
+			</view>
+		</view>
+		<view
+		 class="fullreduction"
+		 wx:else
+		 style="background : #999999"
+		>
+			<view class="money">
+				<view style="font-size : 56rpx;padding-top :20rpx">{{item.faceAmount}}
+					<text class = "text">元</text>
+				</view>
+				<view style="font-size : 24rpx">满{{item.thresholdAmount}}元使用</view>
+			</view>
+		</view>
+		<!-- 优惠券名称-->
+		<view class="couponInfo">
+			<view class="info">
+				<view style="font-size:28rpx;font-weight:400;">{{item.couponName}}</view>
+				<view style="font-size:20rpx;font-weight:400;padding-top:5rpx;color:#999999">{{item.endTime}}到期</view>
+			</view>
+			<view class="check" wx:if="{{nowPrice >= item.thresholdAmount}}">
+				<van-checkbox-group value="{{ radio }}" bind:change="onChange">
+					<van-checkbox checked-color="#ff440b" name="{{item.id}}"></van-checkbox>
+				</van-checkbox-group>
+			</view>
+			<view class="check" wx:else>
+				<van-checkbox-group value="{{ radio }}" bind:change="onChange">
+					<van-checkbox
+					 disabled="true"
+					 checked-color="#ff440b"
+					 name="{{item.id}}"
+					></van-checkbox>
+				</van-checkbox-group>
+			</view>
+
+			<!-- <view wx:if="{{nowPrice >= item.thresholdAmount}}">
+				<van-radio-group value="{{ radio }}" bind:change="onChange">
+					<van-radio
+					 name="{{ item.id }}"
+					 shape="round"
+					 use-icon-slot
+					>
+						<image
+						 slot="icon"
+						 style="height:34rpx;width:34rpx"
+						 src="{{ radio ===  item.id ? icon.active : icon.normal }}"
+						/>
+					</van-radio>
+				</van-radio-group>
+			</view>
+			<view wx:else>
+				<van-radio-group value="{{ radio }}" bind:change="onChange">
+					<van-radio
+					 name="{{ item.id }}"
+					 shape="round"
+					 use-icon-slot
+					 disabled
+					>
+						<image
+						 slot="icon"
+						 style="height:34rpx;width:34rpx"
+						 src="{{ radio ===  item.id ? icon.active : icon.normal }}"
+						/>
+					</van-radio>
+				</van-radio-group>
+			</view> -->
+		</view>
+	</view>
+	<view class="footer">
+		<view class="btn" bindtap="confim">
+			确认
+		</view>
+	</view>
+</view>
+	

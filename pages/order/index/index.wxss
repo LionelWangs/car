@@ -1,0 +1,271 @@
+/* pages/order/index/index.wxss */
+.tabbar {
+  font-size: 28rpx;
+  font-weight: bold;
+  width: 700rpx;
+  padding-bottom: 20rpx;
+}
+.tab-active {
+  color: #ee731a !important;
+  font-size: 32rpx !important;
+  font-weight: bold !important;
+}
+.tab-class {
+  font-size: 32rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(238, 115, 26, 1);
+}
+.all {
+  width: 722rpx;
+  height: 300rpx;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 6rpx;
+  margin-left: 12rpx;
+  margin-right: 10rpx;
+  box-shadow: 0px 1px 14px 0px rgba(50, 50, 50, 0.68);
+  margin-top: 30rpx;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 20rpx;
+  padding-bottom: 0rpx;
+}
+.header .shopname {
+  font-size: 14px;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(68, 68, 68, 1);
+  padding-left: 10rpx;
+}
+.header .mark {
+  font-size: 12px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(238, 115, 26, 1);
+  padding-right: 10rpx;
+}
+.order {
+  display: flex;
+  padding-left: 10rpx;
+}
+.order .orderInfo {
+  padding-left: 20rpx;
+  width: 422rpx;
+  height: 60rpx;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(102, 102, 102, 1);
+  line-height: 46rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.moneyandnum {
+  display: flex;
+  flex-direction: column;
+}
+.moneyandnum .money {
+  margin-left: 110rpx;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(102, 102, 102, 1);
+}
+.moneyandnum .num {
+  margin-left: 140rpx;
+  font-size: 20rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(154, 154, 154, 1);
+}
+.btn {
+  display: flex;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(102, 102, 102, 1);
+  line-height: 54rpx;
+  text-align: center;
+  float: right;
+  margin-right: 10rpx;
+}
+.btn .radius {
+  width: 136rpx;
+  height: 54rpx;
+  border: 2rpx solid rgba(177, 177, 177, 1);
+  border-radius: 26rpx;
+  margin-left: 20rpx;
+}
+.buy {
+  width: 136rpx;
+  height: 54rpx;
+  color: rgba(238, 115, 26, 1);
+  border: 2rpx solid rgba(238, 115, 26, 1);
+  border-radius: 26rpx;
+  margin-left: 20rpx;
+}
+.recommend {
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(42, 41, 49, 1);
+  line-height: 48rpx;
+}
+
+.list-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-right: 20rpx;
+  padding-left: 20rpx;
+}
+
+.list-container .list-item {
+  width: 339rpx;
+  height: 260rpx;
+  margin-bottom: 20rpx;
+}
+
+.list-container .list-item image {
+  width: 339rpx;
+  height: 260rpx;
+  display: block;
+}
+.header-redayPay {
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(101, 101, 101, 1);
+  text-align: center;
+  align-items: center;
+}
+.readyPay-info {
+  height: 216rpx;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 6rpx;
+  box-shadow: 0px 1px 14px 0px rgba(50, 50, 50, 0.68);
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  margin-right: 20rpx;
+}
+.readyPay-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 20rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+.readyPay-header .name {
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(67, 67, 67, 1);
+}
+.readyPay-header .status {
+  font-size: 22rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(237, 115, 25, 1);
+}
+.time {
+  display: flex;
+  flex-direction: row;
+  padding-right: 40rpx;
+}
+.time-btn {
+  display: flex;
+  justify-content: space-between;
+}
+.time-btn .time {
+  margin-top: 14rpx;
+  margin-left: 20rpx;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(42, 41, 49, 1);
+}
+.item {
+  display: inline-block;
+  width: 44rpx;
+  margin-right: 10rpx;
+  color: #fff;
+  font-size: 24rpx;
+  text-align: center;
+  background-color: #4f4f4f;
+  border-radius: 4rpx;
+}
+/* 弹出框 */
+.cancle .header {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20rpx;
+}
+.cancle .header .title {
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(68, 68, 68, 1);
+  text-align: left;
+}
+.cancle .header .intro {
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(181, 181, 181, 1);
+  text-align: left;
+}
+.cancle .radio {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 25rpx;
+  padding-right: 20rpx;
+}
+.cancle .radio .cause {
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(68, 68, 68, 1);
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  margin-top: 20rpx;
+  line-height: 20rpx;
+}
+.canclesubmit {
+  width: 714rpx;
+  height: 74rpx;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 137, 1, 1) 0%,
+    rgba(255, 86, 1, 1) 97%
+  );
+  border-radius: 36rpx;
+  color: white;
+  line-height: 74rpx;
+  text-align: center;
+  margin-right: 10rpx;
+  margin-left: 18rpx;
+  margin-top: 40%;
+}
+.nullOrder {
+  text-align: center;
+}
+.nullOrder .orderTip {
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(102, 102, 102, 1);
+}
+.nullOrder .about {
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(151, 151, 151, 1);
+}
+.popup {
+  height: 880rpx;
+}

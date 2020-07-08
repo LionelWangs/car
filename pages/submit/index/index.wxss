@@ -1,0 +1,172 @@
+.container {
+    width: 750rpx;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .info{
+      display: flex;
+      flex-direction: column;
+  }
+  .info .name{
+    font-size:28rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    padding-left: 30rpx;
+    margin-bottom: 10rpx;
+  }
+  .info .brand{
+      position: relative;
+      margin-left: 10rpx;
+      margin-right: 10rpx;
+  }
+  .title{
+    font-size:28rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+  }
+  .price{
+    position: absolute;
+    top: 80rpx;    
+    font-size:28rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+}
+.tags{
+    position: absolute;
+    background: #EE741A;
+    width:120rpx;
+    bottom: 20rpx;
+    border-radius:30rpx;
+    text-align: center;
+    color: white;
+    width: 100rpx;
+      font-size: 20rpx;
+
+}
+  .stepper{
+      position: absolute;
+      right: 0rpx;
+      top: 75rpx;
+  }
+  .activity{
+    margin-top: 20rpx;
+    width:724rpx;
+    height:168rpx;
+    border:1px solid rgba(154,154,154,1);
+    margin-left: 10rpx;
+    margin-right: 10rpx;
+  }
+  /* 优惠券 */
+  .coupon{
+    height: 84rpx;
+    padding-top: 20rpx;  
+    padding-left: 20rpx;
+    display:  flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .coupon-line{
+      display: flex;
+  }
+  .coupon-line view{
+      line-height: 42rpx;
+      padding-left: 20rpx;
+      width:72rpx;
+      height:24rpx;
+      font-size:24rpx;
+      font-family:Source Han Sans CN;
+      font-weight:500;
+  }
+  .coupon view{
+    font-size:22rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    padding-right: 20rpx    ;
+  }
+  /* 红包 */
+  .redenvelopes{
+    height: 84rpx;
+    padding-bottom: 20rpx;  
+    padding-left: 20rpx;
+    display:  flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .redenvelopes-line{
+    display: flex;
+}
+  .redenvelopes-line view{
+    line-height: 42rpx;
+    padding-left: 20rpx;
+    width:72rpx;
+    height:24rpx;
+    font-size:24rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+}
+.redenvelopes view{
+  font-size:22rpx;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  padding-right: 20rpx    ;
+}
+/* 微信支付 */
+.wechat{
+    height: 84rpx;
+    width: 100%rpx;
+    padding-top: 20rpx;  
+    padding-left: 20rpx;
+    display:  flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .wechat-line{
+      display: flex;
+  }
+  .wechat-line view{
+      line-height: 42rpx;
+      padding-left: 20rpx;
+      height:24rpx;
+      font-size:24rpx;
+      font-family:Source Han Sans CN;
+      font-weight:500;
+  }
+  .wechat view{
+    font-size:22rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    padding-right: 5rpx    ;
+  }
+  /* 好友支付 */
+  .friends{
+    height: 84rpx;
+    padding-bottom: 20rpx;  
+    padding-left: 20rpx;
+    display:  flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .friends-line{
+    display: flex;
+}
+  .friends-line view{
+    line-height: 42rpx;
+    padding-left: 20rpx;
+    height:24rpx;
+    font-size:24rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+}
+.friends view{
+  font-size:22rpx;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  padding-right: 5rpx    ;
+}
+.gun{
+  height: 880rpx;
+}
+.van-submit-bar__price{
+  color: black;
+}
+

@@ -1,0 +1,164 @@
+<view class="container">
+	<view class="info">
+		<text class = "name" >
+            {{shop.shopName}}
+        </text>
+		<!-- 商品信息 -->
+		<view class="brand box-shadow">
+			<van-card thumb="{{activity.listImage}}">
+				<view slot="title" class="title">
+					{{activity.activityName}}
+				</view>
+				<view slot="price-top" class="price">
+					￥ {{activity.currentPrice}} 元
+				</view>
+				<view slot="tags">
+					<view class="tags">
+						过期不退
+					</view>
+				</view>
+				<view slot="num">
+					<view class="stepper">
+						<van-stepper value="{{ 1 }}" bind:change="onAdd" />
+					</view>
+				</view>
+			</van-card>
+		</view>
+		<!-- 优惠券及红包  -->
+		<view class="activity">
+			<!-- 优惠券 -->
+			<view class="coupon">
+				<view class="coupon-line">
+					<image style="width : 42rpx ; height : 42rpx " src="../../../images/coupon.png" />
+					<view>优惠券</view>
+				</view>
+				<view bindtap="showPopup">
+					查看更多
+					<image src="../../../images/more.png" style="width:16rpx;height:14rpx" />
+
+				</view>
+			</view>
+			<van-popup
+			 bind:touchmove="popup"
+			 show="{{ show }}"
+			 round
+			 position="bottom"
+			 close-on-click-overlay="false"
+			>
+				<!-- 设置子组件往父组件传值 -->
+				<!-- 优惠券弹窗  -->
+				<scroll-view
+				 scroll-y="true"
+				 scroll-top="50"
+				 class="gun"
+				 scroll-right
+				>
+					<coupon
+					 id="coupon"
+					 default-value="100"
+					 bind:myevent="getchild"
+					 bind:click-overlay="onClose"
+					/>
+				</scroll-view>
+
+			</van-popup>
+			<!-- 红包信息 -->
+			<view class="redenvelopes">
+				<view class="redenvelopes-line">
+					<image style="width : 42rpx ; height : 42rpx " src="../../../images/redenvelopes.png" />
+					<view>红包</view>
+				</view>
+				<view bindtap="showred">查看更多
+
+					<image src="../../../images/more.png" style="width:16rpx;height:14rpx" />
+				</view>
+			</view>
+			<!--  红包弹窗 -->
+			<van-popup
+			 show="{{ showred }}"
+			 position="bottom"
+			 round
+			>
+				<scroll-view
+				 scroll-y="true"
+				 scroll-top="50"
+				 class="gun"
+				 scroll-right
+				>
+					<redenvelopes
+					 id="red"
+					 default-value="100"
+					 bind:myevent="getRed"
+					 bind:click-overlay="onClose"
+					/>
+				</scroll-view>
+
+				<!-- 设置子组件往父组件传值
+                                                    <redenvelopes    bind:touchmove = "true" id = "coupon" default-value= "100" bind:myevent = "getchild"/> -->
+			</van-popup>
+		</view>
+		<!--
+		 支付方式 
+		<view class="pay activity">
+			微信支付 
+			<view class="wechat">
+				<view class="wechat-line">
+					<image style="width : 42rpx ; height : 42rpx " src="../../../images/wechat.png" />
+					<view>微信支付</view>
+				</view>
+				<view>
+					<van-radio-group value="{{ radio }}" bind:change="onChange">
+						<van-radio
+						 name="1"
+						 shape="round"
+						 use-icon-slot
+						>
+							<image
+							 slot="icon"
+							 style="height:34rpx;width:34rpx"
+							 src="{{ radio ===  '1' ? icon.active : icon.normal }}"
+							/>
+						</van-radio>
+					</van-radio-group>
+				</view>
+			</view>
+			好友支付
+			<view class="friends">
+				<view class="friends-line">
+					<image style="width : 42rpx ; height : 42rpx " src="../../../images/friendpayment.png" />
+					<view>找微信好友支付</view>
+				</view>
+				<view>
+					<van-radio-group value="{{ radio }}" bind:change="onChange">
+						<van-radio
+						 name="2"
+						 shape="round"
+						 use-icon-slot
+						>
+							<image
+							 slot="icon"
+							 style="height:34rpx;width:34rpx"
+							 src="{{ radio ===  '2' ? icon.active : icon.normal }}"
+							/>
+						</van-radio>
+					</van-radio-group>
+				</view>
+			</view>
+		</view>
+		-->
+	</view>
+	<view class="footer">
+		<view class="submit" hidden="{{show || showred}}">
+			<view>
+				<van-submit-bar
+				 price="{{nowPrice * 100}}"
+				 label="实付款 "
+				 button-text="提交订单"
+				 bind:submit="onSubmit"
+				/>
+			</view>
+		</view>
+	</view>
+
+</view>
+

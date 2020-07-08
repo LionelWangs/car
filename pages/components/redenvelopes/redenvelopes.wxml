@@ -1,0 +1,42 @@
+<view class="container">
+	<!-- 标题 -->
+	<text style = "padding-left:30rpx;font-size:14px;font-family:Source Han Sans CN;font-weight:500;" >红包</text>
+
+	<!-- 红包来源 -->
+	<view class="red" wx:for="{{red}}">
+		<view class="red-left">
+			<view class="red-money">
+				签到红包：￥{{item.faceAmount}}
+			</view>
+			<view class="red-date">
+				有效期：{{item.createTime}} - {{item.endTime}}
+			</view>
+		</view>
+		<view class="red-right">
+			<view class="right-money">
+				-￥{{item.faceAmount}}
+				<view class="check" wx:if="{{nowPrice >= item.thresholdAmount}}">
+					<van-checkbox-group value="{{ radio }}" bind:change="onChange">
+						<van-checkbox checked-color="#ff440b" name="{{item.id}}"></van-checkbox>
+					</van-checkbox-group>
+				</view>
+				<view class="check" wx:else>
+					<van-checkbox-group value="{{ radio }}" bind:change="onChange">
+						<van-checkbox
+						 disabled="true"
+						 checked-color="#ff440b"
+						 name="{{item.id}}"
+						></van-checkbox>
+					</van-checkbox-group>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="footer">
+		<view class="btn" bindtap="confim">
+			确认
+		</view>
+	</view>
+
+</view>
+

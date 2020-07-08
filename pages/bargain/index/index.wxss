@@ -1,0 +1,129 @@
+.header{
+    height:202rpx;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 2rpx 14rpx 0rpx rgba(50,50,50,0.68);
+    margin-top: 20rpx;
+    margin-right: 20rpx;
+    margin-left: 20rpx;
+    display: flex;
+}
+.header image{
+    display: flex;
+    padding-top: 20rpx;
+} 
+.couponInfo{
+    padding-top: 20rpx;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10rpx;
+}
+.couponInfo .name{
+    width:510rpx;
+    font-size:28rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(66,66,66,1);
+}
+.couponInfo .time{
+    display: flex;
+    flex-direction: row;
+}
+.time .button{
+    margin-top:10rpx ;
+    width:118rpx;
+    height:26rpx;
+    background:rgba(238,115,26,1);
+    border-radius:14rpx;
+    font-size:20rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(255,254,254,1);
+    text-align: center;
+}
+.time .timeInfo{
+    margin-left: 5rpx;
+    margin-top:10rpx ;
+    width:102rpx;
+    height:20rpx;
+    font-size:20rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(68,68,68,1);
+}
+.header .money-people{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 10rpx;
+    margin-top: 15rpx;
+}
+.money-people .money{
+    font-size:24rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(68,68,68,1);
+}
+.money-people .people{
+    font-size:20rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(153,153,153,1);
+}
+.middle .success{
+    font-size:28rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(66,66,66,1);
+    text-align: center;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+}
+.success text{
+    color: #EE731A;
+}
+.record{
+    height:676rpx;
+    background:#dcdbdc;
+    border-radius:6rpx;
+    margin-top: 30rpx;
+    margin-left:20rpx;
+    margin-right:20rpx
+}
+.name-image {
+    display: flex;
+}
+.name-image .name{
+    font-size:28rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    line-height: 70rpx;
+    padding-left: 10rpx;
+}
+.barginUser{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 30rpx;
+}
+.bargin-money .money{
+    font-size:28rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    line-height: 48rpx;
+}
+.bargin-money{
+    display: flex;
+    padding-right: 30rpx;
+    
+}
+.progress{
+    height:24rpx;
+    background:rgba(254,254,254,1);
+    border:2rpx solid rgba(238,115,26,1);
+    border-radius:12rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
+
+  }

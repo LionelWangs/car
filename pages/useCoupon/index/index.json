@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#FF8C00",
+  "usingComponents": {
+    "van-divider": "@vant/weapp/divider/index"
+  },
+  "navigationBarTitleText": "待使用"
+  
+}

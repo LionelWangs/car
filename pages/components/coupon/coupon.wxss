@@ -1,0 +1,62 @@
+.coupon{
+    display: flex;
+    margin-bottom: 20rpx;
+}
+.text{
+    font-size: 28rpx;
+}
+
+.fullreduction{
+    width:300rpx;
+    height:166rpx;
+    background:#ee731a;
+    border-radius:6rpx 0rpx 0rpx 3rpx;
+    margin-left: 20rpx;
+    display: flex;
+    
+}
+.money{
+    font-size:56rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+}
+.money view{
+    margin-left: 45rpx;
+    color: white;
+}
+.check{
+    margin-top: 20rpx;
+    margin-right: 20rpx;
+
+}
+.couponInfo{
+    margin-right: 20rpx;
+    width: 100%;
+    display: flex;
+    justify-content: space-between ;
+}
+.couponInfo .info{
+    padding-left: 20rpx;
+    padding-top: 20rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+}
+.footer{
+    padding-top:185rpx;
+    /* background:#ee731a; */
+    /* width: 70%; */
+    display: flex;
+    justify-content: center;
+
+    
+}
+.footer .btn{
+    color: white;
+    text-align: center;
+    width: 714rpx;
+    height: 74rpx;
+    border-radius: 40rpx;
+    background-color: #ff440b;
+    line-height: 74rpx;
+    margin-top: 25%;
+}

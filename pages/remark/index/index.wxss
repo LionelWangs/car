@@ -1,0 +1,82 @@
+.container{
+    margin-top: 20rpx;
+    width:708rpx;
+    height:580rpx;
+    background:rgba(255,255,255,1);
+    border-radius:6rpx;
+    margin-right: 20rpx;
+    margin-left: 20rpx;
+    box-shadow: 0px 1px 14px 0px rgba(50, 50, 50, 0.68);
+}
+.container image{
+    padding-right: 20rpx;
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    padding-top: 40rpx;
+    padding-left: 20rpx;
+}
+.header .couponname{
+    padding-top: 15rpx;
+    width:420rpx;
+    height:56rpx;
+    font-size:22rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(101,101,101,1);
+    line-height:34rpx;
+}
+.rate{
+    height: 22rpx;
+    font-size:22rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(67,67,67,1);
+    line-height: 20rpx;
+    display: flex;
+    margin-top: 20rpx;
+}
+.rate .text {
+    line-height: 22rpx;
+    margin-top: 13rpx;
+    padding-left: 20rpx;
+}
+.rate .good{
+    line-height: 22rpx;
+    margin-top: 13rpx;
+    padding-left: 10rpx;
+    font-size:20rpx;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    color:rgba(101,101,101,1);
+}
+.remark{
+    padding-top: 40rpx;
+    padding-left: 20rpx;
+    font-size:20rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(153,153,153,1);
+}
+.upload{
+    padding-left: 20rpx;
+}
+.btn{
+    width:712rpx;
+    height:72rpx;
+    background:linear-gradient(90deg,rgba(255,115,11,1) 0%,rgba(255,75,0,1) 100%);
+    border-radius:34rpx;
+    margin-top: 40rpx;
+    font-size:24rpx;
+    font-family:Source Han Sans CN;
+    font-weight:500;
+    color:rgba(255,255,255,1);
+    line-height: 72rpx;
+    text-align: center;
+    margin-left: 20rpx;
+    margin-right:20rpx ;
+}
+.remark .input{
+    height: 300rpx;
+}

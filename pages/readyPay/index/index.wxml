@@ -1,0 +1,154 @@
+<view class="container">
+	<view class="time">
+		请在
+		<text>22:59:56</text>
+		内支付，逾期订单将自动取消
+	</view>
+	<view class="payinfo">
+		<view class="header">
+			<view class="shopname">
+				奥迪朝阳路4S店
+			</view>
+			<view class="status">
+				待付款
+			</view>
+		</view>
+		<van-divider hairline />
+		<view class="couponinfo">
+			<view class="image" style="padding-left: 20rpx;">
+				<image src="{{order.coupon.listImageUrl}}" style="width:92rpx;height:92rpx;" />
+			</view>
+			<view class="couponname-money">
+				<view class="couponname">
+					{{order.coupon.couponName}}
+				</view>
+				<view class="money-num">
+					<view class="money">
+						￥{{order.coupon.price}}
+					</view>
+					<view class="num">
+						X{{order.buyCount}}
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="payway">
+			<view class="header">
+				支付方式
+			</view>
+			<view class="wechat">
+				<view class="wechat-line">
+					<image style="width : 42rpx ; height : 42rpx " src="../../../images/wechat.png" />
+					<view>微信支付</view>
+				</view>
+				<view>
+					<van-radio-group value="{{ radio }}" bind:change="onChange">
+						<van-radio
+						 name="1"
+						 shape="round"
+						 use-icon-slot
+						>
+							<image
+							 slot="icon"
+							 style="height:34rpx;width:34rpx"
+							 src="{{ radio ===  '1' ? icon.active : icon.normal }}"
+							/>
+						</van-radio>
+					</van-radio-group>
+				</view>
+			</view>
+			<!-- 好友支付 -->
+			<view class="friends">
+				<view class="friends-line">
+					<image style="width : 42rpx ; height : 42rpx " src="../../../images/friendpayment.png" />
+					<view>找微信好友支付</view>
+				</view>
+				<view>
+					<van-radio-group value="{{ radio }}" bind:change="onChange">
+						<van-radio
+						 name="2"
+						 shape="round"
+						 use-icon-slot
+						>
+							<image
+							 slot="icon"
+							 style="height:34rpx;width:34rpx"
+							 src="{{ radio ===  '2' ? icon.active : icon.normal }}"
+							/>
+						</van-radio>
+					</van-radio-group>
+				</view>
+			</view>
+		</view>
+		<view class="orderInfo">
+			<view class="header">
+				订单详情
+			</view>
+			<view class="idtime">
+				<view class="id">
+					订单编号：
+					<text>200619-08573622756</text>
+				</view>
+				<view class="ordertime">
+					下单时间：
+					<text>2020-06-19 14:23:56</text>
+				</view>
+			</view>
+		</view>
+		<view class="btn" bindtap="cancle">
+			取消订单
+		</view>
+		<van-cell
+		 title="展示弹出层"
+		 is-link
+		 bind:click="showPopup"
+		/>
+		<van-popup
+		 show="{{ show }}"
+		 position="bottom"
+		 custom-style="height: 50%"
+		 bind:close="onClose"
+		>
+			<view class="cancle">
+				<view class="header">
+					<view class="title">
+						请选择原因
+					</view>
+					<view class="intro">
+						取消订单后无法恢复，优惠券红包原路返还
+					</view>
+				</view>
+				<view
+				 class="radio"
+				 wx:for="{{cause}}"
+				 wx:key="index"
+				>
+					<view class="cause">
+						{{item.cause}}
+					</view>
+					<view style="padding-right: 3rpx;padding-top: 6rpx;">
+						<van-radio-group value="{{ radio }}" bind:change="onChange">
+							<van-radio name="{{item.id}}"></van-radio>
+						</van-radio-group>
+					</view>
+				</view>
+				<view class="canclesubmit" bindtap="submit">
+					提交
+				</view>
+
+			</view>
+		</van-popup>
+	</view>
+	<view hidden="{{show}}">
+		<view>
+			<van-submit-bar
+			 price="{{ order.coupon.price * 100 }}"
+			 button-text="提交订单"
+			 bind:submit="onSubmit"
+			 price-class="priceclass"
+			/>
+		</view>
+	</view>
+
+</view>
+
