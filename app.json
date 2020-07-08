@@ -11,8 +11,7 @@
     "pages/order/index/index",
     "pages/readyPay/index/index",
     "pages/useCoupon/index/index",
-    "pages/bargain/index/index",
-    "pages/bbb/index/index"
+    "pages/bargain/index/index"
 
   ],
   "permission": {
