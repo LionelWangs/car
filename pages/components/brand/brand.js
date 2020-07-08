@@ -115,7 +115,7 @@ getBrandDetails(id){
     var shopId = e.currentTarget.dataset.operation.shopId
     console.log(shopId)
     wx.navigateTo({
-      url:"../shopping/index/index?shopId=" + shopId +"&id="+id
+      url:"../shopping/index/index?shopId=" + shopId +"&id="+id+'&status='+this.data.status
     })
   }
 

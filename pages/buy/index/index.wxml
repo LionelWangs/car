@@ -1,12 +1,23 @@
 <view class="container">
 	<view class="header-container">
-		<view class="iconfont icon-scan" style="font-size:50rpx" bindtap="scan"></view>
-		<van-search custom-class="custom-class" field-class="field-class" input-class="input-class" cancel-class="cancel-class" value="{{value}}" placeholder="请输入搜索关键词" />
+		<view
+		 class="iconfont icon-scan"
+		 style="font-size:50rpx"
+		 bindtap="scan"
+		></view>
+		<van-search
+		 custom-class="custom-class"
+		 field-class="field-class"
+		 input-class="input-class"
+		 cancel-class="cancel-class"
+		 value="{{value}}"
+		 placeholder="请输入搜索关键词"
+		/>
 	</view>
 	<view class="main-container">
-
+		<!-- 
 		<view class="tab-container">
-			<!-- tab列表 -->
+		tab列表 
 			<view class="tab-list">
 				<van-tabs color="#ee731a;" active="{{tabActive}}" line-width="0" tab-active-class="tab-active" bind:change="onChange">
 					<van-tab title="活动" />
@@ -14,12 +25,13 @@
 					<van-tab title="品牌" />
 				</van-tabs>
 			</view>
-			<!-- 城市选择-->
+			城市选择
 			<view class="city" wx:if="{{tabActive==1||tabActive==2}}">
 				<text>上海</text>
 				<text class="iconfont icon-sanjiao-down"></text>
 			</view>
 		</view>
+		-->
 		<!-- 活动 -->
 		<view class="tab-index hot" hidden="{{tabActive==0?false:true}}">
 			<!-- 活动列表 -->
@@ -55,7 +67,14 @@
 					</view>
 				</block>
 
-				<van-loading custom-class="loading" type="spinner" color="#ee731a" wx:if="{{loading}}" vertical>加载中...</van-loading>
+				<van-loading
+				 custom-class="loading"
+				 type="spinner"
+				 color="#ee731a"
+				 wx:if="{{loading}}"
+				 vertical
+				>加载中...
+				</van-loading>
 
 				<view class="no-data" wx:if="{{!loading && activityList.length==0}}">
 					<text>没有数据</text>
@@ -97,7 +116,11 @@
 							<text class="address">| 地址：普陀区长寿路1888号</text>
 						</view>
 						<view class="right">
-							<van-button round size="small" color="linear-gradient(to right, #FF8D00, #FE5600)">
+							<van-button
+							 round
+							 size="small"
+							 color="linear-gradient(to right, #FF8D00, #FE5600)"
+							>
 								进店逛逛
 							</van-button>
 						</view>
@@ -116,7 +139,11 @@
 							<text class="address">| 地址：普陀区长寿路1888号</text>
 						</view>
 						<view class="right">
-							<van-button round size="small" color="linear-gradient(to right, #FF8D00, #FE5600)">
+							<van-button
+							 round
+							 size="small"
+							 color="linear-gradient(to right, #FF8D00, #FE5600)"
+							>
 								进店逛逛
 							</van-button>
 						</view>
@@ -135,7 +162,11 @@
 							<text class="address">| 地址：普陀区长寿路1888号</text>
 						</view>
 						<view class="right">
-							<van-button round size="small" color="linear-gradient(to right, #FF8D00, #FE5600)">
+							<van-button
+							 round
+							 size="small"
+							 color="linear-gradient(to right, #FF8D00, #FE5600)"
+							>
 								进店逛逛
 							</van-button>
 						</view>
@@ -154,7 +185,11 @@
 							<text class="address">| 地址：普陀区长寿路1888号</text>
 						</view>
 						<view class="right">
-							<van-button round size="small" color="linear-gradient(to right, #FF8D00, #FE5600)">
+							<van-button
+							 round
+							 size="small"
+							 color="linear-gradient(to right, #FF8D00, #FE5600)"
+							>
 								进店逛逛
 							</van-button>
 						</view>
@@ -195,7 +230,11 @@
 							<text class="address">| 地址：普陀区长寿路1888号</text>
 						</view>
 						<view class="right">
-							<van-button round size="small" color="linear-gradient(to right, #FF8D00, #FE5600)">
+							<van-button
+							 round
+							 size="small"
+							 color="linear-gradient(to right, #FF8D00, #FE5600)"
+							>
 								进店逛逛
 							</van-button>
 						</view>
@@ -214,7 +253,11 @@
 							<text class="address">| 地址：普陀区长寿路1888号</text>
 						</view>
 						<view class="right">
-							<van-button round size="small" color="linear-gradient(to right, #FF8D00, #FE5600)">
+							<van-button
+							 round
+							 size="small"
+							 color="linear-gradient(to right, #FF8D00, #FE5600)"
+							>
 								进店逛逛
 							</van-button>
 						</view>
@@ -233,7 +276,11 @@
 							<text class="address">| 地址：普陀区长寿路1888号</text>
 						</view>
 						<view class="right">
-							<van-button round size="small" color="linear-gradient(to right, #FF8D00, #FE5600)">
+							<van-button
+							 round
+							 size="small"
+							 color="linear-gradient(to right, #FF8D00, #FE5600)"
+							>
 								进店逛逛
 							</van-button>
 						</view>
@@ -250,3 +297,4 @@
 	<view class="footer-container"></view>
 
 </view>
+

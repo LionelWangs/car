@@ -6,7 +6,13 @@
     "pages/collect/index/index",
     "pages/message/index/index",
     "pages/recommend/index/index",
-    "pages/shopping/index/index"
+    "pages/shopping/index/index",
+    "pages/submit/index/index",
+    "pages/order/index/index",
+    "pages/readyPay/index/index",
+    "pages/useCoupon/index/index",
+    "pages/bargain/index/index"
+
   ],
   "permission": {
     "scope.userLocation": {

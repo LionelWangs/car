@@ -23,12 +23,12 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.1",
-	"appid": "wxce03b759c64fc9e8",
+	"appid": "wx4ca767d605429db6",
 	"projectname": "car",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -78,6 +78,70 @@
 					"id": -1,
 					"name": "pages/shopping/index/index",
 					"pathName": "pages/shopping/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "优惠购买",
+					"pathName": "pages/submit/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/my/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/testPay/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单",
+					"pathName": "pages/order/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "评价",
+					"pathName": "pages/remark/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "待付款",
+					"pathName": "pages/readyPay/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "优惠券",
+					"pathName": "pages/useCoupon/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "砍价",
+					"pathName": "pages/bargain/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/bargain/index/index",
+					"pathName": "pages/bargain/index/index",
+					"query": "activityId=1277520265799397376",
 					"scene": null
 				}
 			]

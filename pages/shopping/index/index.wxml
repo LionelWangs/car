@@ -1,92 +1,212 @@
+<van-dialog id="van-dialog" />
 <view class="container">
-<!-- 轮播图 -->
-<view class="banner-swiper-container">
-        <swiper indicator-dots="{{true}}" indicator-color="#ccc" indicator-active-color="#ee731a" circular="{{true}}" class="swipers" autoplay="{{true}}">
-                <block wx:for="{{carouselList}}" wx:key="index">
-                    <swiper-item>
-                        <image src="{{item.imgUrl}}" class="slide-image"></image>
-                    </swiper-item>
-                </block>
-        </swiper>
-    </view>
+	<!-- 轮播图 -->
+	<view class="banner-swiper-container">
+		<swiper
+		 indicator-dots="{{true}}"
+		 indicator-color="#ccc"
+		 indicator-active-color="#ee731a"
+		 circular="{{true}}"
+		 class="swipers"
+		 autoplay="{{true}}"
+		>
+			<block wx:for="{{carouselList}}" wx:key="index">
+				<swiper-item>
+					<image src="{{item.imgUrl}}" class="slide-image"></image>
+				</swiper-item>
+			</block>
+		</swiper>
+	</view>
 </view>
 <!-- 商品信息 -->
-<view class = "brandInfo">
-      <view>
-              <view class="name">
-                {{activity.activityName}}
-              </view>
-              <image class = "imageRight" src = "../../../images/share.png"  mode = "widthFix"  />
-              <view>
-                  <text class = "price">{{activity.currentPrice}}元</text>
-                  <text class = "price" style = "color : #ccc ; text-decoration: line-through; ">{{activity.originalPrice}}元</text>
-              </view>
-              <view  class = "tag">
-                  <view class  = "btn">
-                        <view>
-                          {{allowance}}折
-                        </view>
-                  </view>
-              </view>
-      </view>
-<!-- 商品评价 -->
-      <view class= "mark box-shadow mt20">
-        商品评价 (82) 
-        <navigator class="more" url="" open-type="navigate">
-          <view class = "query">
-            查看更多 >>
-          </view>
-        </navigator>
-          <!-- 详细评价 -->
-           <view class = "markInfo">
-            <view class = "markImage">
-                <image class = "image" src = "{{stores.brand.logoUrl}}"/>
-            </view>
-            <view class = "username">测试***用户</view>
-            <view class = "content"> 服务态度非常棒，领取优惠券后直接到店使用，真实有效，很方便， 商家活动都能找到折扣。</view>
-          </view>
-      </view>
-
-      <view class = "stores-list-container" >
-          	<view class="image-container">
-								<image style="width:70rpx;height:70rpx;"  src="{{stores.brand.logoUrl}}"></image>
-                <view id = "shopName">{{stores.shopName}}</view>
-							</view>
-              <view class="right">
-							<van-button round size="small" color="linear-gradient(to right, #FF8D00, #FE5600)" bindtap="goBrand" data-operation="{{stores}}" >
-								进店逛逛
-							</van-button>
-						</view>
-      </view>
-      		<!-- 活动列表 -->
-      <view class = "activity-recommen">
-        活动推荐
-      </view>
-			<view class="list-container mt20">
-				<block wx:for="{{activityList}}" wx:key="index">
-					<view class="list-item box-shadow">
-						<image src="{{item.listImage}}" bindtap = "shopping" data-operation = "{{item}}"></image>
-					</view>
-				</block>
+<view class="brandInfo">
+	<view>
+		<view class="name">
+			{{activity.activityName}}
+		</view>
+		<!-- 分享 -->
+		<button
+		 open-type="share"
+		 id="btnId"
+		 style="display:hidden"
+		 bindtap='onShareAppMessage'
+		 data-operation="1"
+		></button>
+		<label for="btnId" style="z-index:99;height:76rpx">
+			<image
+			 class="imageRight"
+			 src="../../../images/share.png"
+			 mode="widthFix"
+			 style="width:34rpx;height:34rpx"
+			/>
+		</label>
+		<view>
+			<text class = "price">{{activity.currentPrice}}元</text>
+			<text class = "price" style = "color : #ccc ; text-decoration: line-through; ">{{activity.originalPrice}}元</text>
+		</view>
+		<view class="tag">
+			<view class="btn">
+				<view>
+					{{allowance}}折
+				</view>
 			</view>
-        
-  
+		</view>
+	</view>
+	<!-- 商品评价 -->
+	<view class="mark box-shadow mt20">
+		<view class="header">
+			<view class="remark">
+				商品评价 ({{remarkNum}})
+			</view>
+			<view class="query">
+				查看更多
+				<image src="../../../images/more.png" style="width:16rpx;height:14rpx;" />
+			</view>
+		</view>
+		<!-- 砍价 -->
+		<view>
+			<van-cell
+			 title="展示弹出层"
+			 is-link
+			 bind:click="showBargain"
+			/>
+			<van-popup
+			 closeable
+			 show="{{ bargain }}"
+			 bind:close="bargainClose"
+			 custom-style="border-radius:6rpx;"
+			>
+				<view class="bargain">
+					<!-- 标题 -->
+					<view class="title">
+						<view class="header">
+							仅剩
+							<text style="color:#EE731A">9.89%</text>
+							即可免费拿
+						</view>
+					</view>
+					<!-- 进度条 -->
+					<view>
+						<van-progress
+						 percentage="75"
+						 pivot-color="#7232dd"
+						 stroke-width="28rpx"
+						 show-pivot="{{false}}"
+						 track-color="#fff;border-radius: 20rpx;"
+						 color="linear-gradient(90deg,rgba(255,115,12,1) 0%,rgba(255,76,0,1) 100%)"
+						 custom-class="progress"
+						/>
+					</view>
+					<view class="pop-footer">
+						邀请新用户帮砍大金额
+					</view>
+					<button
+					 bindtap="share"
+					 open-type="share"
+					 data-operation="2"
+					>
+						<view style=" text-align: center;">
+							<image src="../../../images/cut.png" style="width:500rpx;height:90rpx" />
+						</view>
+					</button>
+				</view>
+			</van-popup>
+		</view>
 
+		<view wx:for="{{remarkList}}" wx:key="index">
+			<view class="remarkList">
+				<image
+				 class="image"
+				 src="{{item.member.photo}}"
+				 style="width:40rpx;height:40rpx;margin-left: 20rpx;"
+				/>
+				<view class="username">{{item.member.memberName}}</view>
+			</view>
+			<view class="content">{{item.remark}}</view>
+			<van-divider hairline customStyle="margin:0rpx" />
+		</view>
+	</view>
+	<view class="stores-list-container" style="height : 30rpx">
+		<view class="image-container">
+			<image style="width:70rpx;height:70rpx;" src="{{stores.brand.logoUrl}}"></image>
+			<view id="shopName">{{stores.shopName}}</view>
+		</view>
+		<view class="right">
+			<van-button
+			 round
+			 size="small"
+			 color="linear-gradient(to right, #FF8D00, #FE5600)"
+			 bindtap="goBrand"
+			 data-operation="{{stores}}"
+			>
+				进店逛逛
+			</van-button>
+		</view>
+	</view>
+
+	<!-- 这是商品评价 -->
+	<view class="intro box-shadow mt20">
+		<view>
+			商品简介:
+			<rich-text nodes="{{activityInfo}}" style="color: #666666;"></rich-text>
+		</view>
+	</view>
+
+	<!-- 活动列表 -->
+	<view class="activity-recommen">
+		<view>
+			活动推荐
+		</view>
+		<view style="color:#666666; font-size:20rpx;font-weight: 400;padding-right: 20rpx;">
+			查看更多
+			<image src="../../../images/more.png" style="width:16rpx;height:14rpx" />
+		</view>
+	</view>
+	<view class="list-container mt20">
+		<block wx:for="{{activityList}}" wx:key="index">
+			<view class="list-item box-shadow">
+				<image
+				 src="{{item.listImage}}"
+				 bindtap="shopping"
+				 data-operation="{{item}}"
+				></image>
+			</view>
+		</block>
+	</view>
 </view>
-  
 
-
-<view class="footer-container">
-<!-- 选择购物 -->
-<van-goods-action>
-  <van-goods-action-icon icon="chat-o" text="客服" bind:click="clickBuy" />
-  <van-goods-action-icon icon="cart-o" text="购物车" bind:click="clickBuy" />
-   <van-goods-action-icon icon="shop-o" text="店铺" />
-  <van-goods-action-button
-    text="相似商品"
-    type="warning"
-    bind:click="clickBuy"
-  />
-  <van-goods-action-button text="立即购买" bind:click="clickBuy" />
-</van-goods-action>
+<view class="footer-container" wx:if="{{status == 1}}">
+	<!-- 选择购物 -->
+	<van-goods-action>
+		<van-goods-action-icon icon="chat-o" text="客服" />
+		<van-goods-action-icon icon="cart-o" text="购物车" />
+		<van-goods-action-icon
+		 icon="shop-o"
+		 text="店铺"
+		 bind:click="goBrand"
+		 data-operation="{{stores}}"
+		/>
+		<van-goods-action-button
+		 text="邀请砍单"
+		 color="#ffba13"
+		 bind:click="showBargain"
+		/>
+		<van-goods-action-button text="立即购买" bind:click="clickBuy" />
+	</van-goods-action>
 </view>
+<view class="footer-container" wx:else>
+	<!-- 选择购物 -->
+	<van-goods-action>
+		<van-goods-action-icon icon="chat-o" text="客服" />
+		<van-goods-action-icon icon="cart-o" text="购物车" />
+		<van-goods-action-icon
+		 icon="shop-o"
+		 text="店铺"
+		 bind:click="goBrand"
+		 data-operation="{{stores}}"
+		/>
+		<van-goods-action-button text="邀请砍单" type="warning" />
+		<van-goods-action-button color="rgba(102,102,102,1)" text="立即购买" />
+	</van-goods-action>
+</view>
+

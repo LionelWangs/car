@@ -6,6 +6,8 @@
     "van-tabs": "@vant/weapp/tabs/index",
     "van-sticky": "@vant/weapp/sticky/index",
     "shop" :"../components/shop/shop",
-    "brand":"../components/brand/brand"
+    "brand":"../components/brand/brand",
+    "van-field": "@vant/weapp/field/index",
+    "van-divider": "@vant/weapp/divider/index"
   }
 }

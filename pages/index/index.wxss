@@ -40,7 +40,7 @@
 .tab-list {
   font-size: 28rpx;
   font-weight: bold;
-  width: 500rpx;
+  width: 600rpx;
 }
 
 .tab-active {
@@ -76,7 +76,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-
 }
 
 .option-swiper-container .option-item-container .option-item {
@@ -87,6 +86,10 @@
   text-align: center;
   color: #666;
   font-size: 20rpx;
+}
+.option-swiper-container .option-item-container .option-item text {
+  align-items: center;
+  margin-left: -16rpx;
 }
 
 .option-swiper-container .option-item-container .option-item .iconfont {
@@ -112,7 +115,7 @@
   display: block;
 }
 
-/* 4s店 */
+/* 4s店 热门品牌 */
 .stores .hot-brand {
   margin-top: 10rpx;
   width: 100%;
@@ -140,12 +143,13 @@
   display: flex;
   justify-content: space-between;
   margin-top: 10rpx;
+  flex-flow: row wrap; /*子元素溢出父容器时换行*/
 }
 
 .stores .hot-brand .brand-item {
   text-align: center;
+  padding-right: 60rpx;
 }
-
 
 .stores .hot-brand .brand-item .image-container {
   height: 70rpx;
@@ -198,11 +202,28 @@
   font-size: 24rpx;
   padding: 5rpx 24rpx;
   border-radius: 7rpx;
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
   margin-right: 15rpx;
 }
 
 .loading-container {
   text-align: center;
   color: #999;
+}
+.right{
+  margin-top: -20rpx;
+}
+.search{
+  font-size:12px;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  margin-left: 80rpx;
+}
+.search .searchcontainer{
+  display: flex;
+ 
+}
+.searchcontainer .searchname{
+  line-height: 100rpx;
+
 }

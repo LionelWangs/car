@@ -12,7 +12,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    //领取优惠券到卡包
+    // wx.addCard({
+    //   cardList: [{
+    //     "cardExt": '{"nonce_str":"42a34c6e84334c69961f5294643ad331","code":"892237947","signature":"6211eb80ec26b4054c566b3a7d1868fa304183f4","timestamp":"1541723819"}',
+    //     "cardId": "pCS2i1DQQWELTTEcORmb-irOTRqo"
+    //   }],
+    //   success(res) {
+    //     console.log(res.cardList) // 卡券添加结果
+    //   }
+    // })
   },
 
   /**

@@ -1,195 +1,314 @@
 <view class="container">
-	<view class="header-container" hidden = "{{tabActive>=4?true:false}}">
-		<view class="iconfont icon-scan" style="font-size:50rpx" bindtap="scan"></view>
-		<van-search bind:change="onInput" custom-class="custom-class" field-class="field-class" input-class="input-class" cancel-class="cancel-class" value="{{value}}" placeholder="请输入搜索关键词" />
+	<view class="header-container" hidden="{{tabActive>=4?true:false}}">
+		<view
+		 class="iconfont icon-scan"
+		 style="font-size:50rpx"
+		 bindtap="scan"
+		></view>
+		<van-search
+		 bind:change="onInput"
+		 custom-class="custom-class"
+		 field-class="field-class"
+		 input-class="input-class"
+		 cancel-class="cancel-class"
+		 value="{{value}}"
+		 placeholder="{{searchText}}"
+		/>
 	</view>
-	<view class="main-container">
-		<view class="tab-container">
-			<!-- tab列表 -->
-			<view class="tab-list" hidden = "{{tabActive>=4?true:false}}">
-				<van-tabs color="#ee731a;" active= '{{tabActive}}'  line-width="0" tab-active-class="tab-active" bind:change="onChange" sticky="{{true}}">
-					<van-tab title="热门" />
-					<van-tab title="4S店" />
-					<van-tab title="品牌" />
-					<van-tab title="其他" />
-				</van-tabs>
-			</view>
-			<!-- 城市选择-->
-			<view class="city" wx:if="{{tabActive==1||tabActive==2}}">
-				<text>上海</text>
-				<text class="iconfont icon-sanjiao-down"></text>
+
+	<view hidden="{{!search}}">
+		<van-divider hairline customStyle="margin:0rpx" />
+		<view
+		 class="search"
+		 wx:for="{{searchList}}"
+		 wx:key="index"
+		 wx:if="{{tabActive == 0}}"
+		>
+			<!-- 搜索框内容 -->
+			<view
+			 class="searchcontainer"
+			 bindtap="goactivity"
+			 data-operation="{{item}}"
+			>
+				<view class="searchImage">
+					<image src="{{item.listImage}}" style="width:100rpx;height:100rpx" />
+				</view>
+				<view class="searchname">{{item.activityName}}</view>
+				<van-divider hairline customStyle="margin:0rpx" />
 			</view>
 		</view>
-
-		<!-- 热门 -->
-		<view class="tab-index hot" hidden="{{tabActive==0?false:true}}">
-			<!-- 轮播图 -->
-			<view class="banner-swiper-container">
-				<swiper indicator-dots="{{true}}" indicator-color="#ccc" indicator-active-color="#ee731a" circular="{{true}}" class="swipers" autoplay="{{true}}">
-					<block wx:for="{{carouselList}}" wx:key="index">
-						<swiper-item>
-							<image src="{{item.imageUrl}}" class="slide-image"></image>
-						</swiper-item>
-					</block>
-				</swiper>
+		<!-- 搜索品牌 -->
+		<view
+		 class="search"
+		 wx:for="{{searchList}}"
+		 wx:key="index"
+		 wx:if="{{tabActive == 1 || tabActive == 2}}"
+		>
+			<!-- 搜索框内容 -->
+			<view
+			 class="searchcontainer"
+			 bindtap="goBrand"
+			 data-operation="{{item}}"
+			>
+				<view class="searchImage">
+					<image src="{{item.logoUrl}}" style="width:100rpx;height:100rpx" />
+				</view>
+				<view class="searchname">{{item.brandName}}</view>
+				<van-divider hairline customStyle="margin:0rpx" />
 			</view>
-			<!-- 选项轮播 -->
-			<view class="option-swiper-container">
-				<swiper indicator-dots="{{false}}" indicator-color="#ccc" indicator-active-color="#ee731a" circular="{{true}}" class="swipers box-shadow">
-					<block wx:for="{{serveList.length/10}}" wx:key="i" wx:for-index="i">
-						<swiper-item>
-							<view class="option-item-container">
-								<block wx:for="{{serveList}}" wx:key="j" wx:for-index="j" wx:if="{{j>=i*10&&j<(i+1)*10}}">
-									<navigator wx:if="{{item.serviceName=='购车'}}" hover-class="none" url="/pages/buy/index/index">
-										<view class="option-item">
+		</view>
+	</view>
+
+	<view hidden="{{search}}">
+		<view class="main-container">
+			<view class="tab-container">
+				<!-- tab列表 -->
+				<view class="tab-list" hidden="{{tabActive>=4?true:false}}">
+					<van-tabs
+					 color="#ee731a;"
+					 active='{{tabActive}}'
+					 line-width="0"
+					 tab-active-class="tab-active"
+					 bind:change="onChange"
+					 sticky="{{true}}"
+					>
+						<van-tab title="热门" />
+						<van-tab title="4S店" />
+						<van-tab title="品牌" />
+						<!-- <van-tab title="其它" /> -->
+					</van-tabs>
+				</view>
+				<!-- 城市选择-->
+				<view class="city" wx:if="{{tabActive==1||tabActive==2}}">
+					<text>上海</text>
+					<text class="iconfont icon-sanjiao-down"></text>
+				</view>
+			</view>
+
+			<!-- 热门 -->
+			<view class="tab-index hot" hidden="{{tabActive==0?false:true}}">
+				<!-- 轮播图 -->
+				<view class="banner-swiper-container">
+					<swiper
+					 indicator-dots="{{true}}"
+					 indicator-color="#ccc"
+					 indicator-active-color="#ee731a"
+					 circular="{{true}}"
+					 class="swipers"
+					 autoplay="{{true}}"
+					>
+						<block wx:for="{{carouselList}}" wx:key="index">
+							<swiper-item>
+								<image src="{{item.imageUrl}}" class="slide-image"></image>
+							</swiper-item>
+						</block>
+					</swiper>
+				</view>
+				<!-- 选项轮播 -->
+				<view class="option-swiper-container">
+					<swiper
+					 indicator-dots="{{false}}"
+					 indicator-color="#ccc"
+					 indicator-active-color="#ee731a"
+					 circular="{{true}}"
+					 class="swipers box-shadow"
+					>
+						<block
+						 wx:for="{{serveList.length/10}}"
+						 wx:key="i"
+						 wx:for-index="i"
+						>
+							<swiper-item>
+								<view class="option-item-container">
+									<block
+									 wx:for="{{serveList}}"
+									 wx:key="j"
+									 wx:for-index="j"
+									 wx:if="{{j>=i*10&&j<(i+1)*10}}"
+									>
+										<navigator
+										 wx:if="{{item.serviceName=='购车'}}"
+										 hover-class="none"
+										 url="/pages/buy/index/index"
+										>
+											<view class="option-item">
+												<view>
+													<image style="width:45rpx;height:45rpx;" src="{{item.iconUrl}}"></image>
+												</view>
+												<text>{{item.serviceName}}</text>
+											</view>
+										</navigator>
+										<view class="option-item" wx:else>
 											<view>
 												<image style="width:45rpx;height:45rpx;" src="{{item.iconUrl}}"></image>
 											</view>
 											<text>{{item.serviceName}}</text>
 										</view>
-									</navigator>
-									<view class="option-item" wx:else>
-										<view>
-											<image style="width:45rpx;height:45rpx;" src="{{item.iconUrl}}"></image>
-										</view>
-										<text>{{item.serviceName}}</text>
-									</view>
-								</block>
-							</view>
-						</swiper-item>
-					</block>
-				</swiper>
-			</view>
-			<!-- 广告 -->
-			<view class="ad mt20">
-				<image style="width:100%;height:145rpx;border-radius:7rpx" src="{{adImgUrl}}"></image>
-			</view>
-			<!-- 活动列表 -->
-			<view class="list-container mt20">
-				<block wx:for="{{activityList}}" wx:key="index">
-					<view class="list-item box-shadow">
-						<image src="{{item.imgUrl}}"></image>
-					</view>
-				</block>
-			</view>
-		</view>
-		<!-- 4s店 -->
-		<view class="tab-index stores" hidden="{{tabActive==1?false:true}}">
-			<view class="hot-brand box-shadow">
-				<view class="title">
-					<text>热门品牌</text>
-					<view class="all">
-						<text>打开全部</text>
-						<text class="iconfont icon-sanjiao-down"></text>
-					</view>
+									</block>
+								</view>
+							</swiper-item>
+						</block>
+					</swiper>
 				</view>
-				<view class="brand-container">
-					<block wx:for="{{hotBrandList}}" wx:key="index">
-						<view class="brand-item">
-							<view class="image-container">
-								<image style="width:70rpx;height:70rpx;" src="{{item.logoUrl}}" bindtap = "goBrand" data-operation="{{item}}"></image>
-							</view>
-							<view class="name">
-								<text>{{item.brandName}}</text>
-							</view>
+				<!-- 广告
+				<view class="ad mt20">
+					<image style="width:100%;height:145rpx;border-radius:7rpx" src="{{adImgUrl}}"></image>
+				</view> -->
+				<!-- 活动列表 -->
+				<view class="list-container mt20">
+					<block wx:for="{{activityList}}" wx:key="index">
+						<view
+						 class="list-item box-shadow"
+						 bindtap="goactivity"
+						 data-operation="{{item}}"
+						>
+							<image src="{{item.imgUrl}}"></image>
 						</view>
 					</block>
 				</view>
 			</view>
-			<view class="stores-list-container box-shadow mt20">
-				<view class="title fs24 blod">4S店</view>
-				<block wx:for="{{storesList}}" wx:key="index">
-					<view class="stores-item">
+			<!-- 4s店 -->
+			<view class="tab-index stores" hidden="{{tabActive==1?false:true}}">
+				<view class="hot-brand box-shadow" style="height : {{ shopHeight }}; transition-duration : 0.5s">
+					<view class="title">
+						<text>热门品牌</text>
+						<view class="all">
+							<text bindtap = "openAll" data-operation = "{{brandText}}">{{ brandText }}</text>
+							<text class="iconfont icon-sanjiao-down"></text>
+						</view>
+					</view>
+					<view class="brand-container">
+						<!--  默认显示4个品牌 -->
+						<block wx:for="{{hotBrandList}}" wx:key="index">
+							<view class="brand-item">
+								<view class="image-container">
+									<image
+									 style="width:70rpx;height:70rpx;"
+									 src="{{item.logoUrl}}"
+									 bindtap="goBrand"
+									 data-operation="{{item}}"
+									></image>
+								</view>
+								<view class="name">
+									<text>{{item.brandName}}</text>
+								</view>
+							</view>
+						</block>
+					</view>
+				</view>
+				<view class="stores-list-container box-shadow mt20">
+					<view class="title fs24 blod">4S店</view>
+					<block wx:for="{{storesList}}" wx:key="index">
+						<view class="stores-item">
+							<view class="title-container">
+								<view class="left">
+									<view class="image-container">
+										<image style="width:100rpx;height:100rpx;" src="{{item.shop.logoUrl}}"></image>
+									</view>
+									<text class="store-name">{{item.shop.shopName}}</text>
+									<text class="address">| 地址：{{item.shop.adress}}</text>
+								</view>
+								<view class="right">
+									<van-button
+									 round
+									 size="small"
+									 color="linear-gradient(to right, #FF8D00, #FE5600)"
+									 bindtap="goShop"
+									 data-operation="{{item}}"
+									>
+										进店逛逛
+									</van-button>
+								</view>
+							</view>
+							<view class="content-container">
+								<image style="width:100%;height:318rpx;border-radius:16rpx;" src="{{item.imgUrl}}"></image>
+							</view>
+						</view>
+					</block>
+					<view class="loading-container fs24 mt20">
+						<view wx:if="{{storeLoading}}">
+							<text>加载中...</text>
+						</view>
+						<view wx:if="{{storePageEnd}}">
+							<text>没有更多了</text>
+						</view>
+						<view wx:if="{{loadingFail}}">
+							<text>数据加载失败，请重试</text>
+						</view>
+					</view>
+
+				</view>
+			</view>
+			<!-- 品牌 -->
+			<view class="tab-index stores brand" hidden="{{tabActive==2?false:true}}">
+				<view class="hot-brand box-shadow" style=" transition-duration : 0.5s; height : {{ brandHeight }}; ">
+					<view class="title">
+						<text>热门4S店</text>
+						<view class="all">
+							<text  data-operation = "{{text + 2}}" bindtap = "openAll">{{text}}</text>
+							<text class="iconfont icon-sanjiao-down"></text>
+						</view>
+					</view>
+					<view class="stores-container">
+						<block wx:for="{{hotStoresList}}" wx:key="index" >
+							<view class="stores-item">
+								<text bindtap="goHotShop"
+									 data-operation="{{item}}">{{item.shopName}}</text>
+							</view>
+						</block>
+					</view>
+				</view>
+				<view class="stores-list-container box-shadow mt20">
+					<view class="title fs24 blod">品牌</view>
+					<view
+					 class="stores-item"
+					 wx:for="{{brandList}}"
+					 wx:key="index"
+					>
 						<view class="title-container">
 							<view class="left">
 								<view class="image-container">
-									<image style="width:100rpx;height:100rpx;" src="{{item.shop.logoUrl}}"></image>
+									<image style="width:100rpx;height:100rpx;" src="{{item.logoUrl}}"></image>
 								</view>
-								<text class="store-name">{{item.shop.shopName}}</text>
-								<text class="address">| 地址：{{item.shop.adress}}</text>
+								<text class="store-name">{{item.brandName}}</text>
 							</view>
 							<view class="right">
-								<van-button round size="small" color="linear-gradient(to right, #FF8D00, #FE5600)" bindtap="goShop" data-operation="{{item}}">
-									进店逛逛
+								<van-button
+								 round
+								 size="small"
+								 color="linear-gradient(to right, #FF8D00, #FE5600)"
+								 bindtap="goBrand"
+								 data-operation="{{item}}"
+								>
+									进店
 								</van-button>
 							</view>
 						</view>
 						<view class="content-container">
-							<image style="width:100%;height:318rpx;border-radius:16rpx;" src="{{item.imgUrl}}"></image>
+							<image style="width:100%;height:318rpx;border-radius:16rpx;" src="https://www3.autoimg.cn/newsdfs/g28/M06/49/EA/1440x720_0_autohomecar__ChsEfV7Mi-uAJhMkAALWav75uzE322.jpg"></image>
 						</view>
 					</view>
-				</block>
-				<view class="loading-container fs24 mt20">
-					<view wx:if="{{storeLoading}}">
-						<text>加载中...</text>
-					</view>
-					<view wx:if="{{storePageEnd}}">
-						<text>没有更多了</text>
-					</view>
-					<view wx:if="{{loadingFail}}">
-						<text>数据加载失败，请重试</text>
-					</view>
 				</view>
+			</view>
+			<!-- 其他 -->
+			<view class="tab-index other" hidden="{{tabActive==3?false:true}}">
+				其他
+			</view>
+			<!-- 4s店子页面 -->
+			<view hidden="{{tabActive==4?false:true}}">
+				<view wx:if="{{tabActive == 4}}">
+					<shop/>
+				</view>
+			</view>
+			<!-- 品牌子页面-->
+			<view hidden="{{tabActive==5?false:true}}">
+				<view wx:if="{{tabActive == 5}}">
+					<brand/>
+				</view>
+			</view>
 
-			</view>
 		</view>
-		<!-- 品牌 -->
-		<view class="tab-index stores brand" hidden="{{tabActive==2?false:true}}">
-			<view class="hot-brand box-shadow">
-				<view class="title">
-					<text>热门4S店</text>
-					<view class="all">
-						<text>打开全部</text>
-						<text class="iconfont icon-sanjiao-down"></text>
-					</view>
-				</view>
-				<view class="stores-container">
-					<block wx:for="{{hotStoresList}}" wx:key="index">
-						<view class="stores-item">
-							<text>{{item.shopName}}</text>
-						</view>
-					</block>
-				</view>
-			</view>
-			<view class="stores-list-container box-shadow mt20" wx:for = "{{brandList}}" wx:key="index">
-				<view class="title fs24 blod">品牌</view>
-				<view class="stores-item">
-					<view class="title-container">
-						<view class="left">
-							<view class="image-container">
-								<image style="width:100rpx;height:100rpx;" src="{{item.logoUrl}}"></image>
-							</view>
-							<text class="store-name">{{item.brandName}}</text>
-						</view>
-						<view class="right">
-							<van-button round size="small" color="linear-gradient(to right, #FF8D00, #FE5600)" bindtap="goBrand" data-operation="{{item}}" >
-								进店
-							</van-button>
-						</view>
-					</view>
-					<view class="content-container">
-						<image style="width:100%;height:318rpx;border-radius:16rpx;" src="https://www3.autoimg.cn/newsdfs/g28/M06/49/EA/1440x720_0_autohomecar__ChsEfV7Mi-uAJhMkAALWav75uzE322.jpg"></image>
-					</view>
-				</view>
-			</view>
-		</view>
-		<!-- 其他 -->
-		<view class="tab-index other" hidden="{{tabActive==3?false:true}}">
-			其他
-		</view>
-		<!-- 4s店子页面 -->
-		<view hidden="{{tabActive==4?false:true}}">
-			<view wx:if ="{{tabActive == 4}}">
-			<shop  />
-			</view>
-		</view>
-		<!-- 品牌子页面-->
-		<view hidden="{{tabActive==5?false:true}}">
-			<view wx:if ="{{tabActive == 5}}">
-			<brand  />
-			</view>
-		</view>
-
+		<view class="footer-container"></view>
 	</view>
-	<view class="footer-container"></view>
 </view>
+

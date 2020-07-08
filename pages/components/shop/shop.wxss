@@ -2,12 +2,14 @@
 .back{
   display: flex;
   position: relative;
-  font-size: 28rpx;
+  font-size: 24rpx;
   height: 60rpx;
-  top: 0px;
-  left: 0px;
+  top: 0rpx;
+  left: 0rpx;
   margin-top: -30rpx;
   line-height: 60rpx;
+  font-family:Source Han Sans CN;
+  font-weight:bold;
 }
 image{
   padding-top: 9rpx;
@@ -26,17 +28,27 @@ image{
 .brand{
   font-weight: 500;
   position: relative;
+  
 }
-
-.address view{
-  display: inline-block;
-  font-size: small;
-  color: #999;
-  padding-top: 3rpx;
+.brand text{
+  font-size:24rpx;
+  font-family:Source Han Sans CN;
+  font-weight:bold;
+  color:rgba(68,68,68,1);
+}
+.address{
+  display: flex;
+  font-size: 20rpx;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  color:rgba(102,102,102,1);
 }
 .address .distance{
-  position: absolute;
   right: 20rpx;
+  margin-top: -27rpx;
+
 }
 .tab-container {
   display: flex;

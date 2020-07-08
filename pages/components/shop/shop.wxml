@@ -1,43 +1,62 @@
 <view class="container">
-<!-- 返回-->
-	<view >
-		<view class="back" >
-		 <image src = "../../../images/return.png" mode = "widthFix" bindtap = "back"/>
-		 {{brandName}}4S店
-		 	<view class = "imageRight">
-				<image src = "../../../images/share.png" mode = "widthFix"  />
-				<image src = "../../../images/customer.png" mode = "widthFix"  />
-				<image src = "../../../images/collection.png" mode = "widthFix" />
+	<!-- 返回-->
+	<view>
+		<view class="back">
+			<image
+			 src="../../../images/return.png"
+			 mode="widthFix"
+			 bindtap="back"
+			/>
+			{{brandName}}4S店
+			<view class="imageRight">
+				<image src="../../../images/customer.png" mode="widthFix" />
+				<image src="../../../images/collection.png" mode="widthFix" />
+				<image src="../../../images/share.png" mode="widthFix" />
 			</view>
 		</view>
-		  
+
 	</view>
-	<view class="main-container" style = "margin-top : 20rpx">
-			<!-- 地址列表	 -->
-			<view class="brand">
-				{{brandName}}
-			</view>
-			<view class="address">
-				<view>{{address}}</view>
-				<view class="distance">
-				<view wx:if = "{{distance}}">
-					距您：{{distance}}km
+	<view class="main-container">
+		<!-- 地址列表	 -->
+		<view class="brand">
+			<text >{{brandName}}</text>
+		</view>
+		<view class="address">
+			<view>{{address}}</view>
+			<view class="distance">
+				<view wx:if="{{distance}}">
+					<text>
+					距您{{distance}}km
+					</text>
 				</view>
-				<view wx:else = "{{distance  != '' }}" bindtap = "openMap">
+				<view wx:else="{{distance  != '' }}" bindtap="openMap">
 					点击获取位置信息
 				</view>
-				</view>
 			</view>
+		</view>
 		<view class="tab-container">
 			<!-- tab列表 -->
 			<view class="tab-list">
-			<image src="../../../images/search.png" mode="widthFix" class="image"></image>
-				<van-tabs color="#ee731a;" z-index = "1" ellipsis = "false" class = "tabs" active="{{tabActive}}"  tab-active-class="tab-active" bind:change="onChange" sticky="{{true}}">
+				<image
+				 src="../../../images/search.png"
+				 mode="widthFix"
+				 class="image"
+				></image>
+				<van-tabs
+				 color="#ee731a;"
+				 z-index="1"
+				 class="tabs"
+				 active="{{tabActive}}"
+				 tab-active-class="tab-active"
+				 bind:change="onChange"
+				 ellipsis="{{false}}"
+				 sticky="{{true}}"
+				>
 					<van-tab title="推荐" />
 					<van-tab title="宝贝" />
 					<van-tab title="新品" />
 					<van-tab title="全部车型" />
-          		<van-tab title="汽车服务" />
+					<van-tab title="汽车服务" />
 				</van-tabs>
 			</view>
 		</view>
@@ -46,24 +65,35 @@
 		<view class="tab-index hot" hidden="{{tabActive==0?false:true}}">
 			<!-- 轮播图 -->
 			<view class="banner-swiper-container">
-				<swiper indicator-dots="{{true}}" indicator-color="#ccc" indicator-active-color="#ee731a" circular="{{true}}" class="swipers" autoplay="{{true}}">
+				<swiper
+				 indicator-dots="{{true}}"
+				 indicator-color="#ccc"
+				 indicator-active-color="#ee731a"
+				 circular="{{true}}"
+				 class="swipers"
+				 autoplay="{{true}}"
+				>
 					<block wx:for="{{carouselList}}" wx:key="index">
-							<swiper-item>
-								<image src="{{item.imgUrl}}" class="slide-image"></image>
-							</swiper-item>
+						<swiper-item>
+							<image src="{{item.imgUrl}}" class="slide-image"></image>
+						</swiper-item>
 					</block>
 				</swiper>
 			</view>
 
 			<view class="list-container mt20">
 				<block wx:for="{{activityList}}" wx:key="index">
-						<view class="list-item box-shadow">
-							<image src="{{item.listImage}}" bindtap="shopping" data-operation="{{item}}"></image>
-						</view>
+					<view class="list-item box-shadow">
+						<image
+						 src="{{item.listImage}}"
+						 bindtap="shopping"
+						 data-operation="{{item}}"
+						></image>
+					</view>
 				</block>
 			</view>
 
+		</view>
+	</view>
+</view>
 
-      </view>
-      </view>
-      </view>
