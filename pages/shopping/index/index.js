@@ -21,7 +21,7 @@ Page({
     activityInfo: "",
     remarkList:[],
     remarkNum:0,
-    status:1,
+    status:true,
     bargain:false,
     mobile :'',
     user:""

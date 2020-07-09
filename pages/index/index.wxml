@@ -162,7 +162,7 @@
 						 bindtap="goactivity"
 						 data-operation="{{item}}"
 						>
-							<image src="{{item.imgUrl}}"></image>
+							<image src="{{item.listImage}}"></image>
 						</view>
 					</block>
 				</view>

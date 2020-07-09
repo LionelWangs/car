@@ -1,3 +1,4 @@
+@import '/miniprogram_npm/@vant/weapp/common/index.wxss';
 .container {
     width: 750rpx;
     box-sizing: border-box;
@@ -192,4 +193,5 @@ display: flex;
 }
 .footer-container{
   padding-top: 100rpx;
+  text-align: right;
 }

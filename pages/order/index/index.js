@@ -55,6 +55,10 @@ Page({
         cause: "其他原因",
       },
     ],
+    activityPageEnd: false,
+    activityLoading: false,
+    activityPageSize: 10,
+    activityPageNo: 1,
   },
   onShow: function () {
     this.setData({
@@ -116,9 +120,9 @@ Page({
   onReachBottom: function () {
     //上拉4s店
     if (this.data.active == 0) {
+      console.log(this.data.pageEnd + "  "+this.data.pageLoading)
       if(!this.data.pageEnd && !this.data.pageLoading){
       this.setData({
-        pageLoading: true,
         pageNo: this.data.pageNo + 1,
       });
       this.orderAllList();
@@ -161,16 +165,18 @@ Page({
         statusFlag: "",
       },
       (success) => {
-        debugger
         if (this.data.pageNo <= success.data.dto.pagination.pageCount ) {
           this.setData({
             orderList: this.data.orderList.concat(success.data.dto.list),
           });
         }
         //判断是否长度大于总条数
-        if (this.data.orderList.length > success.data.dto.pagination.recordCount) {
+        console.log(success.data.dto.pagination.recordCount)
+        console.log(this.data.orderList.length+"zheshi ")
+        if (this.data.pageNo == success.data.dto.pagination.pageCount) {
           this.setData({
             pageEnd: true,
+            pageLoading:true
           });
         }
         console.log(this.data.orderList)
@@ -301,21 +307,19 @@ Page({
       }
     );
   },
-  /***
-   * 获取活动列表
-   */
+  //获取活动列表
   getActivityList() {
-    api.getGoodsList(
+    api.getActivityList(
       {
-        pageNo: this.data.pageNo,
-        pageSize: 10,
-        type: 2,
+        maxResults:10,
+        pageNo: 1,
+        shopId: "",
+        status: 1,
       },
       (success) => {
-        debugger
         this.setData({
-          activityList: success.data.dto.list,
-        });
+          activityList:success.data.dto.list
+        })
       }
     );
   },

@@ -193,6 +193,7 @@ Page({
   },
   //唤起支付
   onSubmit() {
+    debugger
     var user = this.data.user;
     console.log(user);
     api.orderPay(

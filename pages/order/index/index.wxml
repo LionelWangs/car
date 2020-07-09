@@ -528,7 +528,7 @@
 	<view class="list-container mt20">
 		<block wx:for="{{activityList}}" wx:key="index">
 			<view class="list-item box-shadow">
-				<image src="{{item.imgUrl}}"></image>
+				<image src="{{item.listImage}}"></image>
 			</view>
 		</block>
 	</view>

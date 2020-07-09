@@ -99,12 +99,11 @@ submit(){
 },
   //唤起支付
   onSubmit(){
-    debugger
     api.orderPay({
       couponId : this.data.order.couponId,
       mobile : this.data.mobile,
       quantity: this.data.order.buyCount,
-      // activityId:
+      activityId:this.data.order.activityId
     },(success)=>{
       wx.requestPayment({
         nonceStr: success.data.dto.nonce_str,

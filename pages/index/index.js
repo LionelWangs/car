@@ -19,9 +19,14 @@ Page({
     adImgUrl: null,
     storePageEnd: false,
     storeLoading: false,
+    //活动分页
+    activityPageEnd: false,
+    activityLoading: false,
     pageSize: 4,
     storePageSize: 10,
     storePageNo: 1,
+    activityPageSize: 10,
+    activityPageNo: 1,
     loadingFail: false,
     shopHeight: "176rpx",
     brandHeight: "176rpx",
@@ -46,7 +51,6 @@ Page({
 
     this.getCarouselList();
     this.getServeList();
-    this.getAdlList();
     this.getActivityList();
     this.getHotBrandListt();
     this.getHotStoresListt();
@@ -62,10 +66,18 @@ Page({
     if (this.data.tabActive == 1) {
       if (!this.data.storePageEnd && !this.data.storeLoading) {
         this.setData({
-          storeLoading: true,
           storePageNo: this.data.storePageNo + 1,
         });
         this.getStoresListList();
+      }
+    }
+    //上拉加载活动
+    if (this.data.tabActive == 0) {
+      if (!this.data.activityPageEnd && !this.data.activityLoading) {
+        this.setData({
+          activityPageNo: this.data.activityPageNo + 1,
+        });
+        this.getActivityList();
       }
     }
   },
@@ -85,22 +97,6 @@ Page({
       }
     );
   },
-
-  //获取广告
-  getAdlList() {
-    api.getAdlList(
-      {
-        pageNo: 1,
-        pageSize: 99,
-      },
-      (success) => {
-        this.setData({
-          adImgUrl: success.data.dto.list[0].imageUrl,
-        });
-      }
-    );
-  },
-
   //获取服务列表
   getServeList() {
     api.getServeList(
@@ -134,22 +130,32 @@ Page({
 
   //获取活动列表
   getActivityList() {
-    api.getGoodsList(
+    api.getActivityList(
       {
-        pageNo: 1,
-        pageSize: 10,
-        type: 2,
+        maxResults: this.data.activityPageSize,
+        pageNo: this.data.activityPageNo,
+        shopId: "",
+        status: 1,
       },
       (success) => {
-        debugger
-        console.log(success)
-        this.setData({
-          activityList: success.data.dto.list,
-        });
+        if (this.data.activityPageNo <= success.data.dto.pagination.pageCount) {
+          this.setData({
+            activityList: this.data.activityList.concat(success.data.dto.list),
+          });
+        }
+        //判断是否长度大于总条数
+        if (
+          this.data.pageNo == success.data.dto.pagination.pageCount
+        ) {
+          this.setData({
+            activityLoading: true,
+            activityPageEnd: true,
+          });
+        }
+        console.log(this.data.activityList)
       }
     );
   },
-
   //获取全部4s店列表
   getStoresListList() {
     api.getGoodsList(
@@ -159,18 +165,18 @@ Page({
         type: 3,
       },
       (success) => {
-        
-        if (this.data.storePageNo <= success.data.dto.pagination.pageCount ) {
+        if (this.data.storePageNo <= success.data.dto.pagination.pageCount) {
           this.setData({
             storesList: this.data.storesList.concat(success.data.dto.list),
           });
         }
-          //判断是否长度大于总条数
-          if (this.data.storesList.length > success.data.dto.pagination.recordCount) {
-            this.setData({
-              storePageEnd: true,
-            });
-          }
+        //判断是否长度大于总条数
+        if (this.data.pageNo == success.data.dto.pagination.pageCount) {
+          this.setData({
+            storeLoading: true,
+            storePageEnd: true,
+          });
+        }
       }
     );
     var data = this.data.storesList;
@@ -243,21 +249,21 @@ Page({
       tabActive: 4,
     });
   },
-    /*
+  /*
     4S子页面
   */
- goHotShop(e) {
-  const shopId = e.currentTarget.dataset.operation.shopId;
-  wx.setStorage({
-    key: "shopId",
-    data: shopId,
-  });
-  console.log("缓存成功");
-  this.setData({
-    //设置4S子页面
-    tabActive: 4,
-  });
-},
+  goHotShop(e) {
+    const shopId = e.currentTarget.dataset.operation.shopId;
+    wx.setStorage({
+      key: "shopId",
+      data: shopId,
+    });
+    console.log("缓存成功");
+    this.setData({
+      //设置4S子页面
+      tabActive: 4,
+    });
+  },
 
   /*品牌子页面 */
   goBrand(e) {
@@ -270,7 +276,7 @@ Page({
     this.setData({
       //设置品牌子页面
       tabActive: 5,
-      search:false
+      search: false,
     });
   },
   // 标签切换
@@ -298,7 +304,7 @@ Page({
           maxResults: 10,
           pageNo: 1,
           keyword: event.detail,
-          status: 0,
+          status: 1,
         },
         (success) => {
           console.log(success);
@@ -308,20 +314,24 @@ Page({
           });
         }
       );
-    } else if (event.detail != "" && this.data.tabActive == 1 || this.data.tabActive == 2) {
-      api.searchBrandList({
-        maxResults: 10,
-        pageNo: 1,
-        keyword: event.detail,
-      },
-      (success) => {
-        console.log(success);
-        this.setData({
-          searchList: success.data.dto.list,
-          search: true,
-        });
-      }
-      )
+    } else if (
+      (event.detail != "" && this.data.tabActive == 1) ||
+      this.data.tabActive == 2
+    ) {
+      api.searchBrandList(
+        {
+          maxResults: 10,
+          pageNo: 1,
+          keyword: event.detail,
+        },
+        (success) => {
+          console.log(success);
+          this.setData({
+            searchList: success.data.dto.list,
+            search: true,
+          });
+        }
+      );
     } else {
       this.setData({
         search: false,
@@ -363,9 +373,9 @@ Page({
     }
   },
   goactivity(e) {
-    console.log(e)
+    console.log(e);
     var shopId = e.currentTarget.dataset.operation.shopId;
-    var activityId = e.currentTarget.dataset.operation.activity.id;
+    var activityId = e.currentTarget.dataset.operation.id;
     var status = 1;
     wx.navigateTo({
       url:

@@ -9,5 +9,6 @@
     "van-divider": "@vant/weapp/divider/index",
     "van-popup": "@vant/weapp/popup/index",
     "van-progress": "@vant/weapp/progress/index"
+    
   }
 }
