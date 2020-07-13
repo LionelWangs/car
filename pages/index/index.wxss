@@ -89,7 +89,6 @@
 }
 .option-swiper-container .option-item-container .option-item text {
   align-items: center;
-  margin-left: -16rpx;
 }
 
 .option-swiper-container .option-item-container .option-item .iconfont {
@@ -155,6 +154,10 @@
   height: 70rpx;
   width: 70rpx;
 }
+.name-adress{
+  display: flex;
+  flex-direction: column;
+}
 
 .stores .hot-brand .brand-item .name {
   font-size: 20rpx;
@@ -190,6 +193,7 @@
 .stores .stores-item .title-container .left .address {
   font-size: 20rpx;
   color: #999;
+  margin-left:15rpx ;
 }
 /* 品牌 */
 .brand .stores-container {

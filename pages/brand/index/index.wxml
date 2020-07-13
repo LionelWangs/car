@@ -1,16 +1,5 @@
 <view class="container">
-	<!-- 返回-->
-	<view>
-		<view class="back">
-			<image
-			 src="../../../images/return.png"
-			 mode="widthFix"
-			 bindtap="back"
-			/>
-			{{brandName}}4S店
-		</view>
-	</view>
-	<view class="main-container" style="margin-top : 20rpx">
+	<view class="main-container">
 		<!-- 轮播图 -->
 		<view class="banner-swiper-container">
 			<swiper
@@ -23,7 +12,11 @@
 			>
 				<block wx:for="{{carouselList}}" wx:key="index">
 					<swiper-item>
-						<image src="{{item.imgUrl}}" class="slide-image"></image>
+						<image
+						 src="{{item.imgUrl}}"
+						 mode='aspectFill'
+						 class="slide-image"
+						></image>
 					</swiper-item>
 				</block>
 			</swiper>
@@ -60,6 +53,7 @@
 			>
 				<image
 				 style="width:100%;height:145rpx;border-radius:7rpx"
+				 mode='aspectFill'
 				 src="{{item.listImage}}"
 				 bindtap="shopping"
 				 data-operation="{{item}}"

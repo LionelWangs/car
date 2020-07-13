@@ -239,45 +239,27 @@ Page({
   */
   goShop(e) {
     const shopId = e.currentTarget.dataset.operation.shop.shopId;
-    wx.setStorage({
-      key: "shopId",
-      data: shopId,
-    });
-    console.log("缓存成功");
-    this.setData({
-      //设置4S子页面
-      tabActive: 4,
-    });
+    wx.navigateTo({
+      url: '../shop/index/index?shopId='+shopId,
+    })
   },
   /*
     4S子页面
   */
   goHotShop(e) {
     const shopId = e.currentTarget.dataset.operation.shopId;
-    wx.setStorage({
-      key: "shopId",
-      data: shopId,
-    });
-    console.log("缓存成功");
-    this.setData({
-      //设置4S子页面
-      tabActive: 4,
-    });
+    wx.navigateTo({
+      url: '../shop/index/index?shopId='+shopId,
+    })
   },
 
   /*品牌子页面 */
   goBrand(e) {
     console.log(e);
-    const brandId = e.currentTarget.dataset.operation.id;
-    wx.setStorage({
-      key: "brandId",
-      data: brandId,
-    });
-    this.setData({
-      //设置品牌子页面
-      tabActive: 5,
-      search: false,
-    });
+    const brandId = e.currentTarget.dataset.operation;
+    wx.navigateTo({
+      url: '../brand/index/index?brandId='+brandId,
+    })
   },
   // 标签切换
   onChange(e) {
@@ -387,4 +369,12 @@ Page({
         status,
     });
   },
+  goService(e){
+    console.log(e)
+    let id = e.currentTarget.dataset.operation.id
+    let title = e.currentTarget.dataset.operation.serviceName
+    wx.navigateTo({
+      url: '../buy/index/index?serveTypeId='+id+'&title='+title,
+    })
+  }
 });

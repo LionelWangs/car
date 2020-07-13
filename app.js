@@ -42,6 +42,7 @@ App({
                 iv: res.iv,
               },
               (success) => {
+                console.log(success)
                 this.globalData.userInfo = success.data.dto;
               }
             );

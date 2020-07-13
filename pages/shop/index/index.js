@@ -1,19 +1,11 @@
-// components/shop/shop.js
-const app = getApp();
+// pages/shop/index/index.js
 const api = require("../../../utils/api.js");
-import { IMG_PATH } from "../../../config/appConfig.js";
-
-Component({
-  /**
-   * 组件的属性列表
-   */
-  properties: {},
+Page({
 
   /**
-   * 组件的初始数据
+   * 页面的初始数据
    */
   data: {
-    IMG_PATH,
     tabActive: 0,
     carouselList: [],
     activityList: [],
@@ -30,37 +22,18 @@ Component({
     longitude: "",
     distance: "",
   },
-  lifetimes: {
-    created() {
-      this.getGoodsListWithShopId();
-      this.getActivityList();
-      this.GPSsubmit();
-      this.getStores();
-    },
-  },
 
   /**
-   * 组件的方法列表
+   * 生命周期函数--监听页面加载
    */
-  methods: {
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-      //上拉4s店
-      // if (this.data.tabActive == 1) {
-      //   if (!this.data.storePageEnd && !this.data.storeLoading) {
-      //     this.setData({
-      //       storeLoading: true,
-      //       storePageNo: this.data.storePageNo + 1
-      //     });
-      //     this.getStoresListList();
-      //   }
-      // }
-    },
-
+  onLoad: function (options) {
+    this.getGoodsListWithShopId(options.shopId);
+    this.getActivityList(options.shopId);
+    this.GPSsubmit(options.shopId);
+    this.getStores(options.shopId);
+  },
     //获取经纬度度
-    GPSsubmit: function () {
+    GPSsubmit: function (shopId) {
       wx.getLocation({
         type: "wgs84",
         success: (res) => {
@@ -70,16 +43,15 @@ Component({
             latitude: latitude,
             longitude: longitude,
           });
-          this.getStoresDistance(latitude, longitude);
+          this.getStoresDistance(shopId,latitude, longitude);
         },
       });
     },
     //获取4S店
-    getStores: function () {
-      const c = wx.getStorageSync("shopId");
+    getStores: function (shopId) {
       api.getStores(
         {
-          shopId: c,
+          shopId,
         },
         (success) => {
           this.setData({
@@ -90,14 +62,12 @@ Component({
       );
     },
     //获取门店经纬度
-    getStoresDistance(latitude, longitude) {
-      const c = wx.getStorageSync("shopId");
-      console.log(this.data.latitude);
+    getStoresDistance(shopId,latitude, longitude) {
       api.getStoresDistance(
         {
           latitude: latitude,
           longitude: longitude,
-          shopId: c,
+          shopId,
         },
         (success) => {
           var distance = success.data.dto.distance.toFixed(0);
@@ -165,13 +135,12 @@ Component({
       });
     },
     //获取轮播图列表
-    getGoodsListWithShopId() {
-      const c = wx.getStorageSync("shopId");
+    getGoodsListWithShopId(shopId) {
       api.getGoodsListWithShopId(
         {
           pageNo: 1,
           maxResults: 99,
-          shopId: c,
+          shopId,
           type: 3,
         },
         (success) => {
@@ -181,7 +150,6 @@ Component({
         }
       );
     },
-
     //获取商品列表
     getGoodsList() {
       api.getGoodsList(
@@ -199,13 +167,12 @@ Component({
     },
 
     //获取活动列表
-    getActivityList() {
-      const c = wx.getStorageSync("shopId");
+    getActivityList(shopId) {
       api.getActivityList(
         {
           pageNo: this.data.storePageNo,
           maxResults: this.data.storePageSize,
-          shopId: c,
+          shopId,
           status: 1,
         },
         (success) => {
@@ -230,17 +197,12 @@ Component({
         }
       );
     },
-    back() {
-      wx.reLaunch({
-        url: "../index/index?tabActive=1",
-      });
-    },
     shopping(e) {
       console.log(e);
       var id = e.currentTarget.dataset.operation.id;
       var shopId = e.currentTarget.dataset.operation.shopId;
       wx.navigateTo({
-        url: "../shopping/index/index?id=" + id + "&shopId=" + shopId,
+        url: "../../shopping/index/index?id=" + id + "&shopId=" + shopId,
       });
     },
     // 标签切换
@@ -250,5 +212,4 @@ Component({
         tabActive: e.detail.name,
       });
     },
-  },
-});
+})

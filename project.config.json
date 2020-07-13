@@ -23,7 +23,7 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -142,6 +142,13 @@
 					"name": "pages/bargain/index/index",
 					"pathName": "pages/bargain/index/index",
 					"query": "activityId=1277520265799397376",
+					"scene": null
+				},
+				{
+					"id": 12,
+					"name": "邀请",
+					"pathName": "pages/bargain/index/index",
+					"query": "mobile=18655527294&orderId=1282184602124152832&activityId=1277519712369373184",
 					"scene": null
 				}
 			]

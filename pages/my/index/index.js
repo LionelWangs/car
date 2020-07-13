@@ -10,7 +10,8 @@ Page({
     hasMobile: false,
     mobile: "",
     reg: false,
-    bargain:false
+    bargain: false,
+    orderId:''
   },
 
   /**
@@ -18,45 +19,47 @@ Page({
    */
   onLoad: function (e) {
     this.userInfoReadyCallback();
-    console.log(e.bargain+"这是砍价")
-    this.setData({
-      bargain:e.bargain
-    })
+    console.log(e.bargain + "这是砍价");
+    if(e.bargain != ''){
+      this.setData({
+        bargain:e.bargain,
+        orderId:e.orderId
+      })
+    }
+
   },
-//回调用户信息
-    userInfoReadyCallback(){
+  //回调用户信息
+  userInfoReadyCallback() {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-      if( wx.getStorageSync("mobile") !=''){
+        hasUserInfo: true,
+      });
+      if (wx.getStorageSync("mobile") != "") {
         this.setData({
-          hasMobile:true,
-          mobile: wx.getStorageSync("mobile")
-        })
+          hasMobile: true,
+          mobile: wx.getStorageSync("mobile"),
+        });
       }
       this.getMember();
     } else {
-            // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-            // 所以此处加入 callback 以防止这种情况
-            app.userInfoReadyCallback = res => {
-              this.setData({
-                userInfo: res.userInfo,
-                hasUserInfo: true
-              })
-              if( wx.getStorageSync("mobile") !=''){
-                this.setData({
-                  hasMobile:true,
-                  mobile: wx.getStorageSync("mobile")
-                })
-              }
-              this.getMember();
-              
-            }
-  }
-}
-    ,
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = (res) => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true,
+        });
+        if (wx.getStorageSync("mobile") != "") {
+          this.setData({
+            hasMobile: true,
+            mobile: wx.getStorageSync("mobile"),
+          });
+        }
+        this.getMember();
+      };
+    }
+  },
   // //获取登录状态
   getUserInfo: function (e) {
     var that = this;
@@ -82,7 +85,8 @@ Page({
                 iv: e.detail.iv,
               },
               (success) => {
-                // wx.setStorageSync("unionId", success.data.dto.unionId);
+                debugger;
+                console.log(success);
                 app.globalData.userInfo = success.data.dto;
                 that.setData({
                   userInfo: success.data.dto,
@@ -118,6 +122,7 @@ Page({
                 iv: e.detail.iv,
               },
               (success) => {
+                debugger;
                 //缓存手机号
                 wx.setStorageSync("mobile", success.data.dto.phoneNumber);
                 that.setData({
@@ -131,11 +136,8 @@ Page({
                   that.getMember();
                 }
                 //完成砍价操作
-                if(that.data.bargain){
-                  wx.showToast({
-                    title: '砍价完成',
-                    icon:'none'
-                  })
+                if (that.data.bargain) {
+                  that.knockAdd()
                 }
               }
             );
@@ -170,14 +172,14 @@ Page({
     this.setData({
       hasUserInfo: false,
       hasMobile: false,
-      mobile:''
+      mobile: "",
     });
   },
   //用户注册()
   resigerMember() {
     var mobile = wx.getStorageSync("mobile");
-    var unionId = this.data.userInfo.unionId
-    var openId = this.data.userInfo.openId
+    var unionId = this.data.userInfo.unionId;
+    var openId = this.data.userInfo.openId;
     api.resigerMember(
       {
         memberName: this.data.userInfo.nickName,
@@ -189,9 +191,28 @@ Page({
       (success) => {}
     );
   },
-  order(){
+  order() {
     wx.navigateTo({
-      url: '../../order/index/index',
-    })
-  }
+      url: "../../order/index/index",
+    });
+  },
+  //帮砍价
+  knockAdd() {
+    api.knockAdd(
+      {
+        orderId:this.data.orderId,
+        mobile:this.data.mobile,
+      },
+      (success) => {
+        console.log("这是返回的数据");
+        console.log(success);
+        if (success.data.dto.apply.statusFlag == 2) {
+          wx.showToast({
+            title: "砍价完成",
+            icon: "none",
+          });
+        }
+      }
+    );
+  },
 });

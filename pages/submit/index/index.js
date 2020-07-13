@@ -33,6 +33,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
+    this.setData({
+      orderId : e.orderId
+    })
     this.getActivity(e.id);
     //获取用户信息
     this.getMember();
@@ -193,43 +196,33 @@ Page({
   },
   //唤起支付
   onSubmit() {
-    debugger
-    var user = this.data.user;
-    console.log(user);
-    api.orderPay(
-      {
-        couponId: this.data.activity.couponId,
-        mobile: user.mobile,
-        quantity: this.data.quantity,
-        activityId: this.data.activity.id,
-      },
-      (success) => {
-        debugger;
-        console.log(success);
-        wx.requestPayment({
-          nonceStr: success.data.dto.nonce_str,
-          package: success.data.dto.package,
-          paySign: success.data.dto.paySign,
-          timeStamp: success.data.dto.timeStamp,
-          signType: "MD5",
-          success: (result) => {
-            wx.reLaunch({
-              url: "../../order/index/index",
-            });
-          },
-          fail: (res) => {
-            //跳转到待付款页面
-            wx.reLaunch({
-              url:
-                "../../readyPay/index/index?mobile=" +
-                this.data.user.mobile +
-                "&orderId=" +
-                success.data.dto.orderId,
-            });
-          },
-          complete: (res) => {},
-        });
-      }
-    );
+    api.prepareWeixinPay({
+      orderId:this.data.orderId,
+      mobile:this.data.user.mobile
+    },(success)=>{
+      wx.requestPayment({
+        nonceStr: success.data.dto.nonce_str,
+        package: success.data.dto.package,
+        paySign: success.data.dto.paySign,
+        timeStamp: success.data.dto.timeStamp,
+        signType: "MD5",
+        success: (result) => {
+          wx.reLaunch({
+            url: "../../order/index/index",
+          });
+        },
+        fail: (res) => {
+          //跳转到待付款页面
+          wx.reLaunch({
+            url:
+              "../../readyPay/index/index?mobile=" +
+              this.data.user.mobile +
+              "&orderId=" +
+              success.data.dto.orderId,
+          });
+        },
+      })
+    }
+    )
   },
 });

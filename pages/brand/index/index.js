@@ -1,23 +1,11 @@
-// components/shop/shop.js
-const app = getApp()
+// pages/brand/index/index.js
 const api = require('../../../utils/api.js')
-import {
-  IMG_PATH
-} from "../../../config/appConfig.js"
-
-Component({
-  /**
-   * 组件的属性列表
-   */
-  properties: {
-
-  },
+Page({
 
   /**
-   * 组件的初始数据
+   * 页面的初始数据
    */
   data: {
-    IMG_PATH,
     tabActive: 0,
     carouselList: [],
     activityList: [],
@@ -30,26 +18,25 @@ Component({
     brandName:'',
     brandId :'',
     status:1,
+    canvas_width: 200,
+    canvas_height: 300,
   },
-  lifetimes:{
-    created() {
-      const id = wx.getStorageSync("brandId");
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+      var id = options.brandId;
       this.setData({
-        brandId : id
+        brandId:id
       })
       this.getGoodsListWithBrandId(id)
       this.getActivityListByBrandId(id)
       this.getBrandDetails(id)
-    },
   },
 
-  /**
-   * 组件的方法列表
-   */
-  methods: {
-
  //获取轮播图列表
-  getGoodsListWithBrandId(id) {
+ getGoodsListWithBrandId(id) {
   api.getGoodsListWithBrandId({
     pageNo: 1,
     maxResults: 99,
@@ -84,16 +71,12 @@ getBrandDetails(id){
         status:this.data.status,
         brandId:id
       }, success => {
+        console.log(success)
         this.setData({
           activityList: success.data.dto.list
         })
       })
     },
-  back(){
-    wx.reLaunch({
-      url:"../index/index?tabActive=2"
-    })
-  },
    // 标签切换
    onChange(e) {
     var index =  e.detail.name;
@@ -113,11 +96,48 @@ getBrandDetails(id){
   shopping(e){
     var id = e.currentTarget.dataset.operation.id
     var shopId = e.currentTarget.dataset.operation.shopId
-    console.log(shopId)
     wx.navigateTo({
-      url:"../shopping/index/index?shopId=" + shopId +"&id="+id+'&status='+this.data.status
+      url:"../../shopping/index/index?shopId=" + shopId +"&id="+id+'&status='+this.data.status
     })
-  }
+  },
+  canvas() {
+    var ctx = wx.createCanvasContext('my_canvas', this)
+    var canvas_width = this.data.canvas_width,
+      canvas_height = this.data.canvas_height;
+    var img = this.data.img;
+    wx.getImageInfo({
+      src: img,
+      success(res) {
+        console.log(res.width, res.height);
 
+        var img_width = res.width,
+          img_height = res.height;
+
+        var clip_left, clip_top, //左偏移值，上偏移值，
+          clip_width, clip_height; //截取宽度，截取高度
+
+        clip_height = img_width * (canvas_height / canvas_width);
+        if (clip_height > img_height) {
+          clip_height = img_height;
+          clip_width = clip_height * (canvas_width / canvas_height);
+          clip_left = (img_width - clip_width) / 2;
+          clip_top = 0;
+        } else {
+          clip_left = 0;
+          clip_top = (img_height - clip_height) / 2;
+          clip_width = img_width
+        }
+
+        var data = {
+          clip_left,
+          clip_top,
+          clip_width,
+          clip_height
+        }
+
+        ctx.drawImage(img, clip_left, clip_top, clip_width, clip_height, 0, 0, canvas_width, canvas_height);
+        ctx.draw();
+      }
+    })
   }
 })

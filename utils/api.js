@@ -44,8 +44,8 @@ const pay = (option) => {
         } else {
           wx.showToast({
             title: res.data.message,
-            icon: "none",
-          });
+            icon:'none'
+          })
         }
       },
       fail() {
@@ -150,6 +150,21 @@ const getActivityList = function (option, success) {
       pageNo: option.pageNo,
       shopId: option.shopId,
       status: option.status,
+    },
+  }).then((res) => {
+    return success(res);
+  });
+};
+// 根据4S店活动查询列表
+const getActivityListByServerTypeId = function (option, success) {
+  request({
+    url: "/admin/microservice/activity/list",
+    method: "POST",
+    data: {
+      maxResults: option.maxResults,
+      pageNo: option.pageNo,
+      status: option.status,
+      serveTypeId:option.serveTypeId
     },
   }).then((res) => {
     return success(res);
@@ -455,6 +470,20 @@ const getredList = function (option, success) {
     return success(res);
   });
 };
+//准备支付
+const prepareWeixinPay = function (option, success) {
+  pay({
+    url: "/admin/microservice/coupon/order/prepareWeixinPay",
+    method: "POST",
+    data: {
+      mobile: option.mobile,
+      orderId:option.orderId
+    },
+  }).then((res) => {
+    debugger
+    return success(res);
+  });
+};
 //唤起支付
 const orderPay = function (option, success) {
   pay({
@@ -467,7 +496,6 @@ const orderPay = function (option, success) {
       activityId: option.activityId,
     },
   }).then((res) => {
-    debugger;
     return success(res);
   });
 };
@@ -573,7 +601,7 @@ const remarkList = function (option, success) {
 //发起砍价申请
 const knockApply = function (option, success) {
   request({
-    url: "/microservice/coupon/order/knock/apply",
+    url: "/admin/microservice/coupon/order/knock/apply",
     method: "POST",
     data: {
       orderId: option.orderId,
@@ -584,8 +612,8 @@ const knockApply = function (option, success) {
   });
 };
 //砍价列表
-const knockList = function (option, success) { request({
-    url: "/microservice/coupon/order/knock/list",
+const knockList = function (option, success) { pay({
+    url: "/admin/microservice/coupon/order/knock/list",
     method: "POST",
     data: {
       maxResults: option.maxResults,
@@ -597,8 +625,8 @@ const knockList = function (option, success) { request({
   });
 };
 //帮砍价
-const knockAdd = function (option, success) { request({
-  url: "/microservice/coupon/order/knock/add",
+const knockAdd = function (option, success) { pay({
+  url: "/admin/microservice/coupon/order/knock/add",
   method: "POST",
   data: {
     orderId:option.orderId,
@@ -608,6 +636,19 @@ const knockAdd = function (option, success) { request({
   return success(res);
 });
 };
+//参与砍价的的人数
+const knockApplyCount = function (option, success) { request({
+  // url: "/microservice/coupon/order/knockapply/count",
+  url: "/admin/microservice/coupon/order/knock/count",
+  method: "POST",
+  data: {
+    activityId:option.activityId,
+  },
+}).then((res) => {
+  return success(res);
+});
+};
+
 module.exports = {
   getBrandList,
   getBrandDetails,
@@ -624,6 +665,7 @@ module.exports = {
   getStores,
   getGoodsListWithShopId,
   getActivityListByBrandId,
+  getActivityListByServerTypeId,
   getGoodsListWithBrandId,
   getStoresDistance,
   getActivityListRemove,
@@ -648,4 +690,6 @@ module.exports = {
   knockApply,
   knockList,
   knockAdd,
+  knockApplyCount,
+  prepareWeixinPay
 };

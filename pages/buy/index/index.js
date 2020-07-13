@@ -4,104 +4,53 @@ const api = require("../../../utils/api.js");
 
 Page({
   data: {
-    tabActive: 0,
-    activityList: [],
-    hotBrandList: [],
-    hotStoresList: [],
-    loading: false,
-    pageEnd: false,
-    pageNo: 1,
-    pageSize: 2,
+    maxResults:10,
+    pageNo:1,
+    activityList:[]
   },
 
-  onLoad: function () {
-    this.getActivityList();
-    this.getHotBrandListt();
-    this.getHotStoresListt();
+  onLoad: function (option) {
+    wx.setNavigationBarTitle({
+      title:option.title
+    })
+    let serveTypeId = option.serveTypeId;
+    this.getActivityListByServerTypeId(serveTypeId)
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if (!this.data.pageEnd && !this.data.loading) {
+  },
+
+  //获取该服务下的
+  getActivityListByServerTypeId(serveTypeId){
+    api.getActivityListByServerTypeId({
+      maxResults:this.data.maxResults,
+      pageNo:this.data.pageNo,
+      status:1,
+      serveTypeId
+    },(success)=>{
+      console.log(success)
       this.setData({
-        loading: true,
-        pageNo: this.data.pageNo + 1,
-      });
-      this.getActivityList();
+        activityList:success.data.dto.list
+      })
     }
+    )
   },
-
-  //获取活动列表
-  getActivityList() {
-    api.getGoodsList(
-      {
-        pageNo: this.data.pageNo,
-        pageSize: this.data.pageSize,
-        type: 2,
-      },
-      (success) => {
-        this.setData({
-          loading: false,
-        });
-        if (success.data.dto.list.length > 0) {
-          this.setData({
-            activityList: this.data.activityList.concat(success.data.dto.list),
-          });
-        }
-        if (success.data.dto.list.length < 2) {
-          this.setData({
-            pageEnd: true,
-          });
-        }
-      }
-    );
-  },
-
-  //获取热门品牌列表
-  getHotBrandListt() {
-    api.getBrandList(
-      {
-        pageNo: 1,
-        pageSize: 5,
-      },
-      (success) => {
-        this.setData({
-          hotBrandList: success.data.dto.list,
-        });
-      }
-    );
-  },
-
-  //获取热门4s列表
-  getHotStoresListt() {
-    api.getStoresList(
-      {
-        pageNo: 1,
-        pageSize: 4,
-      },
-      (success) => {
-        this.setData({
-          hotStoresList: success.data.dto.list,
-        });
-      }
-    );
-  },
-
-  //扫码
-  scan() {
-    wx.scanCode({
-      success(res) {
-        console.log(res);
-      },
-    });
-  },
-
-  // 标签切换
-  onChange(e) {
-    this.setData({
-      tabActive: e.detail.name,
+  goactivity(e) {
+    debugger
+    var shopId = e.currentTarget.dataset.operation.shopId;
+    var activityId = e.currentTarget.dataset.operation.id;
+    var status = 1;
+    wx.navigateTo({
+      url:
+        "../../shopping/index/index?shopId=" +
+        shopId +
+        "&id=" +
+        activityId +
+        "&status=" +
+        status,
     });
   },
 });

@@ -107,15 +107,15 @@ Page({
     //全部
     // this.orderAllList();
     //已过期
-    this.obligation();
-    //待使用
-    this.standby();
-    //已完成和待评价
-    this.remark();
-    //y已过期
-    this.expire();
-    //已取消
-    this.cancel();
+    // this.obligation();
+    // //待使用
+    // this.standby();
+    // //已完成和待评价
+    // this.remark();
+    // //y已过期
+    // this.expire();
+    // //已取消
+    // this.cancel();
   },
   onReachBottom: function () {
     //上拉4s店
@@ -139,10 +139,6 @@ Page({
       active: event.detail.name,
       show: false,
     });
-
-    if (event.detail.name == 3) {
-      this.remark();
-    }
   },
   onClose() {
     this.setData({
@@ -186,6 +182,7 @@ Page({
     //加载已完成和待评价列表
     remark() {
       var mobile = this.data.mobile;
+      debugger
       api.orderAllList(
         {
           mobile,
@@ -344,44 +341,36 @@ Page({
    */
   goPay(e) {
     console.log(e);
-    var couponId = e.currentTarget.dataset.operation.couponId;
     var mobile = wx.getStorageSync("mobile");
-    var quantity = e.currentTarget.dataset.operation.buyCount;
-    var activityId = e.currentTarget.dataset.operation.activityId;
     var orderId = e.currentTarget.dataset.operation.id;
-    api.replayPay(
-      {
-        couponId,
-        mobile,
-        quantity,
-        activityId,
-        orderId,
-      },
-      (success) => {
-        wx.requestPayment({
-          nonceStr: success.data.dto.nonce_str,
-          package: success.data.dto.package,
-          paySign: success.data.dto.paySign,
-          timeStamp: success.data.dto.timeStamp,
-          signType: "MD5",
-          success: (result) => {
-            wx.navigateTo({
-              url: "../../order/index/index",
-            });
-          },
-          fail: (res) => {
-            //跳转到待付款页面
-            wx.navigateTo({
-              url:
-                "../../readyPay/index/index?active=1&mobile=" +
-                mobile +
-                "&orderId=" +
-                success.data.dto.orderId,
-            });
-          },
-        });
-      }
-    );
+    api.prepareWeixinPay({
+      orderId,
+      mobile
+    },(success)=>{
+      wx.requestPayment({
+        nonceStr: success.data.dto.nonce_str,
+        package: success.data.dto.package,
+        paySign: success.data.dto.paySign,
+        timeStamp: success.data.dto.timeStamp,
+        signType: "MD5",
+        success: (result) => {
+          wx.reLaunch({
+            url: "../../order/index/index",
+          });
+        },
+        fail: (res) => {
+          //跳转到待付款页面
+          wx.reLaunch({
+            url:
+              "../../readyPay/index/index?mobile=" +
+              mobile +
+              "&orderId=" +
+              orderId,
+          });
+        },
+      })
+    }
+    )
   },
   timeChange(e) {
     this.setData({

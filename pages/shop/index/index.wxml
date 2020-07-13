@@ -2,11 +2,6 @@
 	<!-- 返回-->
 	<view>
 		<view class="back">
-			<image
-			 src="../../../images/return.png"
-			 mode="widthFix"
-			 bindtap="back"
-			/>
 			{{brandName}}4S店
 			<view class="imageRight">
 				<image src="../../../images/customer.png" mode="widthFix" />
@@ -14,13 +9,12 @@
 				<image src="../../../images/share.png" mode="widthFix" />
 			</view>
 		</view>
-
 	</view>
 	<view class="main-container">
 		<!-- 地址列表	 -->
-		<view class="brand">
+		<!-- <view class="brand">
 			<text >{{brandName}}</text>
-		</view>
+		</view> -->
 		<view class="address">
 			<view>{{address}}</view>
 			<view class="distance">
@@ -85,7 +79,7 @@
 				<block wx:for="{{activityList}}" wx:key="index">
 					<view class="list-item box-shadow">
 						<image
-						 src="{{item.listImage}}"
+						 src="{{item.viewImage}}"
 						 bindtap="shopping"
 						 data-operation="{{item}}"
 						></image>

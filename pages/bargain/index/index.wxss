@@ -1,18 +1,21 @@
+.container{
+    padding-right: 20rpx;
+    padding-left: 20rpx;
+}
+
 .header{
     height:202rpx;
     background:rgba(255,255,255,1);
     box-shadow:0px 2rpx 14rpx 0rpx rgba(50,50,50,0.68);
     margin-top: 20rpx;
-    margin-right: 20rpx;
-    margin-left: 20rpx;
     display: flex;
 }
 .header image{
     display: flex;
-    padding-top: 20rpx;
+    padding-top: 28rpx;
 } 
 .couponInfo{
-    padding-top: 20rpx;
+    padding-top: 40rpx;
     display: flex;
     flex-direction: column;
     padding-left: 10rpx;
@@ -54,8 +57,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-left: 10rpx;
-    margin-top: 15rpx;
 }
 .money-people .money{
     font-size:24rpx;
@@ -86,11 +87,10 @@
     background:#dcdbdc;
     border-radius:6rpx;
     margin-top: 30rpx;
-    margin-left:20rpx;
-    margin-right:20rpx
 }
 .name-image {
     display: flex;
+    padding-top: 20rpx;
 }
 .name-image .name{
     font-size:28rpx;
@@ -115,6 +115,7 @@
 .bargin-money{
     display: flex;
     padding-right: 30rpx;
+    padding-top: 30rpx;
     
 }
 .progress{
@@ -122,8 +123,5 @@
     background:rgba(254,254,254,1);
     border:2rpx solid rgba(238,115,26,1);
     border-radius:12rpx;
-    margin-left: 20rpx;
-    margin-right: 20rpx;
     margin-bottom: 20rpx;
-
   }

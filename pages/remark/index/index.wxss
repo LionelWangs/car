@@ -6,7 +6,7 @@
     border-radius:6rpx;
     margin-right: 20rpx;
     margin-left: 20rpx;
-    box-shadow: 0px 1px 14px 0px rgba(50, 50, 50, 0.68);
+    box-shadow: 0px 1px 14px 0px rgba(50, 50, 50, 0.3);
 }
 .container image{
     padding-right: 20rpx;

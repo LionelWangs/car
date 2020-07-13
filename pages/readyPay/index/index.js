@@ -99,28 +99,30 @@ submit(){
 },
   //唤起支付
   onSubmit(){
-    api.orderPay({
-      couponId : this.data.order.couponId,
-      mobile : this.data.mobile,
-      quantity: this.data.order.buyCount,
-      activityId:this.data.order.activityId
+    api.prepareWeixinPay({
+      orderId:this.data.orderId,
+      mobile:this.data.mobile
     },(success)=>{
       wx.requestPayment({
         nonceStr: success.data.dto.nonce_str,
         package: success.data.dto.package,
         paySign: success.data.dto.paySign,
         timeStamp: success.data.dto.timeStamp,
-        signType : 'MD5',
-        success:(result) =>{
-          wx.navigateTo({
-            url: '../../order/index/index' ,
-          })
+        signType: "MD5",
+        success: (result) => {
+          wx.reLaunch({
+            url: "../../order/index/index",
+          });
         },
-        fail:(res) =>{
+        fail: (res) => {
           //跳转到待付款页面
-          wx.navigateTo({
-            url: '../../readyPay/index/index?active=1&mobile='+this.data.mobile+'&orderId='+success.data.dto.orderId 
-          })
+          wx.reLaunch({
+            url:
+              "../../readyPay/index/index?mobile=" +
+              this.data.mobile +
+              "&orderId=" +
+              success.data.dto.orderId,
+          });
         },
       })
     }

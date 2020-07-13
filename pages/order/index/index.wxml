@@ -40,7 +40,7 @@
 			<van-divider hairline />
 			<!-- 订单具体信息 -->
 			<view class="order">
-				<image src="{{item.coupon.listImageUrl}}" style="width:92rpx;height:92rpx" />
+				<image src="{{item.coupon.viewImageUrl}}" style="width:92rpx;height:92rpx" />
 				<view class="orderInfo">
 					<view class="name">{{item.coupon.couponName}}</view>
 				</view>
@@ -189,7 +189,7 @@
 		<van-divider hairline />
 		<!-- 订单具体信息 -->
 		<view class="order">
-			<image src="{{item.coupon.listImageUrl}}" style="width:92rpx;height:92rpx" />
+			<image src="{{item.coupon.viewImageUrl}}" style="width:92rpx;height:92rpx" />
 			<view class="orderInfo">
 				<view class="name">{{item.coupon.couponName}}</view>
 			</view>
@@ -313,7 +313,7 @@
 		<van-divider hairline />
 		<!-- 订单具体信息 -->
 		<view class="order">
-			<image src="{{item.coupon.listImageUrl}}" style="width:92rpx;height:92rpx" />
+			<image src="{{item.coupon.viewImageUrl}}" style="width:92rpx;height:92rpx" />
 			<view class="orderInfo">
 				<view class="name">{{item.coupon.couponName}}</view>
 			</view>
@@ -368,7 +368,7 @@
 		<van-divider hairline />
 		<!-- 订单具体信息 -->
 		<view class="order">
-			<image src="{{item.coupon.listImageUrl}}" style="width:92rpx;height:92rpx" />
+			<image src="{{item.coupon.viewImageUrl}}" style="width:92rpx;height:92rpx" />
 			<view class="orderInfo">
 				<view class="name">{{item.coupon.couponName}}</view>
 			</view>
@@ -435,7 +435,7 @@
 		<van-divider hairline />
 		<!-- 订单具体信息 -->
 		<view class="order">
-			<image src="{{item.coupon.listImageUrl}}" style="width:92rpx;height:92rpx" />
+			<image src="{{item.coupon.viewImageUrl}}" style="width:92rpx;height:92rpx" />
 			<view class="orderInfo">
 				<view class="name">{{item.coupon.couponName}}</view>
 			</view>
@@ -482,7 +482,7 @@
 		<van-divider hairline />
 		<!-- 订单具体信息 -->
 		<view class="order">
-			<image src="{{item.coupon.listImageUrl}}" style="width:92rpx;height:92rpx" />
+			<image src="{{item.coupon.viewImageUrl}}" style="width:92rpx;height:92rpx" />
 			<view class="orderInfo">
 				<view class="name">{{item.coupon.couponName}}</view>
 			</view>
@@ -528,7 +528,7 @@
 	<view class="list-container mt20">
 		<block wx:for="{{activityList}}" wx:key="index">
 			<view class="list-item box-shadow">
-				<image src="{{item.listImage}}"></image>
+				<image src="{{item.viewImage}}"></image>
 			</view>
 		</block>
 	</view>
