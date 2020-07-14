@@ -61,28 +61,30 @@
 
 	<view hidden="{{search}}">
 		<view class="main-container">
-			<view class="tab-container">
-				<!-- tab列表 -->
-				<view class="tab-list">
-					<van-tabs
-					 color="#ee731a;"
-					 active='{{tabActive}}'
-					 line-width="0"
-					 tab-active-class="tab-active"
-					 bind:change="onChange"
-					>
-						<van-tab title="热门" />
-						<van-tab title="4S店" />
-						<van-tab title="品牌" />
-						<!-- <van-tab title="其它" /> -->
-					</van-tabs>
+			<van-sticky>
+				<view class="tab-container" style="background:white">
+					<!-- tab列表 -->
+					<view class="tab-list">
+						<van-tabs
+						 color="#ee731a;"
+						 active='{{tabActive}}'
+						 line-width="0"
+						 tab-active-class="tab-active"
+						 bind:change="onChange"
+						>
+							<van-tab title="热门" />
+							<van-tab title="4S店" />
+							<van-tab title="品牌" />
+							<!-- <van-tab title="其它" /> -->
+						</van-tabs>
+					</view>
+					<!-- 城市选择-->
+					<view class="city">
+						<text>上海</text>
+						<text class="iconfont icon-sanjiao-down"></text>
+					</view>
 				</view>
-				<!-- 城市选择-->
-				<view class="city">
-					<text>上海</text>
-					<text class="iconfont icon-sanjiao-down"></text>
-				</view>
-			</view>
+			</van-sticky>
 
 			<!-- 热门 -->
 			<view class="tab-index hot" hidden="{{tabActive==0?false:true}}">

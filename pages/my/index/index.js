@@ -11,7 +11,7 @@ Page({
     mobile: "",
     reg: false,
     bargain: false,
-    orderId:''
+    orderId: "",
   },
 
   /**
@@ -20,13 +20,12 @@ Page({
   onLoad: function (e) {
     this.userInfoReadyCallback();
     console.log(e.bargain + "这是砍价");
-    if(e.bargain != ''){
+    if (e.bargain != "") {
       this.setData({
-        bargain:e.bargain,
-        orderId:e.orderId
-      })
+        bargain: e.bargain,
+        orderId: e.orderId,
+      });
     }
-
   },
   //回调用户信息
   userInfoReadyCallback() {
@@ -73,6 +72,10 @@ Page({
             code,
           },
           (success) => {
+            console.log("获取token")
+            console.log(success)
+            //缓存token
+            wx.setStorageSync("token", success.data.dto.token);
             that.setData({
               reg: success.data.dto.reg,
             });
@@ -85,7 +88,6 @@ Page({
                 iv: e.detail.iv,
               },
               (success) => {
-                debugger;
                 console.log(success);
                 app.globalData.userInfo = success.data.dto;
                 that.setData({
@@ -122,7 +124,6 @@ Page({
                 iv: e.detail.iv,
               },
               (success) => {
-                debugger;
                 //缓存手机号
                 wx.setStorageSync("mobile", success.data.dto.phoneNumber);
                 that.setData({
@@ -137,7 +138,7 @@ Page({
                 }
                 //完成砍价操作
                 if (that.data.bargain) {
-                  that.knockAdd()
+                  that.knockAdd();
                 }
               }
             );
@@ -149,11 +150,13 @@ Page({
   //获取用户
   getMember() {
     var that = this;
+    console.log(that.data.reg.token);
+    var token = wx.getStorageSync("token");
     var mobile = wx.getStorageSync("mobile");
     var unionId = that.data.userInfo.unionId;
     api.getMember(
       {
-        mobile,
+        Authorization: token,
         unionId,
       },
       (success) => {
@@ -188,7 +191,9 @@ Page({
         unionId,
         openId,
       },
-      (success) => {}
+      (success) => {
+        wx.setStorageSync("token", success.data.dto.token);
+      }
     );
   },
   order() {
@@ -198,10 +203,11 @@ Page({
   },
   //帮砍价
   knockAdd() {
+    var token = wx.getStorageSync("token");
     api.knockAdd(
       {
-        orderId:this.data.orderId,
-        mobile:this.data.mobile,
+        orderId: this.data.orderId,
+        Authorization: token,
       },
       (success) => {
         console.log("这是返回的数据");

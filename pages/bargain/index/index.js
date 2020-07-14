@@ -20,10 +20,10 @@ Page({
     orderId: "",
     bargainProgress: 0,
     kockProgress: [],
-    user:"",
-    isCurrent:0,
-    lastMoney:0,
-    time:''
+    user: "",
+    isCurrent: 0,
+    lastMoney: 0,
+    time: "",
   },
 
   /**
@@ -39,7 +39,7 @@ Page({
     this.knockPeopleList(options.orderId);
     this.knockApplyCount(options.activityId);
     this.getActivity(options.activityId);
-    this.getMember()
+    this.getMember();
   },
   /**
    * 页面上拉触底事件的处理函数
@@ -54,8 +54,8 @@ Page({
     // }
   },
   onShareAppMessage(e) {
-    console.log( this.data.user.memberName )
-    debugger
+    console.log(this.data.user.memberName);
+    debugger;
     return {
       title: this.data.user.memberName + "正在邀请您砍单，就差你这刀",
       desc: "分享页面的内容",
@@ -99,11 +99,13 @@ Page({
     );
   },
   //帮砍价
-  knockAdd(orderId, mobile) {
+  knockAdd(orderId) {
+    var token = wx.getStorageSync("token");
+    console.log("这是token" + token)
     api.knockAdd(
       {
         orderId,
-        mobile,
+        Authorization: token,
       },
       (success) => {
         console.log("这是返回的数据");
@@ -114,41 +116,68 @@ Page({
             icon: "none",
           });
         }
+        var timestamp = Date.parse(new Date());
+        var time = success.data.dto.apply.endTime - timestamp;
+        // var times = util.formatTimeTwo((success.data.dto.apply.endTime - timestamp),'h:m:s')
+        var hours = parseInt(time / (1000 * 60 * 60));
+        var minutes = parseInt((time % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = parseInt((time % (1000 * 60)) / 1000);
+        var str = hours + ":" + minutes + ":" + seconds;
         this.setData({
           knock: success.data.dto,
           peoplesList: [],
+          time:str
         });
         this.knockPeopleList(orderId);
       }
     );
   },
   //砍价进程
-  knockProgress(orderId, mobile) {
+  knockProgress(orderId) {
+    var token = wx.getStorageSync("token");
     api.knockAdd(
       {
         orderId,
-        mobile,
-      },  
+        Authorization: token,
+      },
       (success) => {
-        debugger
-        console.log(success)
-        console.log("这是砍价进程")
+        debugger;
+        console.log(success);
+        console.log("这是砍价进程");
         //获取当前时间
-        var timestamp = Date.parse(new Date()); 
-       var time = success.data.dto.apply.endTime - timestamp
+        var timestamp = Date.parse(new Date());
+        var time = success.data.dto.apply.endTime - timestamp;
         // var times = util.formatTimeTwo((success.data.dto.apply.endTime - timestamp),'h:m:s')
         var hours = parseInt(time / (1000 * 60 * 60));
         var minutes = parseInt((time % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = parseInt((time % (1000 * 60)) / 1000);
-        var str = hours+":"+minutes+":"+seconds
-        var isCurrent = (success.data.dto.apply.startAmount - success.data.dto.apply.currentAmount).toFixed(2)
-        var lastMoney = success.data.dto.apply.currentAmount - success.data.dto.apply.finalAmount
-        console.log((success.data.dto.apply.currentAmount -success.data.dto.apply.finalAmount  ) / (success.data.dto.apply.startAmount-success.data.dto.apply.finalAmount) )
+        var str = hours + ":" + minutes + ":" + seconds;
+        var isCurrent = (
+          success.data.dto.apply.startAmount -
+          success.data.dto.apply.currentAmount
+        ).toFixed(2);
+        var lastMoney =
+          success.data.dto.apply.currentAmount -
+          success.data.dto.apply.finalAmount;
+        console.log(
+          (success.data.dto.apply.currentAmount -
+            success.data.dto.apply.finalAmount) /
+            (success.data.dto.apply.startAmount -
+              success.data.dto.apply.finalAmount)
+        );
         this.setData({
-          bargainProgress:(success.data.dto.apply.startAmount-success.data.dto.apply.currentAmount).toFixed(2)/ (success.data.dto.apply.startAmount-success.data.dto.apply.finalAmount).toFixed(2)  ,
+          bargainProgress:
+            (
+              success.data.dto.apply.startAmount -
+              success.data.dto.apply.currentAmount
+            ).toFixed(2) /
+            (
+              success.data.dto.apply.startAmount -
+              success.data.dto.apply.finalAmount
+            ).toFixed(2),
           isCurrent,
           lastMoney,
-          time:str
+          time: str,
         });
       }
     );
@@ -182,13 +211,15 @@ Page({
   isSelf(options) {
     //本地缓存的手机号
     var phone = wx.getStorageSync("mobile");
+    console.log("这是本地号码"+phone)
+    console.log("这是发起者号码"+options.mobile)
     if (options.mobile == phone) {
       this.setData({
         self: true,
       });
-      this.knockProgress(options.orderId, options.mobile);
+      this.knockProgress(options.orderId);
     } else {
-      this.knockAdd(options.orderId, phone);
+      this.knockAdd(options.orderId);
     }
   },
   //判断用户是否已经登录
@@ -220,10 +251,10 @@ Page({
   },
   //获取用户信息
   getMember() {
-    var mobile = wx.getStorageSync("mobile");
+    var token = wx.getStorageSync("token");
     api.getMember(
       {
-        mobile: mobile,
+        Authorization: token,
         unionId: "",
       },
       (success) => {

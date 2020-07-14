@@ -28,25 +28,37 @@ const request = (option) => {
   });
 };
 
-//支付请求
-const pay = (option) => {
+//token
+const token = (option) => {
   return new Promise((resolve) => {
     wx.request({
       url: `${API_PATH}${option.url}`,
       data: option.data,
       method: option.method,
-      header: {
-        "content-type": "application/x-www-form-urlencoded",
-      },
+      header: option.header,
       success(res) {
+        console.log("token状态")
+        console.log(res)
         if (res.data.statusCode == 100) {
           resolve(res);
-        } else {
+        } 
+        if (res.data.statusCode == 301) 
+        {
+          wx.login({
+            complete: (res) => {
+              debugger
+              login(res,(success)=>{
+                wx.setStorageSync("token", success.data.dto.token);
+              });
+            },
+          })
+        }
+        if (res.data.statusCode == 500){
           wx.showToast({
             title: res.data.message,
             icon:'none'
           })
-        }
+        } 
       },
       fail() {
         wx.showToast({
@@ -164,7 +176,7 @@ const getActivityListByServerTypeId = function (option, success) {
       maxResults: option.maxResults,
       pageNo: option.pageNo,
       status: option.status,
-      serveTypeId:option.serveTypeId
+      serveTypeId: option.serveTypeId,
     },
   }).then((res) => {
     return success(res);
@@ -373,11 +385,17 @@ const getAdlList = function (option, success) {
 //登录
 //授权
 const getMember = function (option, success) {
-  request({
+  console.log(option);
+  token({
     url: "/admin/microservice/member/get",
     method: "POST",
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: option.Authorization,
+    },
     data: {
-      mobile: option.mobile,
+      // mobile: option.mobile,
+      // Authorization:option.Authorization,
       unionId: option.unionId,
     },
   }).then((res) => {
@@ -386,7 +404,8 @@ const getMember = function (option, success) {
 };
 
 //授权
-const login = function (option, success) {
+function login (option, success) {
+  debugger
   request({
     url: "/admin/microservice/member/login",
     method: "POST",
@@ -430,11 +449,14 @@ const resigerMember = function (option, success) {
 };
 //根据手机号获取优惠券列表
 const getCouponList = function (option, success) {
-  request({
+  token({
     url: "/admin/microservice/coupon/memberCode/list",
     method: "POST",
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: option.Authorization,
+    },
     data: {
-      mobile: option.mobile,
       pageNo: "1",
       maxResults: "10",
       serveTypeId: 1,
@@ -460,8 +482,12 @@ const getredList = function (option, success) {
   request({
     url: "/admin/microservice/coupon/memberCode/list",
     method: "POST",
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: option.Authorization,
+    },
     data: {
-      mobile: option.mobile,
+      // mobile: option.mobile,
       pageNo: "1",
       maxResults: "10",
       serveTypeId: "",
@@ -472,41 +498,54 @@ const getredList = function (option, success) {
 };
 //准备支付
 const prepareWeixinPay = function (option, success) {
-  pay({
+  token({
     url: "/admin/microservice/coupon/order/prepareWeixinPay",
     method: "POST",
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: option.Authorization,
+    },
     data: {
-      mobile: option.mobile,
-      orderId:option.orderId
+      // mobile: option.mobile,
+      orderId: option.orderId,
+    },
+  }).then((res) => {
+    debugger;
+    return success(res);
+  });
+};
+//唤起支付
+const orderPay = function (option, success) {
+  token({
+    url: "/admin/microservice/coupon/order/create",
+    method: "POST",
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: option.Authorization,
+    },
+    data: {
+      couponId: option.couponId,
+      // mobile: option.mobile,
+      quantity: option.quantity,
+      activityId: option.activityId,
     },
   }).then((res) => {
     debugger
     return success(res);
   });
 };
-//唤起支付
-const orderPay = function (option, success) {
-  pay({
-    url: "/admin/microservice/coupon/order/create",
-    method: "POST",
-    data: {
-      couponId: option.couponId,
-      mobile: option.mobile,
-      quantity: option.quantity,
-      activityId: option.activityId,
-    },
-  }).then((res) => {
-    return success(res);
-  });
-};
 //待支付重新支付
 const replayPay = function (option, success) {
-  pay({
+  token({
     url: "/admin/microservice/coupon/order/create",
     method: "POST",
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: option.Authorization,
+    },
     data: {
       couponId: option.couponId,
-      mobile: option.mobile,
+      // mobile: option.mobile,
       quantity: option.quantity,
       activityId: option.activityId,
       orderId: option.orderId,
@@ -517,12 +556,16 @@ const replayPay = function (option, success) {
 };
 //订单评价
 const remarkAdd = function (option, success) {
-  request({
+  token({
     url: "/admin/microservice/coupon/order/comment/add",
     method: "POST",
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: option.Authorization,
+    },
     data: {
       orderId: option.orderId,
-      mobile: option.mobile,
+      // mobile: option.mobile,
       remark: option.remark,
       stars: option.stars,
     },
@@ -532,11 +575,15 @@ const remarkAdd = function (option, success) {
 };
 //订单列表
 const orderAllList = function (option, success) {
-  request({
+  token({
     url: "/admin/microservice/coupon/order/list",
     method: "POST",
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: option.Authorization,
+    },
     data: {
-      mobile: option.mobile,
+      // mobile: option.mobile,
       statusFlag: option.statusFlag,
       pageNo: option.pageNo,
       maxResult: option.maxResult,
@@ -547,11 +594,14 @@ const orderAllList = function (option, success) {
 };
 //查询订单
 const getOrder = function (option, success) {
-  request({
+  token({
     url: "/admin/microservice/coupon/order/get",
     method: "POST",
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: option.Authorization,
+    },
     data: {
-      mobile: option.mobile,
       orderId: option.orderId,
     },
   }).then((res) => {
@@ -560,11 +610,15 @@ const getOrder = function (option, success) {
 };
 //取消订单
 const cancleOrder = function (option, success) {
-  request({
+  token({
     url: "/admin/microservice/coupon/order/delete",
     method: "POST",
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: option.Authorization,
+    },
     data: {
-      mobile: option.mobile,
+      // mobile: option.mobile,
       orderId: option.orderId,
       remark: option.remark,
       statusFlag: option.statusFlag,
@@ -600,53 +654,68 @@ const remarkList = function (option, success) {
 };
 //发起砍价申请
 const knockApply = function (option, success) {
-  request({
+  token({
     url: "/admin/microservice/coupon/order/knock/apply",
     method: "POST",
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: option.Authorization,
+    },
     data: {
       orderId: option.orderId,
-      mobile: option.mobile,
+      // mobile: option.mobile,
     },
   }).then((res) => {
     return success(res);
   });
 };
 //砍价列表
-const knockList = function (option, success) { pay({
+const knockList = function (option, success) {
+  token({
     url: "/admin/microservice/coupon/order/knock/list",
     method: "POST",
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: option.Authorization,
+    },
     data: {
       maxResults: option.maxResults,
       pageNo: option.pageNo,
-      orderId:option.orderId
+      orderId: option.orderId,
     },
   }).then((res) => {
     return success(res);
   });
 };
 //帮砍价
-const knockAdd = function (option, success) { pay({
-  url: "/admin/microservice/coupon/order/knock/add",
-  method: "POST",
-  data: {
-    orderId:option.orderId,
-    mobile:option.mobile
-  },
-}).then((res) => {
-  return success(res);
-});
+const knockAdd = function (option, success) {
+  token({
+    url: "/admin/microservice/coupon/order/knock/add",
+    method: "POST",
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: option.Authorization,
+    },
+    data: {
+      orderId: option.orderId,
+      // mobile: option.mobile,
+    },
+  }).then((res) => {
+    return success(res);
+  });
 };
 //参与砍价的的人数
-const knockApplyCount = function (option, success) { request({
-  // url: "/microservice/coupon/order/knockapply/count",
-  url: "/admin/microservice/coupon/order/knock/count",
-  method: "POST",
-  data: {
-    activityId:option.activityId,
-  },
-}).then((res) => {
-  return success(res);
-});
+const knockApplyCount = function (option, success) {
+  request({
+    // url: "/microservice/coupon/order/knockapply/count",
+    url: "/admin/microservice/coupon/order/knock/count",
+    method: "POST",
+    data: {
+      activityId: option.activityId,
+    },
+  }).then((res) => {
+    return success(res);
+  });
 };
 
 module.exports = {
@@ -691,5 +760,5 @@ module.exports = {
   knockList,
   knockAdd,
   knockApplyCount,
-  prepareWeixinPay
+  prepareWeixinPay,
 };

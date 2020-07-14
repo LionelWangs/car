@@ -142,7 +142,7 @@
 	<view hidden="{{show}}">
 		<view>
 			<van-submit-bar
-			 price="{{ order.coupon.price * 100 }}"
+			 price="{{ order.feeAmount * 100 }}"
 			 button-text="提交订单"
 			 bind:submit="onSubmit"
 			 price-class="priceclass"

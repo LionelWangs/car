@@ -23,12 +23,12 @@ Page({
     remarkNum: 0,
     status: true,
     bargain: false,
-    mobile: "",
     user: "",
     //发起购买
     ordeBuy: [],
     //发起砍价
     ordeBargain: [],
+    token:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -139,6 +139,7 @@ Page({
   },
   //页面分享
   onShareAppMessage(e) {
+   var mobile =  wx.getStorageSync("mobile");
     if (e.target.dataset.operation == 1) {
       return {
         title: "优惠券",
@@ -164,7 +165,7 @@ Page({
         link: "https://www.aoshuomusic.com",
         path:
           "pages/bargain/index/index?mobile=" +
-          this.data.mobile +
+          mobile +
           "&activityId=" +
           this.data.activity.id +
           "&orderId=" +
@@ -177,25 +178,11 @@ Page({
   clickBuy() {
     var mobile = wx.getStorageSync("mobile");
     if (mobile != "") {
-      api.orderPay(
-        {
-          activityId: this.data.activity.id,
-          couponId: this.data.activity.couponId,
-          mobile,
-          quantity: 1,
-        },
-        (success) => {
-          debugger;
-          console.log(success);
-          wx.navigateTo({
-            url:
-              "../../submit/index/index?id=" +
-              this.data.id +
-              "&orderId=" +
-              success.data.dto.id,
-          });
-        }
-      );
+      wx.navigateTo({
+        url:
+          "../../submit/index/index?id=" +
+          this.data.id
+      });
     } else {
       Dialog.confirm({
         message: "请先登录或获取手机号",
@@ -226,8 +213,10 @@ Page({
   },
   //砍价
   showBargain() {
-    var mobile = wx.getStorageSync("mobile");
-    if (mobile == "") {
+    debugger
+    var token = wx.getStorageSync("token");
+    console.log("这是砍价token"+token)
+    if (token == "") {
       Dialog.confirm({
         message: "请先登录或获取手机号",
       })
@@ -245,21 +234,19 @@ Page({
         {
           activityId: this.data.activity.id,
           couponId: this.data.activity.couponId,
-          mobile,
+          Authorization:token,
           quantity: 1,
         },
         (success) => {
           api.knockApply(
             {
               orderId: success.data.dto.id,
-              mobile,
+              Authorization:token,
             },
             (success) => {
-              debugger;
               this.setData({
                 ordeBargain: success.data.dto,
                 bargain: true,
-                mobile,
               });
             }
           );
@@ -274,10 +261,12 @@ Page({
   },
   //获取用户信息
   getMember() {
-    var mobile = wx.getStorageSync("mobile");
+    var token = wx.getStorageSync("token");
+    debugger
+    console.log(token)
     api.getMember(
       {
-        mobile: mobile,
+        Authorization:token,
         unionId: "",
       },
       (success) => {

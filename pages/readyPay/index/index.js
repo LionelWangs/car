@@ -37,7 +37,6 @@ Page({
 
     ],
     radio:1,
-    mobile:"",
     orderId:""
   },
   onChange(event) {
@@ -50,18 +49,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getOrder(options.mobile , options.orderId)
+   
+    this.getOrder(options.orderId)
   },
-  getOrder(mobile,orderId){
+  //获取订单
+  getOrder(orderId){
+    var token = wx.getStorageSync("token");
     this.setData({
-      mobile,
       orderId
     })
     api.getOrder({
-      mobile,
+      Authorization: token,
       orderId
     },(success)=>{
-      debugger
       console.log(success)
       this.setData({
         order:success.data.dto
@@ -77,7 +77,7 @@ cancle(){
 },
 //发送取消请求
 submit(){
-  debugger
+    var token = wx.getStorageSync("token");
     var index = this.data.radio;
     var data = "";
     for(var i = 0 ; i < this.data.cause.length ; i++ ){
@@ -86,22 +86,23 @@ submit(){
       }
     }
     api.cancleOrder({
-      mobile:this.data.mobile,
+      Authorization: token,
       orderId:this.data.orderId,
       remark:data,
       statusFlag:2
     },(success) =>{
       wx.reLaunch({
-        url: '../../order/index/index?active=1&mobile='+this.data.mobile
+        url: '../../order/index/index?active=1'
       })
     }
     )
 },
   //唤起支付
   onSubmit(){
+    var token = wx.getStorageSync("token");
     api.prepareWeixinPay({
       orderId:this.data.orderId,
-      mobile:this.data.mobile
+      Authorization: token,
     },(success)=>{
       wx.requestPayment({
         nonceStr: success.data.dto.nonce_str,
@@ -118,9 +119,7 @@ submit(){
           //跳转到待付款页面
           wx.reLaunch({
             url:
-              "../../readyPay/index/index?mobile=" +
-              this.data.mobile +
-              "&orderId=" +
+              "../../readyPay/index/index?orderId=" +
               success.data.dto.orderId,
           });
         },
