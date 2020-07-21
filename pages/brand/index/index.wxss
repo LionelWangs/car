@@ -88,4 +88,23 @@
   .mt0 {
     margin-top: 0rpx !important;
   }
+  .list-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+  }
+  
+  .list-container .list-item {
+    width: 339rpx;
+    height: 260rpx;
+    margin-bottom: 20rpx;
+  }
+  
+  .list-container .list-item image {
+    width: 339rpx;
+    height: 260rpx;
+    display: block;
+  }
   

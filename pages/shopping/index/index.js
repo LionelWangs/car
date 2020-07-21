@@ -44,7 +44,6 @@ Page({
     this.getActivity(e.id);
     this.getStores(e.shopId);
     // this.getGoodsListWithActivityId(e.id);
-    this.getRemarkList(e.id);
     this.getMember();
   },
   // //获取轮播图列表
@@ -177,6 +176,7 @@ Page({
   //点击立即购买
   clickBuy() {
     var mobile = wx.getStorageSync("mobile");
+    console.log("这是手机号" + mobile)
     if (mobile != "") {
       wx.navigateTo({
         url:
@@ -195,28 +195,12 @@ Page({
         .catch(() => {});
     }
   },
-  //获取评价列表
-  getRemarkList(id) {
-    api.remarkList(
-      {
-        activityId: id,
-        pageNo: 1,
-      },
-      (success) => {
-        console.log(success);
-        this.setData({
-          remarkList: success.data.dto.list,
-          remarkNum: success.data.dto.pagination.recordCount,
-        });
-      }
-    );
-  },
   //砍价
   showBargain() {
     debugger
-    var token = wx.getStorageSync("token");
-    console.log("这是砍价token"+token)
-    if (token == "") {
+    var mobile = wx.getStorageSync("mobile");
+    console.log("这是手机号" + mobile)
+    if (mobile == "") {
       Dialog.confirm({
         message: "请先登录或获取手机号",
       })
@@ -229,6 +213,7 @@ Page({
           // on cancel
         });
     } else {
+      var token = wx.getStorageSync("token");
       //发起砍价
       api.orderPay(
         {

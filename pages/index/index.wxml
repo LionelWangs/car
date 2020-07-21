@@ -80,7 +80,7 @@
 					</view>
 					<!-- 城市选择-->
 					<view class="city">
-						<text>上海</text>
+						<text>{{city}}</text>
 						<text class="iconfont icon-sanjiao-down"></text>
 					</view>
 				</view>
@@ -156,7 +156,7 @@
 			<view class="tab-index stores" hidden="{{tabActive==1?false:true}}">
 				<view class="hot-brand box-shadow" style="height : {{ shopHeight }}; transition-duration : 0.5s">
 					<view class="title">
-						<text>热门品牌</text>
+						<text>品牌</text>
 						<view class="all">
 							<text bindtap = "openAll" data-operation = "{{brandText}}">{{ brandText }}</text>
 							<text class="iconfont icon-sanjiao-down"></text>
@@ -219,7 +219,11 @@
 									</van-button>
 								</view>
 							</view>
-							<view class="content-container">
+							<view
+							 class="content-container"
+							 bindtap="goShop"
+							 data-operation="{{item}}"
+							>
 								<image style="width:100%;height:318rpx;border-radius:16rpx;" src="{{item.imgUrl}}"></image>
 							</view>
 						</view>
@@ -258,7 +262,7 @@
 					</view>
 				</view>
 				<view class="stores-list-container box-shadow mt20">
-					<view class="title fs24 blod">品牌</view>
+					<view class="title fs24 blod">优惠券</view>
 					<view
 					 class="stores-item"
 					 wx:for="{{brandList}}"

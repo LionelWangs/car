@@ -24,15 +24,17 @@ Page({
     isCurrent: 0,
     lastMoney: 0,
     time: "",
+    mobile: "",
+    shop: "",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
     this.setData({
       orderId: options.orderId,
+      mobile: options.mobile,
     });
     this.checkAlreadyMobile(options);
     // this.isSelf(options);
@@ -54,21 +56,36 @@ Page({
     // }
   },
   onShareAppMessage(e) {
-    console.log(this.data.user.memberName);
-    debugger;
-    return {
-      title: this.data.user.memberName + "正在邀请您砍单，就差你这刀",
-      desc: "分享页面的内容",
-      link: "https://www.aoshuomusic.com",
-      path:
-        "pages/bargain/index/index?mobile=" +
-        this.data.mobile +
-        "&activityId=" +
-        this.data.activity.id +
-        "&orderId=" +
-        this.data.onLoad, // 路径，传递参数到指定页面。
-      imageUrl: this.data.activity.viewImage,
-    };
+    console.log(e);
+    //帮发起者砍单
+    if (e.target.dataset.operation == 1) {
+      return {
+        title: this.data.user.memberName+"帮"+this.data.user.memberName+"邀请您砍价",
+        desc: "分享页面的内容",
+        link: "https://www.aoshuomusic.com",
+        path:
+          "pages/bargain/index/index?mobile=" +
+          this.data.mobile +
+          "&activityId=" +
+          this.data.activity.id +
+          "&orderId=" +
+          this.data.orderId, // 路径，传递参数到指定页面。
+        imageUrl: this.data.activity.viewImage,
+      };
+    } else
+      return {
+        title: this.data.user.memberName + "正在邀请您砍单，就差你这刀",
+        desc: "分享页面的内容",
+        link: "https://www.aoshuomusic.com",
+        path:
+          "pages/bargain/index/index?mobile=" +
+          this.data.mobile +
+          "&activityId=" +
+          this.data.activity.id +
+          "&orderId=" +
+          this.data.orderId, // 路径，传递参数到指定页面。
+        imageUrl: this.data.activity.viewImage,
+      };
   },
   //获取指定活动
   getActivity(id) {
@@ -81,6 +98,8 @@ Page({
         this.setData({
           activity: success.data.dto,
         });
+        //获取4S店
+        this.getShop(success.data.dto.shopId);
       }
     );
   },
@@ -101,7 +120,7 @@ Page({
   //帮砍价
   knockAdd(orderId) {
     var token = wx.getStorageSync("token");
-    console.log("这是token" + token)
+    console.log("这是token" + token);
     api.knockAdd(
       {
         orderId,
@@ -126,7 +145,7 @@ Page({
         this.setData({
           knock: success.data.dto,
           peoplesList: [],
-          time:str
+          time: str,
         });
         this.knockPeopleList(orderId);
       }
@@ -141,7 +160,6 @@ Page({
         Authorization: token,
       },
       (success) => {
-        debugger;
         console.log(success);
         console.log("这是砍价进程");
         //获取当前时间
@@ -211,8 +229,8 @@ Page({
   isSelf(options) {
     //本地缓存的手机号
     var phone = wx.getStorageSync("mobile");
-    console.log("这是本地号码"+phone)
-    console.log("这是发起者号码"+options.mobile)
+    console.log("这是本地号码" + phone);
+    console.log("这是发起者号码" + options.mobile);
     if (options.mobile == phone) {
       this.setData({
         self: true,
@@ -224,6 +242,20 @@ Page({
   },
   //判断用户是否已经登录
   checkAlreadyMobile(options) {
+    //更新token
+    wx.login({
+      complete: (res) => {
+        api.login(
+          {
+            code: res.code,
+          },
+          (success) => {
+            console.log("更新后的token" + success.data.dto.token);
+            wx.setStorageSync("token", success.data.dto.token);
+          }
+        );
+      },
+    });
     var phone = wx.getStorageSync("mobile");
     if (phone == "") {
       Dialog.confirm({
@@ -260,6 +292,20 @@ Page({
       (success) => {
         this.setData({
           user: success.data.dto,
+        });
+      }
+    );
+  },
+  //获取4S店
+  getShop(shopId) {
+    api.getStores(
+      {
+        shopId,
+      },
+      (success) => {
+        console.log(success);
+        this.setData({
+          shop: success.data.dto,
         });
       }
     );

@@ -57,17 +57,7 @@
 			</view>
 		</view>
 	</view>
-	<!-- 商品评价 -->
 	<view class="mark box-shadow mt20">
-		<view class="header">
-			<view class="remark">
-				商品评价 ({{remarkNum}})
-			</view>
-			<view class="query">
-				查看更多
-				<image src="../../../images/more.png" style="width:16rpx;height:14rpx;" />
-			</view>
-		</view>
 		<!-- 砍价 -->
 		<view>
 			<van-cell

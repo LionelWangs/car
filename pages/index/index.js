@@ -34,6 +34,7 @@ Page({
     brandText: "打开全部",
     searchList: [],
     search: false,
+    city:''
   },
   onLoad: function (e) {
     //判断是否为空
@@ -56,6 +57,18 @@ Page({
     this.getHotStoresListt();
     this.getStoresListList();
     this.getBrandList();
+    this.getCity();
+    wx.setTabBarBadge({
+      index:3,
+      text:"99",
+      success:function(){
+        setTimeout(function() {
+          wx.removeTabBarBadge({
+            index:3,
+          })
+       }, 3000);
+      }
+    })
   },
 
   /**
@@ -375,6 +388,39 @@ Page({
     let title = e.currentTarget.dataset.operation.serviceName
     wx.navigateTo({
       url: '../buy/index/index?serveTypeId='+id+'&title='+title,
+    })
+  },
+  //获取当前城市
+  getCity(){
+    var that = this;
+    wx.getLocation({
+      type: 'wgs84',   //默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标 
+      success: function (res) {
+        // success  
+        var longitude = res.longitude
+        var latitude = res.latitude
+        that.loadCity(longitude, latitude)
+      }
+    })
+  },
+  loadCity(longitude, latitude){
+    var that = this;
+    wx.request({
+      url: 'http://api.map.baidu.com/reverse_geocoding/v3/?ak=EbfH3jKi6p2QO2fjMpUjmdISuGqwVv62&output=json&coordtype=wgs84ll&location='+latitude+','+longitude+'',
+      data: {},
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        // success  
+        console.log(res);
+        var city = res.data.result.addressComponent.city;
+        console.log("这是城市"+ city)
+        that.setData({ city });
+      },
+      fail: function () {
+        that.setData({ currentCity: "获取定位失败" });
+      },
     })
   }
 });

@@ -45,7 +45,7 @@
       },
       {
         "pagePath": "pages/message/index/index",
-        "text": "消息",
+        "text": "活动",
         "iconPath": "/images/message.png",
         "selectedIconPath": "/images/message_selected.png"
       },
@@ -64,7 +64,7 @@
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {
-    "van-image": "@vant/weapp/image/index",
+    "van-image": "@vant/weapp/image/index", 
     "van-button": "@vant/weapp/button/index",
     "van-loading": "@vant/weapp/loading/index"
   },

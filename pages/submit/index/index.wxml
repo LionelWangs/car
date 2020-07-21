@@ -5,7 +5,7 @@
         </text>
 		<!-- 商品信息 -->
 		<view class="brand box-shadow">
-			<van-card thumb="{{activity.listImage}}">
+			<van-card thumb="{{activity.viewImage}}">
 				<view slot="title" class="title">
 					{{activity.activityName}}
 				</view>

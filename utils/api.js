@@ -46,7 +46,6 @@ const token = (option) => {
         {
           wx.login({
             complete: (res) => {
-              debugger
               login(res,(success)=>{
                 wx.setStorageSync("token", success.data.dto.token);
               });
@@ -405,7 +404,6 @@ const getMember = function (option, success) {
 
 //授权
 function login (option, success) {
-  debugger
   request({
     url: "/admin/microservice/member/login",
     method: "POST",
@@ -510,7 +508,6 @@ const prepareWeixinPay = function (option, success) {
       orderId: option.orderId,
     },
   }).then((res) => {
-    debugger;
     return success(res);
   });
 };
@@ -530,7 +527,6 @@ const orderPay = function (option, success) {
       activityId: option.activityId,
     },
   }).then((res) => {
-    debugger
     return success(res);
   });
 };

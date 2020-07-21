@@ -54,6 +54,9 @@ getBrandDetails(id){
       brandId:id
     },
     success=>{
+      wx.setNavigationBarTitle({
+        title: success.data.dto.brandName,
+      })
       this.setData({
         brandName : success.data.dto.brandName,
         logoUrl : success.data.dto.logoUrl

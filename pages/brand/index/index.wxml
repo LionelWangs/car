@@ -2,24 +2,6 @@
 	<view class="main-container">
 		<!-- 轮播图 -->
 		<view class="banner-swiper-container">
-			<swiper
-			 indicator-dots="{{true}}"
-			 indicator-color="#ccc"
-			 indicator-active-color="#ee731a"
-			 circular="{{true}}"
-			 class="swipers"
-			 autoplay="{{true}}"
-			>
-				<block wx:for="{{carouselList}}" wx:key="index">
-					<swiper-item>
-						<image
-						 src="{{item.imgUrl}}"
-						 mode='aspectFill'
-						 class="slide-image"
-						></image>
-					</swiper-item>
-				</block>
-			</swiper>
 			<view>
 				<view class="infoCenter">
 					<view>
@@ -28,39 +10,21 @@
 					<view class="infoText"> {{brandName}}4S店 </view>
 				</view>
 			</view>
-			<view class="tab-container">
-				<!-- tab列表 -->
-				<view class="tab-list">
-					<van-tabs
-					 color="#ee731a;"
-					 z-index="1"
-					 class="tabs"
-					 line-width="0"
-					 tab-active-class="tab-active"
-					 bind:change="onChange"
-					 sticky="{{true}}"
-					>
-						<van-tab title="当前活动" />
-						<van-tab title="以往活动" />
-					</van-tabs>
-				</view>
-			</view>
 			<!-- 广告 -->
-			<view
-			 class="ad mt0"
-			 wx:for="{{activityList}}"
-			 wx:key="index"
-			>
-				<image
-				 style="width:100%;height:145rpx;border-radius:7rpx"
-				 mode='aspectFill'
-				 src="{{item.listImage}}"
-				 bindtap="shopping"
-				 data-operation="{{item}}"
-				></image>
-			</view>
-
 		</view>
+	</view>
+</view>
+<view class="list-container">
+	<view
+	 class="list-item box-shadow"
+	 wx:for="{{activityList}}"
+	 wx:key="index"
+	>
+		<image
+		 src="{{item.viewImage}}"
+		 bindtap="shopping"
+		 data-operation="{{item}}"
+		></image>
 	</view>
 </view>
 

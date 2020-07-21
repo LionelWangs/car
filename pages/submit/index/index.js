@@ -34,8 +34,8 @@ Page({
    */
   onLoad: function (e) {
     this.setData({
-      orderId : e.orderId
-    })
+      orderId: e.orderId,
+    });
     this.getActivity(e.id);
     //获取用户信息
     this.getMember();
@@ -71,11 +71,11 @@ Page({
   },
   //根据手机号获取优惠券
   getCouponList() {
-    debugger
+    debugger;
     var token = wx.getStorageSync("token");
     api.getCouponList(
       {
-        Authorization:token,
+        Authorization: token,
       },
       (success) => {
         console.log(success);
@@ -202,40 +202,42 @@ Page({
       {
         activityId: this.data.activity.id,
         couponId: this.data.activity.couponId,
-        Authorization:token,
+        Authorization: token,
         quantity: this.data.quantity,
       },
       (success) => {
         debugger;
         console.log(success);
-        api.prepareWeixinPay({
-          orderId:success.data.dto.id,
-          Authorization: token,
-        },(success)=>{
-          wx.requestPayment({
-            nonceStr: success.data.dto.nonce_str,
-            package: success.data.dto.package,
-            paySign: success.data.dto.paySign,
-            timeStamp: success.data.dto.timeStamp,
-            signType: "MD5",
-            success: (result) => {
-              wx.reLaunch({
-                url: "../../order/index/index",
-              });
-            },
-            fail: (res) => {
-              //跳转到待付款页面
-              wx.reLaunch({
-                url:
-                  "../../readyPay/index/index?token=" +
-                  token +
-                  "&orderId=" +
-                  success.data.dto.orderId,
-              });
-            },
-          })
-        }
-        )
+        api.prepareWeixinPay(
+          {
+            orderId: success.data.dto.id,
+            Authorization: token,
+          },
+          (success) => {
+            wx.requestPayment({
+              nonceStr: success.data.dto.nonce_str,
+              package: success.data.dto.package,
+              paySign: success.data.dto.paySign,
+              timeStamp: success.data.dto.timeStamp,
+              signType: "MD5",
+              success: (result) => {
+                wx.reLaunch({
+                  url: "../../order/index/index",
+                });
+              },
+              fail: (res) => {
+                //跳转到待付款页面
+                wx.reLaunch({
+                  url:
+                    "../../readyPay/index/index?token=" +
+                    token +
+                    "&orderId=" +
+                    success.data.dto.orderId,
+                });
+              },
+            });
+          }
+        );
       }
     );
   },

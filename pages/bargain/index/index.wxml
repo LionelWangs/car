@@ -3,9 +3,9 @@
 	<!-- 砍价信息详情 -->
 	<view class="header">
 		<image src="{{activity.viewImage}}" style="width:146rpx;height:146rpx;padding-left: 20rpx;" />
-		<view class="couponInfo">
+		<view class="couponInfo" bindtap="goActivity">
 			<view class="name">
-				{{activity.activityName}}
+				{{shop.shopName}} {{activity.currentPrice}} 元代金券
 			</view>
 			<view class="time">
 				<view class="button">{{time}}</view>
@@ -18,7 +18,7 @@
 					￥{{activity.currentPrice}}
 				</view>
 				<view class="people">
-					{{111}}人已0元拿
+					{{count}}人已0元拿
 				</view>
 			</view>
 		</view>
@@ -59,12 +59,15 @@
 		<view class="success">
 			成功帮好友砍价
 		</view>
-		<image
-		 src="../../../images/free.png"
-		 style="width:714rpx;height:74rpx;"
-		 bindtap="goActivity"
+		<button
+		 open-type="share"
+		 plain='true'
+		 style="border:none;padding:0"
+		 data-operation="{{1}}"
 		>
-		</image>
+			<image src="../../../images/freefriends.png" style="width:708rpx;height:74rpx;">
+			</image>
+		</button>
 	</view>
 
 	<!-- 砍价记录 -->
